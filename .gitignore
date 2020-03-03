@@ -1,3 +1,5 @@
-.vscode
+.vscode/
 CheatSheet.jpg
 ex.ipynb
+.gitignore
+practiceSort.py
