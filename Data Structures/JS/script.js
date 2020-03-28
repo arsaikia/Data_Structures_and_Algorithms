@@ -123,28 +123,46 @@
 
 // console.log(rotLeft(arr, 4));
 
-
-
 // function minimumBribes(q) {
 
 //     let bribes = 0, i, j;
-    
+
 //     for (let i = 0; i < q.length; i++) {
 //         const pos = q[i], at = i + 1;
-//         if (pos - at > 2) { return "Too chaotic" } 
+//         if (pos - at > 2) { return "Too chaotic" }
 //         for (j = pos - 2; j < i; j++) {
 //             if (q[j] > pos) { bribes++ }
 //         }
-//     } 
+//     }
 //     return bribes;
 // }
 
-
 // console.log(minimumBribes([ 1, 2, 5, 3, 7, 8, 6, 4 ]));
 
+//-------------Day 2----------------------------.to
+
+// Complete the beautifulDays function below.
+// function beautifulDays (i, j, k) {
+
+//     let beautifulDaysCount = 0;
+    
+// 	for (let day = i; day < j + 1; day++) {
+        
+//         (Math.abs(day - day.toString(10).split('').reverse().join('')) % k) === 0 ? beautifulDaysCount+=1 : null;
+        
+// 	}
+
+// 	return (beautifulDaysCount);
+// }
+
+// console.log(beautifulDays(20, 23, 6));
 
 
-//-------------Day 2----------------------------
+const factorial = (n) => {
 
+    if(n===0 || n===1) return 1
 
+    return n*(factorial(n-1))
+}
 
+console.log(factorial(3))
