@@ -145,11 +145,11 @@
 // function beautifulDays (i, j, k) {
 
 //     let beautifulDaysCount = 0;
-    
+
 // 	for (let day = i; day < j + 1; day++) {
-        
+
 //         (Math.abs(day - day.toString(10).split('').reverse().join('')) % k) === 0 ? beautifulDaysCount+=1 : null;
-        
+
 // 	}
 
 // 	return (beautifulDaysCount);
@@ -157,12 +157,25 @@
 
 // console.log(beautifulDays(20, 23, 6));
 
+// const factorial = (n) => {
 
-const factorial = (n) => {
+//     if(n===0 || n===1) return 1
 
-    if(n===0 || n===1) return 1
+//     return n*(factorial(n-1))
+// }
 
-    return n*(factorial(n-1))
+// console.log(factorial(3))
+
+function vowelsAndConsonants (s) {
+	const vowels = [ 'a', 'e', 'i', 'o', 'u' ];
+	let printVowels = [];
+	let printConsts = [];
+
+	[ ...s ].forEach((ch) => {
+		vowels.includes(ch) ? printVowels.push(ch) : printConsts.push(ch);
+	});
+
+	[ ...printVowels, ...printConsts ].forEach((el) => console.log(el));
 }
 
-console.log(factorial(3))
+vowelsAndConsonants('abcdefgh');
