@@ -268,4 +268,43 @@
 // console.log(twoStrings('hello', 'world'));
 // console.log(twoStrings('hi', 'world'));
 
-/*******************************************************/
+/*********************< InCorrect -> Below Problem : Sherlock and Anagrams>***********************/
+
+// function sherlockAndAnagrams (s) {
+// 	// For strlen 0 or 1 -> No Anaram
+// 	const strLen = s.length;
+// 	const revStr = s.split('').reverse().join('');
+// 	if (strLen < 2) return 0;
+// 	let anagram = 0;
+// 	const strDict = {};
+// 	for (let i = 0; i < strLen; i++) {
+// 		if (strDict[s[i]]) {
+// 			strDict[s[i]] += 1;
+// 		}
+// 		else strDict[s[i]] = 1;
+
+// 		let counter = i;
+// 		while (counter !== 0) {
+// 			if (revStr.includes(s.slice(0, counter + 1))) {
+// 				if (strDict[s.slice(0, counter + 1)]) {
+// 					strDict[s.slice(0, counter + 1)] += 1;
+// 				}
+// 				else strDict[s.slice(0, counter + 1)] = 1;
+// 				//anagram += 1;
+// 				console.log(anagram, strDict, s.slice(0, counter + 1));
+// 			}
+// 			counter -= 1;
+// 		}
+// 	}
+
+// 	[ ...Object.keys(strDict) ].forEach((el) => {
+// 		anagram += strDict[el] - 1;
+// 	});
+
+// 	return anagram;
+// }
+
+// console.log(sherlockAndAnagrams('ifailuhkqq'));
+
+
+/*****************************TBubble Sort**************************/
