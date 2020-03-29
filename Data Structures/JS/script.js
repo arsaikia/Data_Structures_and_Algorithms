@@ -366,8 +366,46 @@
 // console.log(getGrade(29));
 
 /*****************************Dynamic ProgrammingP**************************
-*
-*
-*
-*
+*   Given an arry with Integer values and a Target value, find the total 
+*   number of digit sum combinations that can result in the Target value
+*   E.g.: arr = [1, 2, 4, 6, 9, 10] Target = 16
+*   There are 3 ways we can ge 16 => (1+2+4+9), (2+4+10), (6+10)
 ****************************************************************************/
+
+/*******************Naive Recursion***********************************/
+// const twoSumDP = (arr, toIndex, target) => {
+//     // Variable to store count
+//     let count = 0;
+// 	// Return Condition
+// 	if (arr[toIndex] === undefined) return 0;
+// 	// Increment Count Condition
+// 	if (arr[toIndex] === target) return 1;
+// 	// Recursve Calls
+// 	count += twoSumDP(arr, toIndex - 1, target); // The current element is NOT considered
+// 	count += twoSumDP(arr, toIndex - 1, target - arr[toIndex]); // The current element is Considered
+
+// 	return count;
+// };
+
+// // Main Execution Context:
+// const arr = [ 1, 2, 4, 6, 9, 10 ];
+// console.log(twoSumDP(arr, arr.length - 1, 16));
+
+/*******************Naive Recursion***********************************/
+const twoSumDP = (arr, toIndex, target) => {
+	// Variable to store count
+	let count = 0;
+	// Return Condition
+	if (arr[toIndex] === undefined) return 0;
+	// Increment Count Condition
+	if (arr[toIndex] === target) return 1;
+	// Recursve Calls
+	count += twoSumDP(arr, toIndex - 1, target); // The current element is NOT considered
+	count += twoSumDP(arr, toIndex - 1, target - arr[toIndex]); // The current element is Considered
+
+	return count;
+};
+
+// Main Execution Context:
+const arr = [ 1, 2, 4, 6, 9, 10 ];
+console.log(twoSumDP(arr, arr.length - 1, 16));
