@@ -306,5 +306,25 @@
 
 // console.log(sherlockAndAnagrams('ifailuhkqq'));
 
-
 /*****************************TBubble Sort**************************/
+
+// function countSwaps (a) {
+// 	const bubbleSort = (arr) => {
+// 		let swapCounter = 0;
+// 		for (let i = 0; i < arr.length; i++) {
+// 			for (let j = 0; j < arr.length - i - 1; j++) {
+// 				if (arr[j] > arr[j + 1]) {
+// 					[ arr[j], arr[j + 1] ] = [ arr[j + 1], arr[j] ];
+// 					swapCounter += 1;
+// 				}
+// 			}
+// 		}
+// 		return swapCounter;
+// 	};
+
+// 	console.log(`Array is sorted in ${bubbleSort(a)} swaps.`);
+// 	console.log(`First Element: ${a[0]}`);
+// 	console.log(`Last Element: ${a[a.length - 1]}`);
+// }
+
+// countSwaps([ 3, 2, 1 ]);
