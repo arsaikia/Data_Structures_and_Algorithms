@@ -220,43 +220,52 @@
 
 // console.log(minimumSwaps([ 1, 3, 5, 2, 4, 6, 7 ]));
 
-/*****************************Sock Merchant**************************/
-function checkMagazine (magazine, note) {
-	const magWordsArr = magazine.split(' ');
-	const ranWordsArr = note.split(' ');
+/*****************************Ransom**************************/
+// function checkMagazine (magazine, note) {
+// 	const magWordsArr = magazine.split(' ');
+// 	const ranWordsArr = note.split(' ');
 
-	// Initial Check
-	if (magWordsArr.length < ranWordsArr.length) return 'No';
+// 	/* Initial Check*/
+// 	if (magWordsArr.length < ranWordsArr.length) return 'No';
 
-	// Make Magazine words dict with count as Val and element as key
-	const mDict = {};
-	magWordsArr.forEach((el) => {
-		if (mDict[el]) mDict[el] = mDict[el] + 1;
-		else mDict[el] = 1;
-	});
+// 	/* Make Magazine words dict with count as Val and element as key*/
+// 	const mDict = {};
+// 	magWordsArr.forEach((el) => {
+// 		if (mDict[el]) mDict[el] = mDict[el] + 1;
+// 		else mDict[el] = 1;
+// 	});
 
-    //Chech for words in ransonNote array
-    for (let i = 0; i < ranWordsArr.length; i++) {
-        const el = ranWordsArr[i];
-        if (mDict[el]&& mDict[el] !== 0) {
-			mDict[el] = mDict[el] - 1;
-			
-		}
-		else return 'No';
-    }
+// 	/*Chech for words in ransonNote array*/
+// 	for (let i = 0; i < ranWordsArr.length; i++) {
+// 		const el = ranWordsArr[i];
+// 		if (mDict[el] && mDict[el] !== 0) {
+// 			mDict[el] = mDict[el] - 1;
+// 		}
+// 		else return 'No';
+// 	}
 
+// 	return 'Yes';
+// }
 
-	ranWordsArr.forEach((el) => {
-		// if that el is in mDict
-		if (mDict[el]&& mDict[el] !== 0) {
-			mDict[el] = mDict[el] - 1;
-			ret = 'Yes';
-		}
-		else ret = 'No';
-	});
+// console.log(checkMagazine('two times three is not four', 'two times two is four'));
+// console.log(checkMagazine('give me one grand today night', 'give one grand today'));
 
-	return 'Yes';
-}
+/*****************************Two Strings**************************/
+//Approach-1
+// function twoStrings (s1, s2) {
+// 	let contains = 'No';
+// 	for (const ch of s1) {
+// 		s2.includes(ch) ? (contains = 'Yes') : null;
+// 	}
+// 	return contains;
+// }
+// console.log(twoStrings('hello', 'world'));
 
-console.log(checkMagazine('two times three is not four', 'two times two is four'));
-console.log(checkMagazine('give me one grand today night', 'give one grand today'));
+//Approach-2 : Using Sets
+// function twoStrings (s1, s2) {
+// 	return new Set([ ...s1 ].filter((el) => s2.includes(el))).size ? 'YES' : 'NO';
+// }
+// console.log(twoStrings('hello', 'world'));
+// console.log(twoStrings('hi', 'world'));
+
+/*******************************************************/
