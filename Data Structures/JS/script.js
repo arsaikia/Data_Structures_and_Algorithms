@@ -328,3 +328,46 @@
 // }
 
 // countSwaps([ 3, 2, 1 ]);
+
+/*****************************Greedy Method**************************/
+
+// function maximumToys (prices, k) {
+// 	let currentSpend = 0;
+// 	let items = 0;
+// 	prices.sort((a, b) => a - b);
+
+// 	for (let i = 0; i < prices.length; i++) {
+// 		if (currentSpend + prices[i] <= k) {
+// 			currentSpend += prices[i];
+// 			items += 1;
+// 		}
+// 	}
+
+// 	return items;
+// }
+
+// console.log(maximumToys([ 1, 12, 5, 111, 200, 1000, 10 ], 50));
+
+/*****************************10 Days of JS**************************/
+
+// function getGrade (score) {
+// 	let grade;
+
+// 	if (25 < score && score <= 30) grade = 'A';
+// 	if (20 < score && score <= 25) grade = 'B';
+// 	if (15 < score && score <= 20) grade = 'C';
+// 	if (10 < score && score <= 15) grade = 'D';
+// 	if (5 < score && score <= 10) grade = 'E';
+// 	if (0 < score && score <= 5) grade = 'F';
+
+// 	return grade;
+// }
+
+// console.log(getGrade(29));
+
+/*****************************Dynamic ProgrammingP**************************
+*
+*
+*
+*
+****************************************************************************/
