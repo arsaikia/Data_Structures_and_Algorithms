@@ -457,14 +457,23 @@
 // console.log(selectionSort(arr));
 /*--------------------------------------------------------------------------------------------------------------------------*/
 
-const insertionSort = (array) => {
-	let maxValue;
+/*--------------------------------------------------------------------------------------------------------------------------*/
+/*													Insertion Sort															*/
+// const insertionSort = (array) => {
+// 	for (let i = 1; i < array.length; i++) {
+// 		let maxValue;
+// 		let j = i - 1;
+// 		while (array[j] > array[i] && j > -1) {
+// 			maxValue = array[i];
+// 			array[i] = array[j];
+// 			j -= 1;
+// 		}
+// 		array[i] == maxValue;
+// 	}
 
-	for (let i = 0; i < array.length; i++) {
+// 	return array;
+// };
 
-		
-	}
-};
-
-let arr = Array.from({ length: 40 }, () => Math.floor((Math.random() < 0.5 ? -Math.random() : Math.random()) * 50));
-console.log(insertionSort(arr));
+// let arr = Array.from({ length: 40 }, () => Math.floor((Math.random() < 0.5 ? -Math.random() : Math.random()) * 50));
+// console.log(insertionSort(arr));
+/*--------------------------------------------------------------------------------------------------------------------------*/
