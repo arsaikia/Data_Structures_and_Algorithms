@@ -440,5 +440,19 @@
 
 /*--------------------------------------------------------------------------------------------------------------------------*/
 /*													Selection Sort															*/
+// const selectionSort = (array) => {
+// 	for (let i = array.length - 1; i > 0; i--) {
+// 		let maxIndex = 0;
+// 		for (let j = 1; j < i; j++) {
+// 			array[maxIndex] < array[j] ? (maxIndex = j) : null;
+// 		}
 
+// 		[ array[maxIndex], array[i] ] = [ array[i], array[maxIndex] ];
+// 	}
+
+// 	return array;
+// };
+
+// let arr = Array.from({ length: 40 }, () => Math.floor((Math.random() < 0.5 ? -Math.random() : Math.random()) * 50));
+// console.log(selectionSort(arr));
 /*--------------------------------------------------------------------------------------------------------------------------*/
