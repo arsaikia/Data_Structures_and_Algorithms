@@ -391,21 +391,30 @@
 // const arr = [ 1, 2, 4, 6, 9, 10 ];
 // console.log(twoSumDP(arr, arr.length - 1, 16));
 
-/*******************Naive Recursion***********************************/
-const twoSumDP = (arr, toIndex, target) => {
+/*******************N MEMOIZATION ***********************************
+*   Till a certain toIndex save the count for the Target
+*   Use a Dictonary => KEY as  `toIndex : Target`
+******************************** ***********************************/
+
+const twoSumMEMO = (arr, toIndex, target, memoDict) => {
 	// Variable to store count
 	let count = 0;
 	// Return Condition
-	if (arr[toIndex] === undefined) return 0;
+	if (toIndex < 0) return 0;
+	// Check in Memo
+	if (memoDict[`${toIndex} : ${target}`]) return memoDict[`${toIndex} : ${target}`];
+
 	// Increment Count Condition
 	if (arr[toIndex] === target) return 1;
 	// Recursve Calls
-	count += twoSumDP(arr, toIndex - 1, target); // The current element is NOT considered
-	count += twoSumDP(arr, toIndex - 1, target - arr[toIndex]); // The current element is Considered
+	count += twoSumMEMO(arr, toIndex - 1, target, memoDict); // The current element is NOT considered
+	count += twoSumMEMO(arr, toIndex - 1, target - arr[toIndex], memoDict); // The current element is Considered
 
+	count ? (memoDict[`${toIndex} : ${target}`] = count) : null;
 	return count;
 };
 
 // Main Execution Context:
+const memoDict = {};
 const arr = [ 1, 2, 4, 6, 9, 10 ];
-console.log(twoSumDP(arr, arr.length - 1, 16));
+console.log(twoSumMEMO(arr, arr.length - 1, 16, memoDict));
