@@ -460,7 +460,10 @@
 const insertionSort = (array) => {
 	let maxValue;
 
-	for (let i = 0; i < array.length; i++) {}
+	for (let i = 0; i < array.length; i++) {
+
+		
+	}
 };
 
 let arr = Array.from({ length: 40 }, () => Math.floor((Math.random() < 0.5 ? -Math.random() : Math.random()) * 50));
