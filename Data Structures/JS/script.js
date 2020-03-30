@@ -477,3 +477,19 @@
 // let arr = Array.from({ length: 40 }, () => Math.floor((Math.random() < 0.5 ? -Math.random() : Math.random()) * 50));
 // console.log(insertionSort(arr));
 /*--------------------------------------------------------------------------------------------------------------------------*/
+
+/*--------- 10 Days for JS ------------*/
+
+// function getLetter (s) {
+// 	let letter = s.split('')[0];
+// 	let ret = null;
+
+// 	if ('aeiou'.includes(letter)) return 'A';
+// 	if ('bcdfg'.includes(letter)) return 'B';
+// 	if ('hjklm'.includes(letter)) return 'C';
+// 	if ('npqrstuvwxyz'.includes(letter)) return 'D';
+
+// 	return ret;
+// }
+
+// console.log(getLetter('adfgt'));
