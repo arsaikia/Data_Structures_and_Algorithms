@@ -550,4 +550,15 @@
 
 // console.log(simpleArraySum([ 1, 2, 3, 4 ]));
 
+// function compareTriplets (a, b) {
+// 	let alice =  0;
+// 	let	bob = 0;
 
+// 	for (let i = 0; i < Math.max(a.length, b.length); i++) {
+// 		a[i] > b[i] ? (alice += 1) : a[i] < b[i] ? (bob += 1) : null;
+// 	}
+
+// 	return [alice, bob];
+// }
+
+// console.log(compareTriplets([5,6,7], [3,6,10]));
