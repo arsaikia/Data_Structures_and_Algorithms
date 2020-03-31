@@ -493,3 +493,33 @@
 // }
 
 // console.log(getLetter('adfgt'));
+
+/*--------- 2nd Largest Array Element ------------*/
+
+/*--------- O(n ln n) Time ------------*/
+function getSecondLargest (nums) {
+	nums.sort((a, b) => a - b);
+	let i = 1;
+	while (nums[nums.length - i] === nums[nums.length - i - 1]) i += 1;
+	return nums[nums.length - i - 1];
+}
+
+console.log(getSecondLargest([ 2, 3, 6, 6, 5, 5, 6, 6, 7, 7 ]));
+
+/*--------- O(n) Time ------------*/
+// function getSecondLargest (nums) {
+// 	let largest = 0;
+// 	let secondLargest = 0;
+
+// 	for (let i = 0; i < nums.length; i++) {
+// 		if (nums[i] > largest) {
+// 			secondLargest = largest;
+// 			largest = nums[i];
+// 		}
+// 		else if (nums[i] < largest && nums[i] > secondLargest) secondLargest = nums[i];
+// 	}
+
+// 	return secondLargest;
+// }
+
+// console.log(getSecondLargest([ 2, 3, 6, 6 , 5]));
