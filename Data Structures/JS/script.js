@@ -497,14 +497,14 @@
 /*--------- 2nd Largest Array Element ------------*/
 
 /*--------- O(n ln n) Time ------------*/
-function getSecondLargest (nums) {
-	nums.sort((a, b) => a - b);
-	let i = 1;
-	while (nums[nums.length - i] === nums[nums.length - i - 1]) i += 1;
-	return nums[nums.length - i - 1];
-}
+// function getSecondLargest (nums) {
+// 	nums.sort((a, b) => a - b);
+// 	let i = 1;
+// 	while (nums[nums.length - i] === nums[nums.length - i - 1]) i += 1;
+// 	return nums[nums.length - i - 1];
+// }
 
-console.log(getSecondLargest([ 2, 3, 6, 6, 5, 5, 6, 6, 7, 7 ]));
+// console.log(getSecondLargest([ 2, 3, 6, 6, 5, 5, 6, 6, 7, 7 ]));
 
 /*--------- O(n) Time ------------*/
 // function getSecondLargest (nums) {
@@ -523,3 +523,18 @@ console.log(getSecondLargest([ 2, 3, 6, 6, 5, 5, 6, 6, 7, 7 ]));
 // }
 
 // console.log(getSecondLargest([ 2, 3, 6, 6 , 5]));
+
+/*--------- Try Catch ------------*/
+
+// function reverseString (s) {
+// 	try {
+// 		s = s.split('').reverse().join('');
+// 	} catch (error) {
+// 		console.log('s.split is not a function');
+// 	} finally {
+// 		console.log(s);
+// 	}
+// }
+
+// reverseString('asddasd');
+// reverseString(123);
