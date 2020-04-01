@@ -11,6 +11,7 @@
 
 // console.log(bubbleSortUnoptimized ([3,2,1,4]));
 
+
 /* Insertion Sort  O( n^2 ) */
 
-console.log('');
+console.log("")

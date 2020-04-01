@@ -563,16 +563,40 @@
 // console.log(compareTriplets([5,6,7], [3,6,10]));
 
 /*--------- Diagonal Difference ------------*/
-function diagonalDifference (arr) {
-	let PdiagSum = 0;
-	let SdiagSum = 0;
+// function diagonalDifference (arr) {
+// 	let PdiagSum = 0;
+// 	let SdiagSum = 0;
+
+// 	for (let i = 0; i < arr.length; i++) {
+// 		PdiagSum += arr[i][i];
+// 		SdiagSum += arr[i][arr.length - 1 - i];
+// 	}
+
+// 	return Math.abs(PdiagSum - SdiagSum);
+// }
+
+// console.log(diagonalDifference([ [ 11, 2, 4 ], [ 4, 5, 6 ], [ 10, 8, -12 ] ]));
+
+/*--------- Plus Minus ------------*/
+
+function plusMinus (arr) {
+	const myDict = { zero: 0, positive: 0, negative: 0 };
 
 	for (let i = 0; i < arr.length; i++) {
-		PdiagSum += arr[i][i];
-		SdiagSum += arr[i][arr.length - 1 - i];
+		if (arr[i] === 0) {
+			myDict.zero = myDict.zero + 1;
+		}
+		else if (arr[i] > 0) {
+			myDict.positive = myDict.positive + 1;
+		}
+		else {
+			myDict.negative = myDict.negative + 1;
+		}
 	}
+	console.log(parseFloat(myDict.positive / parseFloat(arr.length)).toPrecision(12));
+	console.log(parseFloat(myDict.negative / parseFloat(arr.length)).toPrecision(12));
+	console.log(parseFloat(myDict.zero / parseFloat(arr.length)).toPrecision(12));
 
-	return Math.abs(PdiagSum - SdiagSum);
 }
 
-console.log(diagonalDifference([ [ 11, 2, 4 ], [ 4, 5, 6 ], [ 10, 8, -12 ] ]));
+plusMinus([ -4, 3, -9, 0, 4, 1 ]);
