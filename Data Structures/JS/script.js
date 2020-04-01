@@ -560,5 +560,19 @@
 
 // 	return [alice, bob];
 // }
-
 // console.log(compareTriplets([5,6,7], [3,6,10]));
+
+/*--------- Diagonal Difference ------------*/
+function diagonalDifference (arr) {
+	let PdiagSum = 0;
+	let SdiagSum = 0;
+
+	for (let i = 0; i < arr.length; i++) {
+		PdiagSum += arr[i][i];
+		SdiagSum += arr[i][arr.length - 1 - i];
+	}
+
+	return Math.abs(PdiagSum - SdiagSum);
+}
+
+console.log(diagonalDifference([ [ 11, 2, 4 ], [ 4, 5, 6 ], [ 10, 8, -12 ] ]));
