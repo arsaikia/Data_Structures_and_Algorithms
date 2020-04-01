@@ -638,18 +638,29 @@
 
 /*--------- Birthday Cake Candles ------------*/
 
-function birthdayCakeCandles (arr) {
-	const myDict = { maxVal: arr[0], count: 0 };
+// function birthdayCakeCandles (arr) {
+// 	const myDict = { maxVal: arr[0], count: 0 };
 
-	arr.forEach((el) => {
-		if (el > myDict.maxVal) {
-			myDict.maxVal = el;
-			myDict.count = 1;
-		}
-		else if (el === myDict.maxVal) myDict.count += 1;
-	});
+// 	arr.forEach((el) => {
+// 		if (el > myDict.maxVal) {
+// 			myDict.maxVal = el;
+// 			myDict.count = 1;
+// 		}
+// 		else if (el === myDict.maxVal) myDict.count += 1;
+// 	});
 
-	return myDict.count;
-}
+// 	return myDict.count;
+// }
 
-console.log(birthdayCakeCandles([ 3, 2, 1, 3 ]));
+// console.log(birthdayCakeCandles([ 3, 2, 1, 3 ]));
+
+/*--------- Time Conversion ------------*/
+// function timeConversion (s) {
+// 	const x = s.includes('PM') ? s.split('PM')[0].split(':') : s.split('AM')[0].split(':');
+// 	s.includes('PM') ? x[0]==='12' ? x[0]='12' : (x[0] = parseInt(x[0]) + 12) : null;
+// 	s.includes('AM') ? (x[0] === '12' ? (x[0] = '00') : null):null;
+
+// 	return x.join(':');
+// }
+
+// console.log(timeConversion('12:45:54PM'));
