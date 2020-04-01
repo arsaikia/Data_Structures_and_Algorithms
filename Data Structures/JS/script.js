@@ -622,3 +622,34 @@
 // }
 
 // staircase(6);
+
+/*--------- Min-Max Score ------------*/
+// function miniMaxSum (arr) {
+// 	const myDict = { sum: 0, maxVal: 0, minVal: arr[0] };
+// 	arr.forEach((el) => {
+// 		myDict.sum += el;
+// 		if (el < myDict.minVal) myDict.minVal = el;
+// 		if (el > myDict.maxVal) myDict.maxVal = el;
+// 	});
+// 	console.log(myDict.sum - myDict.maxVal, myDict.sum - myDict.minVal);
+// }
+
+// miniMaxSum([ 1, 2, 3, 4, 5 ]);
+
+/*--------- Birthday Cake Candles ------------*/
+
+function birthdayCakeCandles (arr) {
+	const myDict = { maxVal: arr[0], count: 0 };
+
+	arr.forEach((el) => {
+		if (el > myDict.maxVal) {
+			myDict.maxVal = el;
+			myDict.count = 1;
+		}
+		else if (el === myDict.maxVal) myDict.count += 1;
+	});
+
+	return myDict.count;
+}
+
+console.log(birthdayCakeCandles([ 3, 2, 1, 3 ]));
