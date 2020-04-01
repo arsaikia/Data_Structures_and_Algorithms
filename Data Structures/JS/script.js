@@ -687,3 +687,55 @@
 // 	}
 // }
 // insertionSort1(6, [ 1, 4, 3, 5, 6, 2 ]);
+
+/*---------  Lily's Homework ------------*/
+//          [ 1, 4, 3, 5, 6, 2 ]
+function lilysHomework (arr) {
+	const ascending = (arr) => {
+		let ascSwapCounts = 0;
+
+		for (let i = 0; i < arr.length; i++) {
+			let max = 0;
+			let initVal = arr[0];
+
+			for (let j = 1; j < arr.length - i; j++) {
+				if (arr[j] > arr[max]) {
+					max = j;
+				}
+			}
+
+			[ arr[max], arr[arr.length - 1 - i] ] = [ arr[arr.length - 1 - i], arr[max] ];
+
+			initVal !== arr[max] ? (ascSwapCounts += 1) : null;
+		}
+		return ascSwapCounts;
+	};
+
+	const descending = (arr) => {
+		let descSwapCounts = 0;
+
+		for (let i = 0; i < arr.length; i++) {
+			let min = 0;
+			let initVal = arr[arr.length - i - 1];
+
+			for (let j = 1; j < arr.length - i; j++) {
+				if (arr[j] < arr[min]) {
+					min = j;
+				}
+			}
+
+			[ arr[min], arr[arr.length - 1 - i] ] = [ arr[arr.length - 1 - i], arr[min] ];
+			if (initVal !== arr[arr.length - 1 - i]) {
+				descSwapCounts += 1;
+			}
+		}
+
+		return descSwapCounts;
+	};
+	let arr1 = arr;
+	const ascSwapCounts = ascending(arr);
+	const descSwapCounts = descending(arr1);
+	return Math.min(ascSwapCounts, descSwapCounts);
+}
+
+console.log(lilysHomework([ 3, 4, 2, 5, 1 ]));
