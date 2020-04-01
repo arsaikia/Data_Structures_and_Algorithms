@@ -664,3 +664,26 @@
 // }
 
 // console.log(timeConversion('12:45:54PM'));
+
+/*---------  Insertion Sort ------------*/
+// function insertionSort1 (n, arr) {
+// 	for (let i = 1; i < n; i++) {
+// 		let j = i;
+// 		let curr = arr[j];
+// 		let flag = false;
+// 		while (j > 0) {
+// 			if (arr[j - 1] > curr) {
+// 				arr[j] = arr[j - 1];
+// 				flag = true;
+// 			}
+// 			else flag = false;
+// 			j -= 1;
+
+// 			if (flag) {
+// 				arr[j] = curr;
+// 			}
+// 		}
+// 		console.log(...arr);
+// 	}
+// }
+// insertionSort1(6, [ 1, 4, 3, 5, 6, 2 ]);
