@@ -579,24 +579,46 @@
 
 /*--------- Plus Minus ------------*/
 
-function plusMinus (arr) {
-	const myDict = { zero: 0, positive: 0, negative: 0 };
+// function plusMinus (arr) {
+// 	const myDict = { zero: 0, positive: 0, negative: 0 };
 
-	for (let i = 0; i < arr.length; i++) {
-		if (arr[i] === 0) {
-			myDict.zero = myDict.zero + 1;
-		}
-		else if (arr[i] > 0) {
-			myDict.positive = myDict.positive + 1;
-		}
-		else {
-			myDict.negative = myDict.negative + 1;
-		}
-	}
-	console.log(parseFloat(myDict.positive / parseFloat(arr.length)).toPrecision(12));
-	console.log(parseFloat(myDict.negative / parseFloat(arr.length)).toPrecision(12));
-	console.log(parseFloat(myDict.zero / parseFloat(arr.length)).toPrecision(12));
+// 	for (let i = 0; i < arr.length; i++) {
+// 		if (arr[i] === 0) {
+// 			myDict.zero = myDict.zero + 1;
+// 		}
+// 		else if (arr[i] > 0) {
+// 			myDict.positive = myDict.positive + 1;
+// 		}
+// 		else {
+// 			myDict.negative = myDict.negative + 1;
+// 		}
+// 	}
+// 	console.log(parseFloat(myDict.positive / parseFloat(arr.length)).toPrecision(12));
+// 	console.log(parseFloat(myDict.negative / parseFloat(arr.length)).toPrecision(12));
+// 	console.log(parseFloat(myDict.zero / parseFloat(arr.length)).toPrecision(12));
 
-}
+// }
 
-plusMinus([ -4, 3, -9, 0, 4, 1 ]);
+// plusMinus([ -4, 3, -9, 0, 4, 1 ]);
+
+/*--------- Staircase ------------*/
+
+// function staircase (n) {
+// 	for (let i = 1; i < n+1; i++) {
+// 		let stairs = '';
+// 		let j = i;
+// 		let k = i;
+// 		while (j !== n) {
+// 			stairs += ' ';
+// 			j++;
+// 		}
+// 		while (k !== 0) {
+// 			stairs += '#';
+// 			k--;
+// 		}
+
+// 		console.log(`${stairs}`);
+// 	}
+// }
+
+// staircase(6);
