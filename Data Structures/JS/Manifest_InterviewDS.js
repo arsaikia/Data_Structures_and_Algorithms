@@ -1,4 +1,9 @@
 /*---------  Manifest Interview ------------*/
+
+/*/*---------  Q1 ------------*/
+
+/*---------  Q2 ------------*/
+
 function isValid (str) {
 	let given = str.split('');
 
