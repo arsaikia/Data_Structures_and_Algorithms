@@ -14,4 +14,5 @@
 
 /* Insertion Sort  O( n^2 ) */
 
-console.log("")
+////
+
