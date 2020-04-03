@@ -740,5 +740,18 @@
 
 // console.log(lilysHomework([ 3, 4, 2, 5, 1 ]));
 
+/*
+ * Complete the Rectangle function
+ */
+// function Rectangle(a, b) {
+//     const myDict ={};
+//     myDict.length = (a);
+//     myDict.width = (b);
+//     myDict.perimeter = (2*(a+b));
+//     myDict.area = (a*b);
 
+//     return myDict;
+// }
 
+// let x = Rectangle(4, 5);
+// console.log(x);
