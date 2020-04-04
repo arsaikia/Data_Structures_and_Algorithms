@@ -800,10 +800,10 @@
  * literals: The tagged template literal's array of strings.
  * expressions: The tagged template literal's array of expression values (i.e., [area, perimeter]).
  */
-function sides(literals, ...expressions) {
+// function sides(literals, ...expressions) {
 
-    const x= ( (expressions[1] + Math.sqrt( (expressions[1]*expressions[1]) - (16*expressions[0]))) /4 );
-    const y = ( (expressions[1] - Math.sqrt( (expressions[1]*expressions[1]) - (16*expressions[0]))) /4 );
+//     const x= ( (expressions[1] + Math.sqrt( (expressions[1]*expressions[1]) - (16*expressions[0]))) /4 );
+//     const y = ( (expressions[1] - Math.sqrt( (expressions[1]*expressions[1]) - (16*expressions[0]))) /4 );
     
-   return [Math.min(x,y), Math.max(x,y)]
-}
+//    return [Math.min(x,y), Math.max(x,y)]
+// }
