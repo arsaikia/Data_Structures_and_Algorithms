@@ -774,3 +774,17 @@
 //     return count;
     
 // }
+
+/*
+ * Modify and return the array so that all even elements are doubled and all odd elements are tripled.
+ * 
+ * Parameter(s):
+ * nums: An array of numbers.
+ */
+// function modifyArray(nums) {
+//     let n = [];
+//     nums.forEach( (el) => {
+//         el%2 === 0 ? n.push(el*2) : n.push(el*3);
+//     })
+//     return n;
+// }
