@@ -755,3 +755,22 @@
 
 // let x = Rectangle(4, 5);
 // console.log(x);
+
+
+/*
+ * Return a count of the total number of objects 'o' satisfying o.x == o.y.
+ * 
+ * Parameter(s):
+ * objects: an array of objects with integer properties 'x' and 'y'
+ */
+// function getCount(objects) {
+
+//     let count =0;
+
+//     objects.forEach( (el) => {
+//         if(el.x === el.y) count += 1;
+//     })
+
+//     return count;
+    
+// }
