@@ -10,11 +10,31 @@
     __Note:__
         You must do this in-place without making a copy of the array.
         Minimize the total number of operations.
+
+    🐲🐲
 '''
 
 
+def moveZeroes(nums):
 
+    indxArr = []
+    zeroCounter = 0
+
+    for i in range(0, len(nums)):
+        if(nums[i] == 0):
+            zeroCounter += 1
+        else:
+            indxArr.append(i)
+
+    for i in range(0, len(indxArr)):
+        nums[i] = nums[indxArr[i]]
+
+    for i in range(len(nums)-1, len(indxArr)-1, -1):
+        
+        nums[i] = 0
 
 
 if __name__ == "__main__":
-    pass
+    nums = [0, 1]
+    moveZeroes(nums)
+    print(nums)
