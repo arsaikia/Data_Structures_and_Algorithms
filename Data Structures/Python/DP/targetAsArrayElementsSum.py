@@ -1,12 +1,13 @@
 
 count = 0
-arr = [2, 4, 6, 10, 12,1 ,2 ,3 ,1, 1, 1, 1, 1]
+arr = [2, 4, 6, 10, 12]
 
 
 def DP( i, target):
     global arr
+    global count
+
     if ( target == 0 ):
-        global count
         count += 1
         return
     elif ( i>= len(arr)): return 0
@@ -19,8 +20,6 @@ def DP( i, target):
 
 
 if __name__ == "__main__":
-
-    
 
     DP( 0, 12)
     print(count)
