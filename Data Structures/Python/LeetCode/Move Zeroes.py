@@ -1,4 +1,5 @@
 '''
+    🐲🐲
     Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
     Example:
 
@@ -30,7 +31,7 @@ def moveZeroes(nums):
         nums[i] = nums[indxArr[i]]
 
     for i in range(len(nums)-1, len(indxArr)-1, -1):
-        
+
         nums[i] = 0
 
 
