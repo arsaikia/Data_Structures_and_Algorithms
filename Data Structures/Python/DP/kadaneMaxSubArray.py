@@ -1,6 +1,7 @@
 
 '''
 Kadane's Algorithm for finding maximum subarray sum.
+
 APPROACH:
     Traverse the array and for each iteration keep the 
     local and global maximum sum.
