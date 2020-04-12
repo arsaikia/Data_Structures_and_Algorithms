@@ -24,12 +24,14 @@
 
 
 def BuySellStocks( arr, indx):
-
+    
     curr = indx
 
     for i in range( indx, len(arr) ):
-        if(arr[i] > arr[curr]-1):
-            curr = arr[i]
+        
+        if(arr[i] > arr[curr]):
+            curr = i
+            
     return arr[curr]-arr[indx]
 
 
@@ -45,7 +47,7 @@ if __name__ == "__main__":
     
     arr = [7,1,5,3,6,4]
     stocksPrices = []
-    for i in range( 0, len(arr)-1):
+    for i in range( 0, len(arr)):
        stocksPrices.append( BuySellStocks( arr, i) )
     
     print(max(stocksPrices))
