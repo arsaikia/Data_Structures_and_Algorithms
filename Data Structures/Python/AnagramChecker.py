@@ -1,4 +1,5 @@
 '''
+🥨
 Given two strings check if they are ANAGRAMS of each other or not.
 '''
 
