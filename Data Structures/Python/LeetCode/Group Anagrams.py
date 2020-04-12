@@ -1,4 +1,5 @@
 '''
+🎈🎈
 Given an array of strings, group anagrams together.
 
 __Example:__
@@ -20,32 +21,34 @@ __Note:__
 
 from typing import List
 
+
 class Solution:
+
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
 
-        anagList = [] 
-        opList=[]
+        anagDict = {}
 
         for each in strs:
-            asciiVal = 1
-            for ch in each:
-                asciiVal += ord( ch )
-            anagList.append( asciiVal )
-        
-        for i in range(len(anagList)):
+            x = self.primeHash(each)
+            if anagDict.get(str(x)):
+                anagDict[str(x)].append(each)
+            else:
+                anagDict[str(x)] = [each]
 
-        
-        return anagList
+        return [anagDict[i] for i in anagDict.keys()]
 
-
-
-
+    def primeHash(self, str: str) -> int:
+        primeList = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41,
+                     43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101]
+        x = 1
+        for ch in str:
+            x *= primeList[ord(ch)-97]
+        return x
 
 
 if __name__ == "__main__":
-    
     input = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
     anagramClass = Solution()
-
-    print(anagramClass.groupAnagrams( input ))
+    print(anagramClass.groupAnagrams(
+        ["eat", "tea", "tan", "ate", "nat", "bat"]))
