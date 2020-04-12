@@ -28,8 +28,8 @@ def BuySellStocks(arr):
     curr = 0
     soFar = 0
 
-    for i in range(1, len(prices)):
-        curr += prices[i]-prices[i-1]
+    for i in range(1, len(arr)):
+        curr += arr[i]-arr[i-1]
         curr = max(0, curr)
         soFar = max(curr, soFar)
 
