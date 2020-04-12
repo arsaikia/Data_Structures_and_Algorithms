@@ -19,30 +19,34 @@
     Output: 0
     Explanation: In this case, no transaction is done, i.e. max profit = 0.
     ```
-    
+
 '''
 
 
-def moveZeroes(nums):
+def BuySellStocks( arr, indx):
 
-    indxArr = []
-    zeroCounter = 0
+    curr = indx
 
-    for i in range(0, len(nums)):
-        if(nums[i] == 0):
-            zeroCounter += 1
-        else:
-            indxArr.append(i)
+    for i in range( indx, len(arr) ):
+        if(arr[i] > arr[curr]-1):
+            curr = arr[i]
+    return arr[curr]-arr[indx]
 
-    for i in range(0, len(indxArr)):
-        nums[i] = nums[indxArr[i]]
 
-    for i in range(len(nums)-1, len(indxArr)-1, -1):
 
-        nums[i] = 0
 
+
+
+
+
+   
 
 if __name__ == "__main__":
-    nums = [0, 1, '🤪', 0]
-    moveZeroes(nums)
-    print(nums)
+    
+    arr = [7,1,5,3,6,4]
+    stocksPrices = []
+    for i in range( 0, len(arr)-1):
+       stocksPrices.append( BuySellStocks( arr, i) )
+    
+    print(max(stocksPrices))
+   
