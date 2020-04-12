@@ -12,7 +12,6 @@ def anagramChecker(str1, str2):
         return False
 
     for each in str1:
-
         if myDict.get(each):
             myDict[each] += 1
         else:
