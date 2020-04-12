@@ -33,4 +33,5 @@ def anagramChecker(str1, str2):
 
 if __name__ == "__main__":
 
-    print(anagramChecker('aaabc', 'baaac'))
+    print(anagramChecker ('aaabc', 'baaac'))
+
