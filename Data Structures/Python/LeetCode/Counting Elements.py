@@ -1,6 +1,7 @@
 
 
 '''
+🎉
 Given an integer array arr, count element x such that x + 1 is also in arr.
 
 If there're duplicates in arr, count them seperately.
@@ -29,33 +30,31 @@ Explanation: Two 1s are counted cause 2 is in arr.
 from typing import List
 
 # nlogn solution usin sort:
+
+
 class Solution:
     def countElements(self, arr: List[int]) -> int:
-        
+
         arr.sort()
         #arr = list(set(arr))
         print(arr)
-        currCount=0
-        globalCount=0
+        currCount = 0
+        globalCount = 0
 
         for i in range(1, len(arr)):
-            if(arr[i] == arr[i-1]): currCount+=1
-            elif(arr[i]-1 == arr[i-1]): 
-                currCount+=1
+            if(arr[i] == arr[i-1]):
+                currCount += 1
+            elif(arr[i]-1 == arr[i-1]):
+                currCount += 1
                 globalCount += 1
-            else: currCount=0
-            
+            else:
+                currCount = 0
+
         return globalCount
-                
-
-        
-        
-
-
 
 
 
 if __name__ == "__main__":
-    
+
     sol = Solution()
-    print(sol.countElements([1,1,2,2]))
+    print(sol.countElements([1, 1, 2, 2]))
