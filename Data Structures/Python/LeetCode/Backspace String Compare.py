@@ -23,37 +23,27 @@ from typing import List
 
 
 class Solution:
+
+    def backspace(self, S):
+
+        myList = []
+
+        for each in S:
+            if(each != '#'):
+                myList.append(each)
+            else:
+                if(len(myList)): myList.pop()
+
+        return (''.join(myList))
+
+
     def backspaceCompare(self, S: str, T: str) -> bool:
-        if(len(S) != len(T)):
-            return False
 
-        S1 = S
-        T1 = T
-
-        i = 1
-        x = len(S)
-        while(i < x):
-            if(S[i] == '#'):
-                S = S.replace(S[i-1], '')
-                i = min(1, i)
-            else:
-                i += 1
-            x = len(S)
-
-        i = 1
-        x = len(T)
-        while(i < x):
-            if(T[i] == '#'):
-                T = T.replace(T[i-1], '')
-                i = min(1, i)
-            else:
-                i += 1
-            x = len(T)
-        return(S)
+        return(self.backspace(S) == self.backspace(T))
 
 
 if __name__ == "__main__":
     sol = Solution()
-    S = "xywrrmp"
-    T = "xywrrmu#p"
+    S = "a#c"
+    T = "b"
     print(sol.backspaceCompare(S, T))
