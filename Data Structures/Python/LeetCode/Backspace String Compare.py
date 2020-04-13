@@ -24,8 +24,36 @@ from typing import List
 
 class Solution:
     def backspaceCompare(self, S: str, T: str) -> bool:
-        pass
+        if(len(S) != len(T)):
+            return False
+
+        S1 = S
+        T1 = T
+
+        i = 1
+        x = len(S)
+        while(i < x):
+            if(S[i] == '#'):
+                S = S.replace(S[i-1], '')
+                i = min(1, i)
+            else:
+                i += 1
+            x = len(S)
+
+        i = 1
+        x = len(T)
+        while(i < x):
+            if(T[i] == '#'):
+                T = T.replace(T[i-1], '')
+                i = min(1, i)
+            else:
+                i += 1
+            x = len(T)
+        return(S)
 
 
 if __name__ == "__main__":
-    pass
+    sol = Solution()
+    S = "xywrrmp"
+    T = "xywrrmu#p"
+    print(sol.backspaceCompare(S, T))
