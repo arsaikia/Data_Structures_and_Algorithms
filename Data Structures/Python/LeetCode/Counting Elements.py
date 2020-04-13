@@ -29,32 +29,28 @@ Explanation: Two 1s are counted cause 2 is in arr.
 
 from typing import List
 
-# nlogn solution usin sort:
+# (2n + nlogn) solution usin sort:
 
 
 class Solution:
     def countElements(self, arr: List[int]) -> int:
-
-        arr.sort()
-        #arr = list(set(arr))
+        arr = sorted(arr)
+        arr1 = list(set(arr))
         print(arr)
-        currCount = 0
-        globalCount = 0
+        curr=0
+        count=0
 
-        for i in range(1, len(arr)):
-            if(arr[i] == arr[i-1]):
-                currCount += 1
-            elif(arr[i]-1 == arr[i-1]):
-                currCount += 1
-                globalCount += 1
-            else:
-                currCount = 0
-
-        return globalCount
-
+        for i in range(1, len(arr1)):
+            print(arr1[i], arr1[i-1], curr)
+            if(arr1[i]-1==arr1[i-1]): curr = arr1[i-1]
+        
+        for i in range(0, len(arr)):
+            #print(arr[i] , curr)
+            if(arr[i] > curr): return count
+            count+=1
 
 
 if __name__ == "__main__":
 
     sol = Solution()
-    print(sol.countElements([1, 1, 2, 2]))
+    print(sol.countElements([2,9,0,7,6,2,7,7,0]))
