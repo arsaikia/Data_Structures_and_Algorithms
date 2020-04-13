@@ -25,20 +25,15 @@ from typing import List
 class Solution:
 
     def backspace(self, S):
-
         myList = []
-
         for each in S:
             if(each != '#'):
                 myList.append(each)
             else:
                 if(len(myList)): myList.pop()
-
         return (''.join(myList))
 
-
     def backspaceCompare(self, S: str, T: str) -> bool:
-
         return(self.backspace(S) == self.backspace(T))
 
 
