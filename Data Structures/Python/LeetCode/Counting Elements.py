@@ -28,43 +28,44 @@ Explanation: Two 1s are counted cause 2 is in arr.
 '''
 
 from typing import List
+import unittest
 
-# (2n + nlogn) solution usin sort:
 
-#                                                       [0, 0, 2, 2, 6, 7, 7, 7, 9]
 class Solution:
-    def countElements(self, arr: List[int]) -> int:
-        arr = sorted(arr)
 
+    # (nlogn) solution usin sort:
+    def countElements_NlogN(self, arr: List[int]) -> int:
+        arr = sorted(arr)
         count = 0
         globalCount = 0
 
-        for i in range( 1, len(arr)):
-
-            
-
-            if( arr[i] == arr[i-1] ): count += 1
-            elif( arr[i]-1 == arr[i-1]  ):
-                 
-                globalCount += max(count+1,1)
+        for i in range(1, len(arr)):
+            if(arr[i] == arr[i-1]):
+                count += 1
+            elif(arr[i]-1 == arr[i-1]):
+                globalCount += max(count+1, 1)
                 count = 0
-            else: count = 0
-
-            if( i == len(arr)-2 and arr[i]-1 == arr[i-1] ):
+            else:
+                count = 0
+            if(i == len(arr)-2 and arr[i]-1 == arr[i-1]):
                 globalCount += count
-            
-            print(arr[i], count, globalCount)
-                
-            
-
-
-
         return globalCount
+
+    # (N) solution using hashSet:
+    def countElements_N(self, arr: List[int]) -> int:
+
+        my_hashSet = set(arr)
+        count = 0
+
+        for each in arr:
+            if(each+1 in my_hashSet):
+                count += 1
+
+        return count
 
 
 if __name__ == "__main__":
 
     sol = Solution()
-    arr = [4,10,11,11,1,9,6,2,4,5,8]
-    print(sorted([4,10,11,11,1,9,6,2,4,5,8]))
-    print(sol.countElements([1,1,2,2]))
+    arr = [4, 10, 11, 11, 1, 9, 6, 2, 4, 5, 8]
+    print(sol.countElements_NlogN(arr) == sol.countElements_N(arr))
