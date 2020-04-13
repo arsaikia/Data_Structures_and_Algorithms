@@ -31,26 +31,40 @@ from typing import List
 
 # (2n + nlogn) solution usin sort:
 
-
+#                                                       [0, 0, 2, 2, 6, 7, 7, 7, 9]
 class Solution:
     def countElements(self, arr: List[int]) -> int:
         arr = sorted(arr)
-        arr1 = list(set(arr))
-        print(arr)
-        curr=0
-        count=0
 
-        for i in range(1, len(arr1)):
-            print(arr1[i], arr1[i-1], curr)
-            if(arr1[i]-1==arr1[i-1]): curr = arr1[i-1]
-        
-        for i in range(0, len(arr)):
-            #print(arr[i] , curr)
-            if(arr[i] > curr): return count
-            count+=1
+        count = 0
+        globalCount = 0
+
+        for i in range( 1, len(arr)):
+
+            
+
+            if( arr[i] == arr[i-1] ): count += 1
+            elif( arr[i]-1 == arr[i-1]  ):
+                 
+                globalCount += max(count+1,1)
+                count = 0
+            else: count = 0
+
+            if( i == len(arr)-2 and arr[i]-1 == arr[i-1] ):
+                globalCount += count
+            
+            print(arr[i], count, globalCount)
+                
+            
+
+
+
+        return globalCount
 
 
 if __name__ == "__main__":
 
     sol = Solution()
-    print(sol.countElements([2,9,0,7,6,2,7,7,0]))
+    arr = [4,10,11,11,1,9,6,2,4,5,8]
+    print(sorted([4,10,11,11,1,9,6,2,4,5,8]))
+    print(sol.countElements([1,1,2,2]))
