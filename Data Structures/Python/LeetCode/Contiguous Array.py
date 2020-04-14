@@ -18,8 +18,31 @@ from typing import List
 
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
-        pass
+
+        zero = 0
+        one = 0
+        c=0
+        g=0
+
+        for each in nums:
+            if(each == 0):
+                zero += 1
+            else:
+                one += 1
+
+            if( zero == one ): 
+                c +=2
+
+
+
+            if(c%2 == 0): g += c
+
+        return g
 
 
 if __name__ == "__main__":
-    pass
+    sol = Solution()
+    Input = [0,1,1,0,1,1,1,0]
+    Input1 = [0,0,1,0,0,0,1,1]
+    for i in range(0, len(Input1)):
+        print(sol.findMaxLength(Input1[i:]))
