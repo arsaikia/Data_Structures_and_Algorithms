@@ -33,14 +33,49 @@ class Node:
         if self.right:
             self.right.PrintTree()
 
+    def NodeDepth(self, x):
+
+        if( x == None ): return 0
+
+        left = 1 + self.NodeDepth(x.left) 
+        right = 1 + self.NodeDepth(x.right) 
+
+        
+
+        return max(left, right)
+         
+    
+    
+
+    
+
 
 
 if __name__ == "__main__":
     # Use the insert method to add nodes
-    root = Node(12)
-    root.insert(5)
-    root.insert(14)
+    root = Node(4)
+    root.insert(-7)
+    root.insert(-3)
+    root.insert(-9)
+    root.insert(-3)
+    root.insert(9)
+    root.insert(-7)
+    root.insert(-4)
     root.insert(6)
-    root.insert(1)
+    root.insert(-6)
+    root.insert(-6)
+    root.insert(0)
+    root.insert(6)
+    root.insert(5)
+    root.insert(9)
+    root.insert(-1)
+    root.insert(-4)
+    root.insert(-2)
 
-    root.PrintTree()
+    
+
+    
+
+    #root.PrintTree()
+
+    print((root.NodeDepth(root.left) + root.NodeDepth(root.right)))
