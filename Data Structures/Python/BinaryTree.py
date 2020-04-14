@@ -33,17 +33,28 @@ class Node:
         if self.right:
             self.right.PrintTree()
 
-    def NodeDepth(self, x):
+    def getMaxDia(self, root):
 
-        if( x == None ): return 0
+        self.x = 0
+        self.diameter(root)
+        return self.x
 
-        left = 1 + self.NodeDepth(x.left) 
-        right = 1 + self.NodeDepth(x.right) 
+         
+    def diameter( self, root):
+
+        if not root: return 0
+
+        L = self.diameter(root.left)
+        R= self.diameter(root.right)
+         
+        total = L+R+1
+
+        self.x =  max( self.x, total)
+
+        return 1+max(L,R)
 
         
 
-        return max(left, right)
-         
     
     
 
@@ -53,24 +64,10 @@ class Node:
 
 if __name__ == "__main__":
     # Use the insert method to add nodes
-    root = Node(4)
-    root.insert(-7)
-    root.insert(-3)
-    root.insert(-9)
-    root.insert(-3)
-    root.insert(9)
-    root.insert(-7)
-    root.insert(-4)
-    root.insert(6)
-    root.insert(-6)
-    root.insert(-6)
-    root.insert(0)
-    root.insert(6)
-    root.insert(5)
-    root.insert(9)
-    root.insert(-1)
-    root.insert(-4)
-    root.insert(-2)
+    y = [1,2,3,4,5]
+    root = Node(1)
+    for i in range(1, len(y)):
+        root.insert(i)
 
     
 
@@ -78,4 +75,4 @@ if __name__ == "__main__":
 
     #root.PrintTree()
 
-    print((root.NodeDepth(root.left) + root.NodeDepth(root.right)))
+    print((root.getMaxDia(root)))
