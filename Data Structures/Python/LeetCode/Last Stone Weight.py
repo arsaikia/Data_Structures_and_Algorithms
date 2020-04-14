@@ -8,6 +8,7 @@ Each turn, we choose the two heaviest stones and smash them together.  Suppose t
 If x == y, both stones are totally destroyed;
 If x != y, the stone of weight x is totally destroyed, and the stone of weight y has new weight y-x.
 At the end, there is at most 1 stone left.  Return the weight of this stone (or 0 if there are no stones left.)
+
 '''
 from typing import List
 
@@ -27,7 +28,7 @@ class Solution:
             maxVal, minVal = -1 * \
                 self.heapq.heappop(self.h), -1 * self.heapq.heappop(self.h)
             self.heapq.heappush(
-                self.h, -1*(max(maxVal, minVal)-min(maxVal, minVal)))
+                self.h, (minVal-maxVal))
         return -self.h[0]
 
 
