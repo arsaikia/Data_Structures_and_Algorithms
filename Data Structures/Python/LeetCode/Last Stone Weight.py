@@ -11,31 +11,28 @@ At the end, there is at most 1 stone left.  Return the weight of this stone (or 
 '''
 from typing import List
 
+
 class Solution:
     import heapq
+
     def lastStoneWeight(self, stones: List[int]) -> int:
-        if(len(stones)==1): return stones[0]
-        self.h=[]
+        if(len(stones) == 1):
+            return stones[0]
+        self.h = []
         for each in stones:
             self.heapq.heappush(self.h, -1 * each)
 
-        
-
-        while(len(self.h) !=1 ):
+        while(len(self.h) != 1):
             print(self.h)
-            maxVal, minVal = -1 * self.heapq.heappop(self.h), -1 * self.heapq.heappop(self.h)
-            self.heapq.heappush(self.h, -1*(max(maxVal, minVal)-min(maxVal, minVal)))
-
+            maxVal, minVal = -1 * \
+                self.heapq.heappop(self.h), -1 * self.heapq.heappop(self.h)
+            self.heapq.heappush(
+                self.h, -1*(max(maxVal, minVal)-min(maxVal, minVal)))
         return -self.h[0]
 
 
-
 if __name__ == "__main__":
-    
-    Input = [2,7,4,1,8,1]
+
+    Input = [2, 7, 4, 1, 8, 1]
     sol = Solution()
     print(sol.lastStoneWeight(Input))
-
-    #import heapq as hq
-
-
