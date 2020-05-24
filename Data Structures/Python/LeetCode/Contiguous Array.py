@@ -15,32 +15,34 @@ Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal numb
 Note: The length of the given binary array will not exceed 50,000.
 '''
 from typing import List
+import pandas as pd
 
 
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
 
-        zero = 0
-        one = 0
-        c = 0
-        g = 0
+        if(len(nums) <= 1):
+            return 0
 
-        for each in nums:
-            if(each == 0):
-                zero += 1
+        globalMax = 0
+        myDict = {0: -1}
+        sums = 0
+
+        for i in range(len(nums)):
+            if(nums[i] == 0):
+                nums[i] = -1
+            sums = sums + nums[i]
+            if(sums in myDict.keys()):
+                globalMax = max(globalMax, i-myDict.get(sums))
             else:
-                one += 1
-
-            if(zero == one):
-                c += 2
-            if(c % 2 == 0):
-                g += c
-        return g
+                myDict[sums] = i
+        return globalMax
 
 
 if __name__ == "__main__":
+    # myFile = pd.read_csv("../Test Data/ContiguousArray.csv", sep=',')
+    # print(myFile)
     sol = Solution()
     Input = [0, 1, 1, 0, 1, 1, 1, 0]
     Input1 = [0, 0, 1, 0, 0, 0, 1, 1]
-    for i in range(0, len(Input1)):
-        print(sol.findMaxLength(Input1[i:]))
+    print(f'Max Length is: {sol.findMaxLength(Input)}')
