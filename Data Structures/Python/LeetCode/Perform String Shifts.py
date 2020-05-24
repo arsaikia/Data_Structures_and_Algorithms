@@ -18,12 +18,26 @@ class Solution:
         else:
             shiftAmount = shiftDict[1] - shiftDict[0]
             shiftDirection = 1
+        
+        if(shiftAmount > len(s)):
+            shiftAmount = shiftAmount % len(s)
 
-        return shiftDict, shiftAmount, shiftDirection
+
+        if( shiftDirection == 1 ):
+            return shiftDict,shiftDirection,shiftAmount, s[(len(s)-shiftAmount):] + s[:(len(s)-shiftAmount)]
+        else:
+            return shiftDict,shiftDirection,shiftAmount, s[shiftAmount:] + s[:shiftAmount]
+
 
 if __name__ == "__main__":
     shift = [[1, 1], [1, 1], [0, 2], [1, 3]]
-    s1 = [[1, 1], [0, 1]]
     s = "abcdefg"
+
+    shift1 = [[1,4],[0,7],[0,8],[0,7],[0,6],[1,3],[0,1],[1,7],[0,5],[0,6]]
+    s1 = "xqgwkiqpif"
+
+
+    
     sol = Solution()
-    print(sol.stringShift(s, shift))
+    print(sol.stringShift("xqgwkiqpif", [[1,4],[0,7],[0,8],[0,7],[0,6],[1,3],[0,1],[1,7],[0,5],[0,6]]))
+    # print('abcdefg'[4::1] + 'abcdefg'[:len(s)-3:1])
