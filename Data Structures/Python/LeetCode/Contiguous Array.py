@@ -15,7 +15,6 @@ Explanation: [0, 1] (or [1, 0]) is a longest contiguous subarray with equal numb
 Note: The length of the given binary array will not exceed 50,000.
 '''
 from typing import List
-import pandas as pd
 
 
 class Solution:
@@ -45,4 +44,4 @@ if __name__ == "__main__":
     sol = Solution()
     Input = [0, 1, 1, 0, 1, 1, 1, 0]
     Input1 = [0, 0, 1, 0, 0, 0, 1, 1]
-    print(f'Max Length is: {sol.findMaxLength(Input)}')
+    print(f'Max Length is: {sol.findMaxLength([0,0,1])}')
