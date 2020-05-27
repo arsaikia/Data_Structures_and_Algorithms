@@ -10,7 +10,7 @@ def DP( i, target):
     if ( target == 0 ):
         count += 1
         return
-    elif ( i>= len(arr)): return 0
+    elif ( i >= len(arr)): return 0
 
     DP( i+1, target-arr[i])
     DP( i+1, target)
