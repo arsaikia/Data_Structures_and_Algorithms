@@ -26,17 +26,32 @@ def preOrderTree( node ):
 
 class Solution:
     def closestValue(self, root: TreeNode, target: float) -> int:
-        # while(root.left is not None):
-        #     print(root)
-        pass
+        
+        currClosest = float('inf')            
+        currNode = root
+
+        while(currNode is not None):
+
+            if( abs(currClosest-target) > abs(currNode.val-target) ): 
+                currClosest = currNode.val
+
+            if ( target < currNode.val ) : currNode = currNode.left
+            elif ( target > currNode.val ) : currNode = currNode.right
+            else: break
+        
+        return currClosest
+
 
 
 
 if __name__ == "__main__":
-    sol = TreeNode()
-    array = [1, 2, 3, 4, 5, 6, 7] 
+    sol = Solution()
+    array = [1, 2, 5, 7, 9] 
     array.sort()
     print(f'{array}\n')
     target = 3.714286
 
-    preOrderTree( BST_from_array(array) )
+    root = BST_from_array(array)
+
+    print( sol.closestValue(root, target) ) 
+
