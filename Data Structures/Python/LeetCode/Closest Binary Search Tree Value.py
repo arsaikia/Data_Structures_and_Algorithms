@@ -15,6 +15,7 @@ def BST_from_array( array: List[int] ) :
     root.right = BST_from_array( array[ mid+1 : ] )
     return root
 
+
 def preOrderTree( node ):
 
     if node is None: return
