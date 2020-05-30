@@ -16,3 +16,4 @@ def isValid(s):
 
 
 print(isValid(")("))
+
