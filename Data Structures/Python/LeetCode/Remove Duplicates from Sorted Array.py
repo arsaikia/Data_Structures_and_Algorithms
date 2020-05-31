@@ -8,7 +8,7 @@ class Solution:
                 nums.pop(i)
 
     def removeDup(self, nums: List[int]) -> int:
-        nums[:] = sorted(set(nums))
+        nums[:] = sorted(list(set(nums)))
 
 
 if __name__ == "__main__":
@@ -20,3 +20,9 @@ if __name__ == "__main__":
     print(array)
     sol.removeDup(array1)
     print(array)
+
+    arr = [1,2,3]
+
+    x = set(arr)
+
+    print(set(arr))
