@@ -11,8 +11,15 @@ from typing import List
 
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-        pass
+        outputArray = [i+1 for i in range(len(nums))]
+        for each in nums:
+            if each in outputArray:
+                outputArray.pop(outputArray.index(each))
+
+        return outputArray
+
 
 
 if __name__ == "__main__":
-    pass
+    sol = Solution()
+    print(sol.findDisappearedNumbers([4,3,2,7,8,2,3,1]))
