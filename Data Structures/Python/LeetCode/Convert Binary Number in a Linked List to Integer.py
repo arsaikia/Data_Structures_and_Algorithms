@@ -9,8 +9,6 @@ class Solution:
         return int(str, 2)
 
 
-
-
 if __name__ == "__main__":
     str = '0'
     print(int(str, 2))
