@@ -21,5 +21,4 @@ def shiftAndUpdate( array, num, idx):
             array[i] = array[i+1]
     return
 
-
 print(findThreeLargestNumbers( [12, 22, 1, 99, 126, 4, 187, 9, 321, 320, 325, 90] ))
