@@ -1,3 +1,5 @@
+# O(n) Time || O(n) Space
+# NOTE : FOR ALPHABET SIZE > 26 {large alphabet size} the size of alphabet will come into the picture for complexity analysis
 def ceaserCypher( string, key ):
     newString = []
     newKey = key % 26
