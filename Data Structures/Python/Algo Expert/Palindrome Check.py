@@ -1,4 +1,7 @@
 # Approach 1: Reverse the String
+# O(n) time || O(n) Space
+
+
 def reverseStringPalindrome(string):
     revString = string[::-1]
     if string == revString:
@@ -12,7 +15,6 @@ def checkPalindrome(string):
         if string[i] != string[len(string)-1-i]:
             return False
     return True
-
 
 
 myString = 'MOROM'
