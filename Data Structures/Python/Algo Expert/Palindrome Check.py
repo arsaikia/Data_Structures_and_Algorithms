@@ -6,6 +6,7 @@ def checkPalindrome(string):
     return True
 
 
+
 myString = 'MOROM'
 print(f'The String "{myString}" is a palindrome  ? ',
       checkPalindrome(myString))
