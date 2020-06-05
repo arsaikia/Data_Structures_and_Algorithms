@@ -1,3 +1,15 @@
+# Approach 1: String Concatination to get the reversed sring
+# O(n^2) Time || O(n) Space
+def stringConcatPalindrome( string ):
+    revStr = ''
+    for i in range(len(string)-1, -1, -1):
+        revStr += string[i]
+    if string == revStr:
+        return True
+    return False
+
+
+
 # Approach 2: Reverse the String
 # O(n) time || O(n) Space
 def reverseStringPalindrome(string):
@@ -7,6 +19,7 @@ def reverseStringPalindrome(string):
     return False
 
 # Approach 3: String into array then traverse
+# O(n) time || O(n) Space
 def stringarrayPalindrome( string ):
     stringArray = list(string)
     for i in range(len(stringArray)//2):
