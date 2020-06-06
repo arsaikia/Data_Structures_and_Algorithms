@@ -4,7 +4,6 @@ Iterative Approach:
     Space Complexity : O (1)
 '''
 
-
 def binarySearch(array, target):
 
     start = 0
