@@ -1,39 +1,30 @@
-# def twoSum(arr, target):
-#     i = 0
-#     j = len(arr)-1
-#     arr.sort()
-#     while(i < j):
-#         if((arr[i] + arr[j]) == target):
-#             return (i, j)
-#         if((arr[i] + arr[j]) > target):
-#             j -= 1
-#         elif((arr[i] + arr[j]) < target):
-#             i += 1
-#     return "Not Found"
+# Fibonnaci
+import time as t
+# Naive
 
+def Naivefib( n ):
+    if n == 1: return 0
+    elif n == 2: return 1
+    else: return Naivefib(n-1) + Naivefib(n-1)
 
-# if __name__ == "__main__":
-#     arr = [1, 2, 6, 4, 8, 10]
-#     target = [10, 12, 14]
-#     for each in target:
-#         print(twoSum(arr, each))
-    
-#     # enumerate
-#     for val,index in enumerate(arr):
-#         print(val, index)
+def Memoizedfib( n , memo={1:0, 2: 1}):
+    if n in memo:
+        return memo[n]
+    else:
+        memo[n] = Memoizedfib(n-1, memo) + Memoizedfib(n-2, memo)
+        return memo[n]
 
-#       [[7, 0], [7, 1], [6, 1], [5, 0], [5, 2], [4, 4]]
+def BottomUpFib( n ):
+    firstTwo = [0, 1]
+    counter = 3
+    while counter < n:
+        value = firstTwo[0] + firstTwo[1]
+        firstTwo[0], firstTwo[1] = firstTwo[1], value
+        counter += 1
+    return firstTwo[1] if n>1 else firstTwo[0]
 
-import random
-array = [[0,0],[6,2],[5,5],[4,3],[5,2],[1,1],[6,0],[6,3],[7,0],[5,1]]
-sortedArray = sorted(array, key=lambda each : each[0], reverse=True)
-for i in range(1, len(sortedArray)):
-    if sortedArray[i-1][0] == sortedArray[i][0] and sortedArray[i-1][1] > sortedArray[i][1]:
-        sortedArray[i-1][1], sortedArray[i][1] = sortedArray[i][1], sortedArray[i-1][1]
-opArr = []
-for each in sortedArray:
-    opArr.insert(each[1], each)
-
-
-
-print(sortedArray)
+start = t.time()
+val = Naivefib(20)
+end = t.time()
+print(f'Naive Fib of 5 is {val} which takes {end-start} seconds!')
+     
