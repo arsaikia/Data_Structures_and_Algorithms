@@ -1,4 +1,5 @@
 class Solution:
+    
     def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
         res = []
         for k, g in itertools.groupby(sorted(people, reverse=True), key=lambda x: x[0]):
