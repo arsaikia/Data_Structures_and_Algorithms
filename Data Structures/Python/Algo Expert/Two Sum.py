@@ -18,6 +18,7 @@ def NaiveTwoSum( array: List[int] , target) -> List[int]:
                 return [i, j]
     return -1
 
+# O(n logn) Time || O(1) space
 def twoPointerTwoSum(array: List[int] , target) -> List[int]:
     array = sorted(array)
     start, end = 0, len(array)-1
@@ -27,10 +28,20 @@ def twoPointerTwoSum(array: List[int] , target) -> List[int]:
         elif array[start]+ array[end] < target:
             start += 1
         else:
-            return [start, end]
+            return [array[start], array[end]]
     return -1
 
+# O(n) Time || O(1) Space
+def hashTableTwoSum(array: List[int] , target) -> List[int]:
+    myDict = {array[0] : 0}
+    for i in range(1, len(array)):
+        if target-array[i] in myDict:
+            return [myDict[target-array[i]], i]
+        else:
+            myDict[array[i]] = i
+    return -1
+            
 
-print(NaiveTwoSum([1,2,4,6,10,12], 12), twoPointerTwoSum([1,2,4,6,10,12], 12))
+print(NaiveTwoSum([1,2,4,6,10,12], 12), twoPointerTwoSum([3,2,4], 6), hashTableTwoSum([3,2,4], 6))
             
         
