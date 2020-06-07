@@ -1,5 +1,5 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
-    "python.pythonPath": "C:\\Users\\aruna\\AppData\\Local\\Continuum\\anaconda3\\python.exe",
+    "python.pythonPath": "c:\\Users\\aruna\\Desktop\\Git\\GitHub\\Data_Structures_and_Algorithms\\.venv\\Scripts\\python.exe",
     "python.formatting.provider": "autopep8"
 }

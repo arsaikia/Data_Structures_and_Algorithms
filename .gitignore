@@ -3,3 +3,6 @@ CheatSheet.jpg
 ex.ipynb
 .gitignore
 practiceSort.py
+*.pyc
+*.cfg
+*.venv
