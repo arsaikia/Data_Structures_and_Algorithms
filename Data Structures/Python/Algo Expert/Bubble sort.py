@@ -8,7 +8,6 @@ def BubbleSort( array ):
                 array[j-1], array[j] =  array[j], array[j-1]
                 isSwapped = True
         if isSwapped == False:
-            print('CAME HERE')
             break
     return array
         
