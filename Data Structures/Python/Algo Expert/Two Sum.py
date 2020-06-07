@@ -19,8 +19,8 @@ def NaiveTwoSum( array: List[int] , target) -> List[int]:
     return -1
 
 # O(n logn) Time || O(1) space
-def twoPointerTwoSum(array: List[int] , target) -> List[int]:
-    array = sorted(array)
+def twoPointerTwoSum(arr: List[int] , target) -> List[int]:
+    array = sorted(arr)
     start, end = 0, len(array)-1
     while start < end:
         if array[start]+array[end] > target:
@@ -28,7 +28,7 @@ def twoPointerTwoSum(array: List[int] , target) -> List[int]:
         elif array[start]+ array[end] < target:
             start += 1
         else:
-            return [array[start], array[end]]
+            return [arr.index(array[start]), arr.index(array[end])]
     return -1
 
 # O(n) Time || O(1) Space
