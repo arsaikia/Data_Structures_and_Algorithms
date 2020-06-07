@@ -1,4 +1,4 @@
-
+# O(n^2) Time || O(1) Space
 from typing import  List
 def SelectionSort( array: List[int] ) -> List[int]:
     for i in range(len(array)):

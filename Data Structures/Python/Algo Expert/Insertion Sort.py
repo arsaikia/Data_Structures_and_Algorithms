@@ -1,3 +1,4 @@
+# O(n^2) Time || O(1) Space
 def InsertionSort( array ):
     for i in range(1, len(array)):
         for j in range(i, len(array)):

@@ -48,18 +48,33 @@
 
 # Find closest in Binary Search tree
 
-def findClosest( tree, target ):
-    closest = float('inf')
-    return findClosestHelper(tree, target, closest)
+# def findClosest( tree, target ):
+#     closest = float('inf')
+#     return findClosestHelper(tree, target, closest)
 
-def findClosestHelper(tree, target, closest):
-    if tree is None:
-        return closest
-    if abs(closest-target) > abs(tree.value - target):
-        closest = tree.value
-    if target < tree.value:
-        return findClosestHelper(tree.left, target, closest)
-    elif target > tree.value:
-        return findClosestHelper(tree.right, target, closest)
-    else:
-        return closest
+# def findClosestHelper(tree, target, closest):
+#     if tree is None:
+#         return closest
+#     if abs(closest-target) > abs(tree.value - target):
+#         closest = tree.value
+#     if target < tree.value:
+#         return findClosestHelper(tree.left, target, closest)
+#     elif target > tree.value:
+#         return findClosestHelper(tree.right, target, closest)
+#     else:
+#         return closest
+
+
+#   Find Numbers with Even Number of Digits
+from typing import List
+import math
+def findNumbers(nums: List[int]) -> int:
+    count = 0
+    for each in nums:
+        if math.ceil(math.log10(each)) != 0 and math.ceil(math.log10(each))%2 == 0:
+            count += 1
+    return count
+
+nums = [12,345,2,6,7896]
+
+print(findNumbers(nums))
