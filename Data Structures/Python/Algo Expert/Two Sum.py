@@ -13,11 +13,11 @@ def NaiveTwoSum( array: List[int] , target) -> List[int]:
     O(n^2) Time || O(1) Space
     """    
     for i in range(len(array)):
-        if j in range(i+1, len(array)):
+        for j in range(i+1, len(array)):
             if array[i] + array[j] == target:
                 return [i, j]
     return -1
 
-print(NaiveTwoSum(1,2,4,6,10,12), 12)
+print(NaiveTwoSum([1,2,4,6,10,12], 12))
             
         
