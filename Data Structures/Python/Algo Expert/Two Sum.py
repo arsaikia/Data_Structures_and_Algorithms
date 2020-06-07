@@ -18,6 +18,19 @@ def NaiveTwoSum( array: List[int] , target) -> List[int]:
                 return [i, j]
     return -1
 
-print(NaiveTwoSum([1,2,4,6,10,12], 12))
+def twoPointerTwoSum(array: List[int] , target) -> List[int]:
+    array = sorted(array)
+    start, end = 0, len(array)-1
+    while start < end:
+        if array[start]+array[end] > target:
+            end -= 1
+        elif array[start]+ array[end] < target:
+            start += 1
+        else:
+            return [start, end]
+    return -1
+
+
+print(NaiveTwoSum([1,2,4,6,10,12], 12), twoPointerTwoSum([1,2,4,6,10,12], 12))
             
         
