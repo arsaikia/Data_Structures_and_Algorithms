@@ -59,7 +59,7 @@ def findClosestHelper(tree, target, closest):
         closest = tree.value
     if target < tree.value:
         return findClosestHelper(tree.left, target, closest)
-    elif target > tree.right:
+    elif target > tree.value:
         return findClosestHelper(tree.right, target, closest)
     else:
         return closest
