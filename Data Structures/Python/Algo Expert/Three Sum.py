@@ -1,3 +1,4 @@
+# Time Complexity O(n^2) || O(1) Space
 def threeSum(array, target):
     array.sort()
     for idx in range(len(array)):
