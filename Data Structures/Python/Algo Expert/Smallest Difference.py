@@ -13,7 +13,7 @@ def smallestDifference( array1, array2 ):
             idxTwo += 1
         else:
             return array1[idxOne],  array2[idxTwo]
-        smallestGlobal = min( smallestCurrent, smallestGlobal)
+        smallestGlobal = min(smallestCurrent, smallestGlobal)
     return smallestGlobal
 
 
