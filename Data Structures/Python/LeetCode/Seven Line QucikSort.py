@@ -2,8 +2,6 @@ import random
 
 # Expected  : O(nlogn) Time || O(n) Space
 # Worst     : O(n^2) Time || O(n^2) Space
-
-
 def QuickSort(array):
 
     if len(array) <= 1:
