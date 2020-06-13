@@ -1,4 +1,5 @@
 from typing import List
+from collections import deque
 def sortedSquareArray( array : List[int]) -> List[int] :
     """
     O(n) Time || O(n) Space
@@ -12,22 +13,22 @@ def sortedSquareArray( array : List[int]) -> List[int] :
         
     [-6, -4, 1, 2, 3, 5]
     """      
-    outputArray = []
+    outputArray = deque()
     start, end = 0, len(array)-1
     while start < end:
         if abs(array[start]) > abs(array[end]):
-            outputArray.insert(0, array[start]**2)
+            outputArray.appendleft(array[start]**2)
             start += 1
         elif abs(array[start]) < abs(array[end]):
-            outputArray.insert(0, array[end]**2)
+            outputArray.appendleft(array[end]**2)
             end -= 1
         else:
-            outputArray.insert(0, array[start]**2)
+            outputArray.appendleft(array[start]**2)
             start += 1
-            outputArray.insert(0, array[end]**2)
+            outputArray.appendleft(array[end]**2)
             end -= 1
     if start == end:
-        outputArray.insert(0, array[start])
+        outputArray.appendleft(array[start])
     return outputArray
 
 myArray = [-6, -4, 1, 2, 3, 5]
