@@ -96,3 +96,7 @@ root.remove(14)
 
 print("\n")
 root.printTree()
+
+
+import math
+print(math.log2(14))
