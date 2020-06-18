@@ -5,27 +5,29 @@
 #         self.left = left
 #         self.right = right
 from collections import deque
-def invertTree( root ):
-    
+
+
+def invertTree(root):
+
     if root is None:
         return
     node = root
     invertTree(node.left)
     invertTree(node.right)
-    
+
     node.left, node.right = node.right, node.left
+
 
 def invertBst(root):
     queue = deque()
     queue.append(root)
     while queue:
         node = queue.popleft()
-        if node is None:
-            continue
-        swap(node)
-        queue.append(node.left)
-        queue.append(node.right)
-        
+        if node is not None:
+            swap(node)
+            queue.append(node.left)
+            queue.append(node.right)
+
+
 def swap(node):
     node.left, node.right = node.right, node.left
-    
