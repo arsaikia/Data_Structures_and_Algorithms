@@ -2,6 +2,7 @@
 def maxSubsetNoAdjacent(array):
     if not len(array):
         return
+    
     maxSums = array[:]
     for i in range(2, len(array)):
         array[i] = max(array[i-1], array[i] + array[i-2])
