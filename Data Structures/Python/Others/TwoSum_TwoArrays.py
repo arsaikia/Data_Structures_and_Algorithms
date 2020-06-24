@@ -17,9 +17,3 @@ target = 12
 print(twoSumAdv(arr1, arr2, target))
 
 
-
-
-x = 1
-
-def sumVal(x):
-    return x+1
