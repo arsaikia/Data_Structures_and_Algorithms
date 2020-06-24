@@ -15,3 +15,11 @@ arr1 = [2,4,7,21]
 arr2=[-1, 3, 98, 8, 21]
 target = 12
 print(twoSumAdv(arr1, arr2, target))
+
+
+
+
+x = 1
+
+def sumVal(x):
+    return x+1
