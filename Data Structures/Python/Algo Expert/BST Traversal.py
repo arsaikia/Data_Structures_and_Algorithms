@@ -25,3 +25,5 @@ def postorderTraversal(tree, array):
         postorderTraversal(tree.right, array)
         array.append(tree.value)
     return array
+
+
