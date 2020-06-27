@@ -7,6 +7,8 @@ def inorderTraversal(tree, array):
     return array
 
 # O(n) Time || O(n) Space
+
+
 def preorderTraversal(tree, array):
     if tree is not None:
         array.append(tree.value)
@@ -15,6 +17,8 @@ def preorderTraversal(tree, array):
     return array
 
 # O(n) Time || O(n) Space
+
+
 def postorderTraversal(tree, array):
     if tree is not None:
         postorderTraversal(tree.left, array)
