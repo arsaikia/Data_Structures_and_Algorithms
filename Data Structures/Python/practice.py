@@ -66,15 +66,23 @@
 
 
 #   Find Numbers with Even Number of Digits
-from typing import List
-import math
-def findNumbers(nums: List[int]) -> int:
-    count = 0
-    for each in nums:
-        if math.ceil(math.log10(each)) != 0 and math.ceil(math.log10(each))%2 == 0:
-            count += 1
-    return count
+# from typing import List
+# import math
+# def findNumbers(nums: List[int]) -> int:
+#     count = 0
+#     for each in nums:
+#         if math.ceil(math.log10(each)) != 0 and math.ceil(math.log10(each))%2 == 0:
+#             count += 1
+#     return count
 
-nums = [12,345,2,6,7896]
+# nums = [12,345,2,6,7896]
 
-print(findNumbers(nums))
+# print(findNumbers(nums))
+
+
+
+'''
+PRACTICE
+'''
+
+print([1,2,3]+[4])
