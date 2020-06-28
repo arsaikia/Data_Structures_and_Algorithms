@@ -44,11 +44,23 @@ class Solution:
         for ch in str:
             x *= primeList[ord(ch)-97]
         return x
+    
+## MUCH FASTER
+    def groupAnagrams_intuitive(self, words: List[str]) -> List[List[str]]:
+        anagrams = {}
+        for word in words:
+            wordSorted = "".join(sorted(word))
+            if wordSorted in anagrams:
+                anagrams[wordSorted].append(word)
+            else:
+                anagrams[wordSorted] = [word]
+        return list(anagrams.values())
 
 
 if __name__ == "__main__":
     input = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
     anagramClass = Solution()
-    print(anagramClass.groupAnagrams(
-        ["eat", "tea", "tan", "ate", "nat", "bat"]))
+    print(anagramClass.groupAnagrams(input))
+    print(anagramClass.groupAnagrams_intuitive(input))
+    

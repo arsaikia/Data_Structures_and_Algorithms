@@ -20,5 +20,13 @@ Output:
 
 '''
 
+
 def subsets(nums):
-    pass
+    powerset = [[]]
+    for each in nums:
+        for i in range(len(powerset)):
+            curr = powerset[i]
+            powerset.append(curr + [each])
+    return powerset
+
+print(subsets([1,2,3]))
