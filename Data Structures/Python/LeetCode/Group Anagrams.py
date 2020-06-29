@@ -57,6 +57,8 @@ class Solution:
         return list(anagrams.values())
 
 
+
+
 if __name__ == "__main__":
     input = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
