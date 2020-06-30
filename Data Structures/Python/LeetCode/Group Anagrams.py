@@ -18,7 +18,6 @@ __Note:__
 *  The order of your output does not matter.
 
 '''
-
 from typing import List
 
 
@@ -44,8 +43,8 @@ class Solution:
         for ch in str:
             x *= primeList[ord(ch)-97]
         return x
-    
-## MUCH FASTER
+
+# MUCH FASTER
     def groupAnagrams_intuitive(self, words: List[str]) -> List[List[str]]:
         anagrams = {}
         for word in words:
@@ -57,12 +56,9 @@ class Solution:
         return list(anagrams.values())
 
 
-
-
 if __name__ == "__main__":
     input = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
     anagramClass = Solution()
     print(anagramClass.groupAnagrams(input))
     print(anagramClass.groupAnagrams_intuitive(input))
-    
