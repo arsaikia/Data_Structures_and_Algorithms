@@ -11,4 +11,5 @@ class Solution:
             digits.insert(0, 1)
         else:
             digits[index] += 1
+            
         return digits
