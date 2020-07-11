@@ -7,6 +7,7 @@ class Solution:
         while digits[index] == 9:
             digits[index] = 0
             index -= 1
+            
         if index < 0:
             digits.insert(0, 1)
         else:
