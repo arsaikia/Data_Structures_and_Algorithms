@@ -37,7 +37,7 @@
 # start = t.time()
 # val = BottomUpFib(num)
 # end = t.time()
-# print(f'BottomUpFib of {num} is {val} which takes {end-start} seconds!') 
+# print(f'BottomUpFib of {num} is {val} which takes {end-start} seconds!')
 
 # '''
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RESULTS>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -80,9 +80,24 @@
 # print(findNumbers(nums))
 
 
-
 '''
 PRACTICE
 '''
 
-print([1,2,3]+[4])
+
+def twoSum(array, target):
+    if len(array) == 0:
+        return -1
+
+    elemDict = {}
+    for idx, each in enumerate(array):
+        print(idx, elemDict)
+        required = target-each
+        if required in elemDict:
+            return [idx, elemDict[required]]
+        else:
+            elemDict[each] = idx
+    return -1
+
+
+print(twoSum([2, 4, 6, 8, 12], 12))
