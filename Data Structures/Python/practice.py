@@ -83,21 +83,35 @@
 '''
 PRACTICE
 '''
+#  0  1  2  3   4   0+4//2=2->6
+# [2, 4, 6, 8, 12]  --> 8
+
+class Node:
+    def __init__(self, val=0):
+        self.val = val
+        self.children = []
+        
+    def addChild( self, val ):
+        self.children.append(Node(val))
+        return self
+    def depthFirstSearch( self, arr):
+        arr.append(self.val)
+        for child in self.children:
+            child.depthFirstSearch( arr )
+        return arr
+    
+
+root = Node("A")
+root.addChild("B")
+root.addChild("C")
+root.addChild("D")
+root.children[0].addChild("E")
+root.children[0].addChild("F")
+root.children[0].children[1].addChild("I")
+root.children[0].children[1].addChild("J")
+root.children[2].addChild("G")
+root.children[2].addChild("H")
+root.children[2].children[0].addChild("K")
 
 
-def twoSum(array, target):
-    if len(array) == 0:
-        return -1
-
-    elemDict = {}
-    for idx, each in enumerate(array):
-        print(idx, elemDict)
-        required = target-each
-        if required in elemDict:
-            return [idx, elemDict[required]]
-        else:
-            elemDict[each] = idx
-    return -1
-
-
-print(twoSum([2, 4, 6, 8, 12], 12))
+print( root.depthFirstSearch([]) )
