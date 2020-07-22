@@ -86,32 +86,14 @@ PRACTICE
 #  0  1  2  3   4   0+4//2=2->6
 # [2, 4, 6, 8, 12]  --> 8
 
-class Node:
-    def __init__(self, val=0):
-        self.val = val
-        self.children = []
-        
-    def addChild( self, val ):
-        self.children.append(Node(val))
-        return self
-    def depthFirstSearch( self, arr):
-        arr.append(self.val)
-        for child in self.children:
-            child.depthFirstSearch( arr )
-        return arr
-    
 
-root = Node("A")
-root.addChild("B")
-root.addChild("C")
-root.addChild("D")
-root.children[0].addChild("E")
-root.children[0].addChild("F")
-root.children[0].children[1].addChild("I")
-root.children[0].children[1].addChild("J")
-root.children[2].addChild("G")
-root.children[2].addChild("H")
-root.children[2].children[0].addChild("K")
+def Memoizedfib(n):
+    memo = [0, 1]
+    k = 3
+    while k <= n:
+        memo[0], memo[1] = memo[1], (memo[0]+memo[1])
+        k += 1
+    return memo[1] if k > 1 else memo[0]
 
 
-print( root.depthFirstSearch([]) )
+print(Memoizedfib(9))
