@@ -85,5 +85,3 @@ PRACTICE
 '''
 #  0  1  2  3   4   0+4//2=2->6
 # [2, 4, 6, 8, 12]  --> 8
-import random
-print(random.choice([1,29,3,1,12,32]))
