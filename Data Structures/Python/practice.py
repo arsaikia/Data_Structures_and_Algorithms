@@ -85,45 +85,5 @@ PRACTICE
 '''
 #  0  1  2  3   4   0+4//2=2->6
 # [2, 4, 6, 8, 12]  --> 8
-
-
-class BinaryTree:
-         def __init__(self, value):
-                self.value = value
-                self.left = None
-                self.right = None
-        def branchSums(self, root):
-                sums = []
-                self.calculateBranchSums(root, 0, sums)
-        def calculateBranchSums(self, node, runningSum, sums):
-                 if node is None:
-                         return
-                runningSum += node.value
-                 if node.left is None and node.right is None:
-                         return sums.append(runningSum)
-                self.calculateBranchSums(node.left, runningSum, sums)
-                self.calculateBranchSums(node.right, runningSum, sums)
-                
-class BinaryTree:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-
-    def BranchSums(self, root):
-        sums = []
-        self.calculateBranchSums(root, 0, sums)
-        return sums
-      
-    def calculateBranchSums(self, node, runningSum, sums):
-        if node is None:
-            return
-        runningSum += node.value
-        
-        if node.left is None and node.right is None:
-            sums.append(runningSum)
-        self.calculateBranchSums(ndoe.left, runningSum, sums)
-        self.calculateBranchSums(node.right, runningSum, sums)
-        
-        
-BT = BinaryTree(10)
+import random
+print(random.choice([1,29,3,1,12,32]))
