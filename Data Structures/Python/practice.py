@@ -80,6 +80,7 @@
 # print(findNumbers(nums))
 
 
+
 '''
 PRACTICE
 '''
@@ -87,13 +88,4 @@ PRACTICE
 # [2, 4, 6, 8, 12]  --> 8
 
 
-def Memoizedfib(n):
-    memo = [0, 1]
-    k = 3
-    while k <= n:
-        memo[0], memo[1] = memo[1], (memo[0]+memo[1])
-        k += 1
-    return memo[1] if k > 1 else memo[0]
-
-
-print(Memoizedfib(9))
+print([float('-inf') for i in range(3)])
