@@ -109,3 +109,21 @@ class BinaryTree:
         self.value = value
         self.left = None
         self.right = None
+
+    def BranchSums(self, root):
+        sums = []
+        self.calculateBranchSums(root, 0, sums)
+        return sums
+      
+    def calculateBranchSums(self, node, runningSum, sums):
+        if node is None:
+            return
+        runningSum += node.value
+        
+        if node.left is None and node.right is None:
+            sums.append(runningSum)
+        self.calculateBranchSums(ndoe.left, runningSum, sums)
+        self.calculateBranchSums(node.right, runningSum, sums)
+        
+        
+BT = BinaryTree(10)
