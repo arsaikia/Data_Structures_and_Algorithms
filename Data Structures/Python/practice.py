@@ -87,4 +87,5 @@ PRACTICE
 # [2, 4, 6, 8, 12]  --> 8
 
 
-print([float('-inf') for i in range(3)])
+def branchSums():
+    pass
