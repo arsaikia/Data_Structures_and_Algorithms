@@ -85,6 +85,6 @@ PRACTICE
 '''
 #  0  1  2  3   4   0+4//2=2->6
 # [2, 4, 6, 8, 12]  --> 8
-array = [i for i in range(0, 20, 2)]
-for idx, num in enumerate(array):
-    print(idx, num)
+# array = [i for i in range(0, 20, 2)]
+# for idx, num in enumerate(array):
+#     print(idx, num)
