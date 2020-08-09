@@ -88,3 +88,5 @@ PRACTICE
 # array = [i for i in range(0, 20, 2)]
 # for idx, num in enumerate(array):
 #     print(idx, num)
+
+print(chr(((ord('b') + 2 )%122)+122))
