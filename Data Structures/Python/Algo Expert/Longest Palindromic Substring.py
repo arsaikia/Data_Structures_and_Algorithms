@@ -1,0 +1,6 @@
+matchingPairs = {
+    '(': ')',
+    '{': '}',
+    '[': ']'
+}
+print(matchingPairs.keys())
