@@ -48,9 +48,8 @@ class MinHeap:
             else:
                 return
 
-
-
     # O(N) Time || O(1) Space
+
     def buildHeap(self, array):
         firstParentIdx = len(array)-2 // 2
         for currentIdx in reversed(range(firstParentIdx+1)):

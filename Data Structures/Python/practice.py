@@ -90,8 +90,19 @@ PRACTICE
 #     print(idx, num)
 
 
-array=[1,2,3,4,5]
+# array = [1, 2, 3, 4, 5]
 
-print((len(array)+16) % len(array))
+# print((len(array)+16) % len(array))
 
 
+# string = "Id sit commodo anim labore amet amet voluptate ea."
+# print(string.split(' ', 1))
+
+arr = ['let3 art zero', 'let1 art can','let5 art can', 'let2 own kit dig']
+x = sorted(arr, key=lambda k: (k.split(' ', 1)[1], k.split(' ', 1)[0]))
+print(x)
+
+x = [1,2,3]
+y = [ 4,5,6]
+x.extend(y)
+print(x)
