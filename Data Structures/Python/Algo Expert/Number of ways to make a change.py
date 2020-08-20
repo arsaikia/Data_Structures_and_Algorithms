@@ -1,4 +1,4 @@
-# O(n) Time || O(n) Space
+# O(nd) Time || O(n) Space
 def numOfWaysToMakeChange(n, denoms):
     ways = [0 for i in range(n+1)]
     ways[0] = 1
