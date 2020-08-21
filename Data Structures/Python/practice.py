@@ -108,4 +108,9 @@ x.extend(y)
 print(x)
 
 
+import random
+print( random.choice([12,3,4,-1,2]))
+print(random.randint(0, 10))
+
+
 
