@@ -98,19 +98,16 @@ PRACTICE
 # string = "Id sit commodo anim labore amet amet voluptate ea."
 # print(string.split(' ', 1))
 
-arr = ['let3 art zero', 'let1 art can','let5 art can', 'let2 own kit dig']
+import random
+arr = ['let3 art zero', 'let1 art can', 'let5 art can', 'let2 own kit dig']
 x = sorted(arr, key=lambda k: (k.split(' ', 1)[1], k.split(' ', 1)[0]))
 print(x)
 
-x = [1,2,3]
-y = [ 4,5,6]
+x = [1, 2, 3]
+y = [4, 5, 6]
 x.extend(y)
 print(x)
 
 
-import random
-print( random.choice([12,3,4,-1,2]))
+print(random.choice([12, 3, 4, -1, 2]))
 print(random.randint(0, 10))
-
-
-
