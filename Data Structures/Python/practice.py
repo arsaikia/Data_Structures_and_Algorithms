@@ -111,3 +111,25 @@ print(x)
 
 print(random.choice([12, 3, 4, -1, 2]))
 print(random.randint(0, 10))
+
+# O(N) time | O(1) Space
+
+
+def isMonotonic(array):
+    if len(array) < 2:
+        return True
+    return isIncreasing(array) or isDecreasing(array)
+
+
+def isIncreasing(arr):
+    for idx in range(1, len(arr)):
+        if arr[idx] < arr[idx-1]:
+            return False
+    return True
+
+
+def isDecreasing(arr):
+    for idx in range(1, len(arr)):
+        if arr[idx] > arr[idx-1]:
+            return False
+    return True
