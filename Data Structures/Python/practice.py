@@ -98,117 +98,156 @@ PRACTICE
 # string = "Id sit commodo anim labore amet amet voluptate ea."
 # print(string.split(' ', 1))
 
-import random
-arr = ['let3 art zero', 'let1 art can', 'let5 art can', 'let2 own kit dig']
-x = sorted(arr, key=lambda k: (k.split(' ', 1)[1], k.split(' ', 1)[0]))
-print(x)
+# import random
+# arr = ['let3 art zero', 'let1 art can', 'let5 art can', 'let2 own kit dig']
+# x = sorted(arr, key=lambda k: (k.split(' ', 1)[1], k.split(' ', 1)[0]))
+# print(x)
 
-x = [1, 2, 3]
-y = [4, 5, 6]
-x.extend(y)
-print(x)
-
-
-print(random.choice([12, 3, 4, -1, 2]))
-print(random.randint(0, 10))
-
-# O(N) time | O(1) Space
+# x = [1, 2, 3]
+# y = [4, 5, 6]
+# x.extend(y)
+# print(x)
 
 
-def isMonotonic(array):
-    if len(array) < 2:
-        return True
-    return isIncreasing(array) or isDecreasing(array)
+# print(random.choice([12, 3, 4, -1, 2]))
+# print(random.randint(0, 10))
+
+# # O(N) time | O(1) Space
 
 
-def isIncreasing(arr):
-    for idx in range(1, len(arr)):
-        if arr[idx] < arr[idx-1]:
-            return False
-    return True
+# def isMonotonic(array):
+#     if len(array) < 2:
+#         return True
+#     return isIncreasing(array) or isDecreasing(array)
 
 
-def isDecreasing(arr):
-    for idx in range(1, len(arr)):
-        if arr[idx] > arr[idx-1]:
-            return False
-    return True
+# def isIncreasing(arr):
+#     for idx in range(1, len(arr)):
+#         if arr[idx] < arr[idx-1]:
+#             return False
+#     return True
 
 
-print(1 in {1: True, 2: True, 3: True, 4: True})
+# def isDecreasing(arr):
+#     for idx in range(1, len(arr)):
+#         if arr[idx] > arr[idx-1]:
+#             return False
+#     return True
 
 
-# Do not edit the class below except for
-# the insert, contains, and remove methods.
-# Feel free to add new properties and methods
-# to the class.
-class BST:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+# print(1 in {1: True, 2: True, 3: True, 4: True})
 
-    def insert(self, value):
-        curr = self
-        while True:
-			if value < curr.value:
-				if curr.left is None:
-					curr.left = BST(value)
-					break
-				else:
-					curr = curr.left
-			else:
-				if curr.right is None:
-					curr.right = BST(value)
-					break
-				else:
-					curr = curr.right
-        return self
 
-    def contains(self, value):
-        curr = self
-        while curr is not None:
-			if value < curr.value:
-				curr = curr.left
-			elif value > curr.value:
-				curr = curr.right
-			else: 
-                return True
-	    return False
+# # Do not edit the class below except for
+# # the insert, contains, and remove methods.
+# # Feel free to add new properties and methods
+# # to the class.
+# class BST:
+#     def __init__(self, value):
+#         self.value = value
+#         self.left = None
+#         self.right = None
 
-    def remove(self, value, parent = None):
-        curr = self
-        while curr is not None:
-			if value < curr.value:
-				parent = curr
-				curr = curr.left
-			elif value > curr.value:
-				parent = curr
-				curr = curr.right
-			else:
-				if curr.left is not None and curr.right is not None:
-					curr.value = curr.right.getMinValue()
-					curr.right.remove(curr.value, curr)
-				elif parent is None:
-					if curr.left is not None:
-						curr.value = curr.left.value
-						curr.right = curr.left.right
-						curr.left = curr.left.left
-					elif curr.right is not None:
-						curr.value = curr.right.value
-						curr.left = curr.right.left
-						curr.right = curr.right.right
-					else:
-						curr = None
-				elif parent.left == curr:
-					parent.left = curr.left if curr.left is not None else curr.right
-				elif parent.right == curr:
-					parent.left = curr.left if curr.left is not None else curr.right
-				break
-        return self
+#     def insert(self, value):
+#         curr = self
+#         while True:
+# 			if value < curr.value:
+# 				if curr.left is None:
+# 					curr.left = BST(value)
+# 					break
+# 				else:
+# 					curr = curr.left
+# 			else:
+# 				if curr.right is None:
+# 					curr.right = BST(value)
+# 					break
+# 				else:
+# 					curr = curr.right
+#         return self
+
+#     def contains(self, value):
+#         curr = self
+#         while curr is not None:
+# 			if value < curr.value:
+# 				curr = curr.left
+# 			elif value > curr.value:
+# 				curr = curr.right
+# 			else: 
+#                 return True
+# 	    return False
+
+#     def remove(self, value, parent = None):
+#         curr = self
+#         while curr is not None:
+# 			if value < curr.value:
+# 				parent = curr
+# 				curr = curr.left
+# 			elif value > curr.value:
+# 				parent = curr
+# 				curr = curr.right
+# 			else:
+# 				if curr.left is not None and curr.right is not None:
+# 					curr.value = curr.right.getMinValue()
+# 					curr.right.remove(curr.value, curr)
+# 				elif parent is None:
+# 					if curr.left is not None:
+# 						curr.value = curr.left.value
+# 						curr.right = curr.left.right
+# 						curr.left = curr.left.left
+# 					elif curr.right is not None:
+# 						curr.value = curr.right.value
+# 						curr.left = curr.right.left
+# 						curr.right = curr.right.right
+# 					else:
+# 						curr = None
+# 				elif parent.left == curr:
+# 					parent.left = curr.left if curr.left is not None else curr.right
+# 				elif parent.right == curr:
+# 					parent.left = curr.left if curr.left is not None else curr.right
+# 				break
+#         return self
 	
-	def getMinValue(self):
-		curr = self
-		while curr.left is not None:
-			curr = curr.left
-   		return curr.value
+# 	def getMinValue(self):
+# 		curr = self
+# 		while curr.left is not None:
+# 			curr = curr.left
+#    		return curr.value
+ 
+ 
+ 
+ 
+ 
+class TreeNode:
+	def __init__(self, x):
+		self.value = x
+		self.left = None
+		self.right = None
+ 
+Tree = TreeNode(10)
+Tree.left = TreeNode(5)
+Tree.right = TreeNode(2)
+Tree.left.left = TreeNode(12)
+Tree.left.right = TreeNode(9)
+Tree.right.left = TreeNode(7)
+Tree.right.right = TreeNode(11)
+
+
+def printTree(node):
+    if node is None:
+       return
+    print(node.value)
+    printTree(node.left)
+    printTree(node.right)
+
+def getNodeRoute(node, runningValues, target):
+    if node is None:
+        return
+    newRunningValues = runningValues + [node.value]
+    if node.value == target:
+        return newRunningValues
+    return getNodeRoute(node.left, newRunningValues, target)
+    return getNodeRoute(node.left, newRunningValues, target)
+    
+
+printTree(Tree)
+print(getNodeRoute(Tree, [], 12))
