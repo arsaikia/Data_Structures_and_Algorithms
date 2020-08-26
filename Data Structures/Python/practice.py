@@ -172,7 +172,7 @@ PRACTICE
 # 				curr = curr.left
 # 			elif value > curr.value:
 # 				curr = curr.right
-# 			else: 
+# 			else:
 #                 return True
 # 	    return False
 
@@ -206,48 +206,72 @@ PRACTICE
 # 					parent.left = curr.left if curr.left is not None else curr.right
 # 				break
 #         return self
-	
+
 # 	def getMinValue(self):
 # 		curr = self
 # 		while curr.left is not None:
 # 			curr = curr.left
 #    		return curr.value
- 
- 
- 
- 
- 
-class TreeNode:
-	def __init__(self, x):
-		self.value = x
-		self.left = None
-		self.right = None
- 
-Tree = TreeNode(10)
-Tree.left = TreeNode(5)
-Tree.right = TreeNode(2)
-Tree.left.left = TreeNode(12)
-Tree.left.right = TreeNode(9)
-Tree.right.left = TreeNode(7)
-Tree.right.right = TreeNode(11)
 
 
-def printTree(node):
-    if node is None:
-       return
-    print(node.value)
-    printTree(node.left)
-    printTree(node.right)
+# class TreeNode:
+# 	def __init__(self, x):
+# 		self.value = x
+# 		self.left = None
+# 		self.right = None
 
-def getNodeRoute(node, runningValues, target):
-    if node is None:
-        return
-    newRunningValues = runningValues + [node.value]
-    if node.value == target:
-        return newRunningValues
-    return getNodeRoute(node.left, newRunningValues, target)
-    return getNodeRoute(node.left, newRunningValues, target)
-    
+# Tree = TreeNode(10)
+# Tree.left = TreeNode(5)
+# Tree.right = TreeNode(2)
+# Tree.left.left = TreeNode(12)
+# Tree.left.right = TreeNode(9)
+# Tree.right.left = TreeNode(7)
+# Tree.right.right = TreeNode(11)
 
-printTree(Tree)
-print(getNodeRoute(Tree, [], 12))
+
+# def printTree(node):
+#     if node is None:
+#        return
+#     print(node.value)
+#     printTree(node.left)
+#     printTree(node.right)
+
+# def getNodeRoute(node, runningValues, target):
+#     if node is None:
+#         return
+#     newRunningValues = runningValues + [node.value]
+#     if node.value == target:
+#         return newRunningValues
+#     return getNodeRoute(node.left, newRunningValues, target)
+#     return getNodeRoute(node.left, newRunningValues, target)
+
+
+# printTree(Tree)
+# print(getNodeRoute(Tree, [], 12))
+
+
+# def sameBsts(arrayOne, arrayTwo):
+#     if arrayOne[0] != arrayTwo[0] or len(arrayOne) != len(arrayTwo):
+#         return False
+
+#     arr1 = [arrayOne[0]]
+#     rootIdx = 0
+
+#     for i in range(1, len(arrayOne)):
+#         idx = rootIdx
+#         print(arrayOne[i], arr1[idx])
+#         if arrayOne[i] < arr1[idx]:
+#             while (idx != 0 or idx != len(arr1)-1) or arrayOne[i] < arr1[idx]:
+#                 idx -= 1
+#             arr1.popleft(arrayOne[i])
+#             idx += 1
+#             continue
+#     print(arr1)
+
+
+# sameBsts([10, 15, 8, 12, 94, 81, 5, 2, 11], [10, 8, 5, 15, 2, 12, 11, 94, 81])
+arrayOne = [10, 15, 8, 12, 94, 81, 5, 2, 11]
+leftOne = [arrayOne[i]
+           for i in range(1, len(arrayOne)) if arrayOne[i] < arrayOne[0]]
+rightOne = [arrayOne[i] for i in range(1, len(arrayOne)) if arrayOne[i] >= arrayOne[0]] 
+
