@@ -270,8 +270,10 @@ PRACTICE
 
 
 # sameBsts([10, 15, 8, 12, 94, 81, 5, 2, 11], [10, 8, 5, 15, 2, 12, 11, 94, 81])
-arrayOne = [10, 15, 8, 12, 94, 81, 5, 2, 11]
-leftOne = [arrayOne[i]
-           for i in range(1, len(arrayOne)) if arrayOne[i] < arrayOne[0]]
-rightOne = [arrayOne[i] for i in range(1, len(arrayOne)) if arrayOne[i] >= arrayOne[0]] 
+# arrayOne = [10, 15, 8, 12, 94, 81, 5, 2, 11]
+# leftOne = [arrayOne[i]
+#            for i in range(1, len(arrayOne)) if arrayOne[i] < arrayOne[0]]
+# rightOne = [arrayOne[i] for i in range(1, len(arrayOne)) if arrayOne[i] >= arrayOne[0]] 
 
+
+print([1, 2] == [1, 2])
