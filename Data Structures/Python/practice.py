@@ -276,4 +276,4 @@ PRACTICE
 # rightOne = [arrayOne[i] for i in range(1, len(arrayOne)) if arrayOne[i] >= arrayOne[0]] 
 
 
-print([1, 2] == [1, 2])
+print([1, 2] in [[1, 2]])
