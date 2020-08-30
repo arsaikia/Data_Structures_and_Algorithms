@@ -10,31 +10,31 @@ Explanation:
 2 + 45 = 47
 '''
 
-def uniqueTwoSum( nums, target ):
-    found=[]
+
+def uniqueTwoSum(nums, target):
+    found = []
     complementDict = {}
     for num in nums:
         required = target - num
         if required in complementDict and [required, num] not in found:
-            found.append(sorted([required, num])) 
+            found.append(sorted([required, num]))
         else:
             complementDict[num] = True
     return len(found)
 
+
 # More Efficient Solution
 def uniquePairs(nums, target):
-    ans = set()
-    comp = set()
+    found = set()
+    complementSet = set()
     for num in nums:
-        c = target - num
-        if c in comp:
-            res = (num, c) if num > c else (c, num)
-            ans.add(res)       
-        comp.add(num)
-    return len(ans)
-
-
-
+        complement = target - num
+        if complement in complementSet:
+            result = (num, complement) if num > complement else (
+                complement, num)
+            found.add(result)
+        complementSet.add(num)
+    return len(found)
 
 
 if __name__ == "__main__":
@@ -43,4 +43,4 @@ if __name__ == "__main__":
 
     nums1 = [1, 5, 1, 5]
     target1 = 6
-    print(uniqueTwoSum(nums1, target1))
+    print(uniqueTwoSum(nums1, target1) == uniquePairs(nums1, target1))
