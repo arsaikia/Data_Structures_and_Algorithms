@@ -1,4 +1,4 @@
-
+# O(N^2) Time
 class Solution:
     def fourSum(self, nums, target):
         allSums = {}
