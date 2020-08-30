@@ -276,54 +276,40 @@ PRACTICE
 # rightOne = [arrayOne[i] for i in range(1, len(arrayOne)) if arrayOne[i] >= arrayOne[0]]
 
 
-# O(n) Time | O(1) Space
-def subarraySort(array):
-    minOutOfOrder, maxOutOfOrder = float('inf'), float('-inf')
-    for i, num in enumerate(array):
-        if isOutOfOrder(num, i, array):
-            minOutOfOrder = min(minOutOfOrder, num)
-            maxOutOfOrder = max(maxOutOfOrder, num)
-
-    if minOutOfOrder == float('inf'):
-        return [-1, -1]
-
-    start, end = 0, len(array)-1
-    while minOutOfOrder >= array[start]:
-        start += 1
-    while maxOutOfOrder <= array[end]:
-        end -= 1
-    return [start, end], end- start + 1
-
-
-def isOutOfOrder(num, i, array):
-    if i == 0:
-        return num > array[i+1]
-    if i == len(array)-1:
-        return array[i-1] > num
-
-    return num < array[i-1] or num > array[i+1]
-
-
-def findUnsortedSubarray(nums):
-    minOutOfOrder, maxOutOfOrder = float('inf'), float('-inf')
-
-    for idx, num in enumerate(nums):
-        if isOutOfOrder(num, idx, nums):
-            minOutOfOrder = min(minOutOfOrder, num)
-            maxOutOfOrder = max(maxOutOfOrder, num)
-
-    if minOutOfOrder == float('inf'):
-        return 0
-
-    start, end = 0 , len(nums)-1
-    while minOutOfOrder >= nums[start]:
-        start += 1
-
-    while maxOutOfOrder <= nums[end]:
-        end -= 1
-
-    return end- start + 1
+def getArrivalTime( time, waitTime ):
+    if time > 100:
+        hours = int(time  / 100)
+        minutes = int(time % 100)
+    else:
+        hours = 0
+        minutes = time
+    timeAfterWait = minutes + waitTime
     
-arr = [2,6,4,8,10,9,15]
-print(subarraySort(arr)) 
-print(findUnsortedSubarray(arr))
+    if timeAfterWait >= 60:
+        additionalHours = int(timeAfterWait / 60)
+        additionalMinutes = timeAfterWait % 60
+        return ((((hours + additionalHours) % 24) * 100) + additionalMinutes)
+    else:
+        return ((hours % 24) * 100) + timeAfterWait
+    
+
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        startTimes = sorted([meeting[0] for meeting in intervals])
+        endTimes = sorted([meeting[1] for meeting in intervals])
+        start, end = 0, 0
+        occupiedRooms = 0
+        
+        while start < len(startTimes) and end < len(endTimes):
+            meetingStarts = startTimes[start]
+            meetingEnds = endTimes[end]
+            if meetingStarts < meetingEnds:
+                occupiedRooms += 1
+                start += 1
+            else:
+                start += 1
+                end += 1
+                
+        return occupiedRooms
+    
+print(getArrivalTime(1259, 60))
