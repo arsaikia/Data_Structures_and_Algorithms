@@ -276,6 +276,10 @@ PRACTICE
 # rightOne = [arrayOne[i] for i in range(1, len(arrayOne)) if arrayOne[i] >= arrayOne[0]]
 
 
+from itertools import permutations
+import heapq
+
+
 def getArrivalTime(time, waitTime):
     if time > 100:
         hours = int(time / 100)
@@ -318,133 +322,143 @@ def getArrivalTime(time, waitTime):
 # Do not edit the class below except for
 # the insert method. Feel free to add new
 # properties and methods to the class.
-import heapq
-class ContinuousMedianHandler:
-    def __init__(self):
-        self.lowers = []
-        self.greaters = []
-        self.median = None
-
-    def insert(self, number):
-        if not len(self.lowers) or number < self.lowers[0]:
-            heapq.heappush(self.lowers, number)
-            print(self.lowers)
-        else:
-            heapq.heappush(self.greaters, number)
-        self.rebalanceHeaps()
-        
-        self.updateMedian()
-    
-    def rebalanceHeaps(self):
-        heapq.heapify(self.lowers)
-        heapq.heapify(self.greaters)
-        
-        if len(self.lowers) - len(self.greaters) == 2:
-            heapq.heappush(self.greaters, heapq.heappop(self.lowers))
-
-        elif  len(self.greaters) - len(self.lowers) == 2:
-            heapq.heappush(self.lowers, heapq.heappop(self.greaters))
-
-    def updateMedian(self):
-        if len(self.lowers) == len(self.greaters):
-            self.median = ((self.lowers[0] + self.greaters[0])) / 2
-        elif len(self.lowers) > len(self.greaters):
-            self.median = self.lowers[0]
-        else:
-            self.median = self.greaters[0]
-
-    def getMedian(self):
-        return self.median
-
-    def printHeap(self):
-        pass
-        # return self.lowers.printHeap(), self.greaters.printHeap()
 
 
-class Heap:
-    def __init__(self, array, comparisonFunc):
-        self.comparisonFunc = comparisonFunc
-        self.heap = self.buildHeap(array)
-        self.length = len(self.heap)
+# class ContinuousMedianHandler:
+#     def __init__(self):
+#         self.lowers = []
+#         self.greaters = []
+#         self.median = None
 
-    def printHeap(self):
-        pass
-        # print(self.heap)
-        
-    def buildHeap(self, array):
-        firstParentIdx = len(array)-2 // 2
-        for currentIdx in reversed(range(firstParentIdx+1)):
-            self.siftDown(array, currentIdx, len(array)-1)
-        return array
+#     def insert(self, number):
+#         if not len(self.lowers) or number < self.lowers[0]:
+#             heapq.heappush(self.lowers, number)
+#             print(self.lowers)
+#         else:
+#             heapq.heappush(self.greaters, number)
+#         self.rebalanceHeaps()
 
-    def siftDown(self, heap, currentIdx, endIdx):
-        childOneIdx = (currentIdx*2) + 1
-        while childOneIdx < endIdx:
-            childTwoIdx = (currentIdx*2) + \
-                2 if (currentIdx*2) + 2 <= endIdx else -1
-            if childTwoIdx != -1:
-                if self.comparisonFunc(heap[childTwoIdx], heap[childOneIdx]):
-                    idxToSwap = childTwoIdx
-                else:
-                    idxToSwap = childOneIdx
-            if self.comparisonFunc(heap[currentIdx], heap[idxToSwap]):
-                self.swap(heap, currentIdx, idxToSwap)
-                currentIdx = idxToSwap
-                childOneIdx = (currentIdx*2)+1
-            else:
-                return
+#         self.updateMedian()
 
-    def siftUp(self, heap, currentIdx):
-        parentIdx = (currentIdx-1) // 2
-        while currentIdx > 0:
-            if self.comparisonFunc(heap[currentIdx], heap[parentIdx]):
-                self.swap(heap, currentIdx, parentIdx)
-                currentIdx = parentIdx
-                parentIdx = (currentIdx-1) // 2
-            else:
-                return
+#     def rebalanceHeaps(self):
+#         heapq.heapify(self.lowers)
+#         heapq.heapify(self.greaters)
 
-    def peek(self):
-        return self.heap[0]
+#         if len(self.lowers) - len(self.greaters) == 2:
+#             heapq.heappush(self.greaters, heapq.heappop(self.lowers))
 
-    def remove(self):
-        self.swap(self.heap, 0, len(self.heap)-1)
-        toRemove = self.heap.pop()
-        self.length -= 1
-        self.siftDown(self.heap, 0, len(self.heap)-1)
-        return toRemove
+#         elif len(self.greaters) - len(self.lowers) == 2:
+#             heapq.heappush(self.lowers, heapq.heappop(self.greaters))
 
-    def insert(self, value):
-        self.heap.append(value)
-        self.length += 1
-        self.siftUp(self.heap, self.length - 1)
+#     def updateMedian(self):
+#         if len(self.lowers) == len(self.greaters):
+#             self.median = ((self.lowers[0] + self.greaters[0])) / 2
+#         elif len(self.lowers) > len(self.greaters):
+#             self.median = self.lowers[0]
+#         else:
+#             self.median = self.greaters[0]
 
-    def swap(self, heap, i, j):
-        heap[i], heap[j] = heap[j], heap[i]
-        return
+#     def getMedian(self):
+#         return self.median
+
+#     def printHeap(self):
+#         pass
+#         # return self.lowers.printHeap(), self.greaters.printHeap()
 
 
-def MAX_HEAP_FUNC(a, b):
-    return a > b
+# class Heap:
+#     def __init__(self, array, comparisonFunc):
+#         self.comparisonFunc = comparisonFunc
+#         self.heap = self.buildHeap(array)
+#         self.length = len(self.heap)
+
+#     def printHeap(self):
+#         pass
+#         # print(self.heap)
+
+#     def buildHeap(self, array):
+#         firstParentIdx = len(array)-2 // 2
+#         for currentIdx in reversed(range(firstParentIdx+1)):
+#             self.siftDown(array, currentIdx, len(array)-1)
+#         return array
+
+#     def siftDown(self, heap, currentIdx, endIdx):
+#         childOneIdx = (currentIdx*2) + 1
+#         while childOneIdx < endIdx:
+#             childTwoIdx = (currentIdx*2) + \
+#                 2 if (currentIdx*2) + 2 <= endIdx else -1
+#             if childTwoIdx != -1:
+#                 if self.comparisonFunc(heap[childTwoIdx], heap[childOneIdx]):
+#                     idxToSwap = childTwoIdx
+#                 else:
+#                     idxToSwap = childOneIdx
+#             if self.comparisonFunc(heap[currentIdx], heap[idxToSwap]):
+#                 self.swap(heap, currentIdx, idxToSwap)
+#                 currentIdx = idxToSwap
+#                 childOneIdx = (currentIdx*2)+1
+#             else:
+#                 return
+
+#     def siftUp(self, heap, currentIdx):
+#         parentIdx = (currentIdx-1) // 2
+#         while currentIdx > 0:
+#             if self.comparisonFunc(heap[currentIdx], heap[parentIdx]):
+#                 self.swap(heap, currentIdx, parentIdx)
+#                 currentIdx = parentIdx
+#                 parentIdx = (currentIdx-1) // 2
+#             else:
+#                 return
+
+#     def peek(self):
+#         return self.heap[0]
+
+#     def remove(self):
+#         self.swap(self.heap, 0, len(self.heap)-1)
+#         toRemove = self.heap.pop()
+#         self.length -= 1
+#         self.siftDown(self.heap, 0, len(self.heap)-1)
+#         return toRemove
+
+#     def insert(self, value):
+#         self.heap.append(value)
+#         self.length += 1
+#         self.siftUp(self.heap, self.length - 1)
+
+#     def swap(self, heap, i, j):
+#         heap[i], heap[j] = heap[j], heap[i]
+#         return
 
 
-def MIN_HEAP_FUNC(a, b):
-    return a < b
+# def MAX_HEAP_FUNC(a, b):
+#     return a > b
 
 
-C = ContinuousMedianHandler()
-
-C.insert(5)
-C.insert(10)
-C.insert(100)
-print(C.getMedian())
-C.insert(200)
-print(C.getMedian())
-
-C.printHeap()
+# def MIN_HEAP_FUNC(a, b):
+#     return a < b
 
 
-import heapq
+# C = ContinuousMedianHandler()
+
+# C.insert(5)
+# C.insert(10)
+# C.insert(100)
+# print(C.getMedian())
+# C.insert(200)
+# print(C.getMedian())
+
+# C.printHeap()
+
+import numpy as np
 x = heapq.heapify([2, 1, 12, -10, 100])
 print(x)
+
+
+array = [1, 2, 3, 4]
+perms = []
+
+for (i, j, k, l) in permutations(array, 4):
+    perms.append([i, j, k, l])
+    
+perms = np.array(perms)
+print(perms)
 
