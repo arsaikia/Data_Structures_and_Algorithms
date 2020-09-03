@@ -445,20 +445,29 @@ def getArrivalTime(time, waitTime):
 # print(C.getMedian())
 # C.insert(200)
 # print(C.getMedian())
-
 # C.printHeap()
 
-import numpy as np
-x = heapq.heapify([2, 1, 12, -10, 100])
-print(x)
+def countArrangement(N):
+    values = tuple(range(1, N+1))
+    return getValidArrangements(values, {})
 
-
-array = [1, 2, 3, 4]
-perms = []
-
-for (i, j, k, l) in permutations(array, 4):
-    perms.append([i, j, k, l])
+def getValidArrangements(arrangement, memo):
+        if len(arrangement) == 1:
+            return 1
+        
+        if arrangement in memo:
+            return memo[arrangement]
+        total = 0
+        for j in range(len(arrangement)):
+            if isValid(arrangement, j):
+                remaining = arrangement[:j] + arrangement[j+1:]
+                print(remaining)
+                total += getValidArrangements(remaining, memo)
+                
+        memo[arrangement] = total 
+        return total 
     
-perms = np.array(perms)
-print(perms)
+def isValid(array, idx):
+    return array[idx] % len(array) == 0 or len(array) % array[idx] == 0
 
+print(countArrangement(3)) 
