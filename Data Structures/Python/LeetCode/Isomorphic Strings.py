@@ -18,3 +18,22 @@ Output: true
 '''
 
 
+def repeatedSubstringPattern(s):
+    start = 0
+    end = len(string) - 1
+    mid = (start+end) // 2
+
+    midx = mid + 1
+    while start <= mid and midx <= end:
+        if string[start] != string[midx]:
+            return False
+            break
+        else:
+            start += 1
+            midx += 1
+    return True
+
+
+string = "aba"
+
+print(repeatedSubstringPattern(string))
