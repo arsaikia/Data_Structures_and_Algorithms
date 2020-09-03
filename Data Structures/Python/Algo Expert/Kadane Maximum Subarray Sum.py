@@ -14,6 +14,12 @@ def maxSubarraySum( array ):
     return max(maxSum)
 
 # O(n) Time | O(1) Space 
+def kadane( array ):
+    currMax, globalMax = array[0]
+    for i in range(1, len(array)):
+        currMax = max(currMax, currMax + array[i])
+        globalMax = max(currMax, globalMax)
+    return globalMax
 
 
 
