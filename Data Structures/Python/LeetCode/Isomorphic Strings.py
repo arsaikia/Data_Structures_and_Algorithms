@@ -17,6 +17,7 @@ Output: true
 
 '''
 
+# INCOMPLETE
 
 def repeatedSubstringPattern(s):
     start = 0
