@@ -1,9 +1,6 @@
 from collections import deque
 
 
-
-
-
 # Recursive
 # O(n) Time | O(logn) Space
 def invertBinaryTree(node):
@@ -12,9 +9,6 @@ def invertBinaryTree(node):
     invertBinaryTree(node.left)
     invertBinaryTree(node.right)
     node.left, node.right = node.right, node.left
-
-
-
 
 
 # Iterative
