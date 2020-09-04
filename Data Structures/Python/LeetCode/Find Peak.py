@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     # O(log(n)) Time | O(1) Space
     def findPeakElement(self, nums: List[int]) -> int:
