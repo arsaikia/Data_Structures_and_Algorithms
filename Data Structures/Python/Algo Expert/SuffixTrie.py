@@ -11,7 +11,7 @@ class SuffixTrie:
     def populateSuffixTrieFrom(self, string):
         for i in range(len(string)):
             self.buildTrieStartingAt(i, string)
-    
+
     def buildTrieStartingAt(self, idx, string):
         node = self.root
         for j in range(idx, len(string)):
@@ -30,12 +30,10 @@ class SuffixTrie:
             else:
                 return False
         return self.endSymbol in node
-    
-    
-    
+
+
 if __name__ == "__main__":
     ST = SuffixTrie("APPLE")
     print(ST.contains("APPLE"))
 
-    pprint(ST.root, width = 1)
-    
+    pprint(ST.root, width=1)
