@@ -17,24 +17,21 @@ Output: true
 
 '''
 
-# INCOMPLETE
 
-def repeatedSubstringPattern(s):
-    start = 0
-    end = len(string) - 1
-    mid = (start+end) // 2
+def isIsomorphic(s, t):
+    visited = {}
+    for i in range(len(s)):
+        if s[i] not in visited:
+            if t[i] in visited.values():
+                return False
+            visited[s[i]] = t[i]
 
-    midx = mid + 1
-    while start <= mid and midx <= end:
-        if string[start] != string[midx]:
-            return False
-            break
         else:
-            start += 1
-            midx += 1
+            if visited[s[i]] != t[i]:
+                return False
     return True
 
 
-string = "aba"
-
-print(repeatedSubstringPattern(string))
+s = "egg"
+t = "add"
+print(isIsomorphic(s, t))
