@@ -75,7 +75,7 @@ def buildSequence(string, cache):
     row = len(cache) - 1
     col = len(cache[0]) - 1
     sequence = []
-    while row >= 0 and col >= 0:
+    while row > 0 and col > 0:
         if cache[row][col] == cache[row - 1][col]:
             row -= 1
         elif cache[row][col] == cache[row][col - 1]:
