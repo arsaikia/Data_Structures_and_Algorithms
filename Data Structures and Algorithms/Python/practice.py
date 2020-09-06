@@ -276,25 +276,25 @@ PRACTICE
 # rightOne = [arrayOne[i] for i in range(1, len(arrayOne)) if arrayOne[i] >= arrayOne[0]]
 
 
-from itertools import permutations
-import heapq
+# from itertools import permutations
+# import heapq
 
 
-def getArrivalTime(time, waitTime):
-    if time > 100:
-        hours = int(time / 100)
-        minutes = int(time % 100)
-    else:
-        hours = 0
-        minutes = time
-    timeAfterWait = minutes + waitTime
+# def getArrivalTime(time, waitTime):
+#     if time > 100:
+#         hours = int(time / 100)
+#         minutes = int(time % 100)
+#     else:
+#         hours = 0
+#         minutes = time
+#     timeAfterWait = minutes + waitTime
 
-    if timeAfterWait >= 60:
-        additionalHours = int(timeAfterWait / 60)
-        additionalMinutes = timeAfterWait % 60
-        return ((((hours + additionalHours) % 24) * 100) + additionalMinutes)
-    else:
-        return ((hours % 24) * 100) + timeAfterWait
+#     if timeAfterWait >= 60:
+#         additionalHours = int(timeAfterWait / 60)
+#         additionalMinutes = timeAfterWait % 60
+#         return ((((hours + additionalHours) % 24) * 100) + additionalMinutes)
+#     else:
+#         return ((hours % 24) * 100) + timeAfterWait
 
 
 # class Solution:
@@ -454,7 +454,7 @@ def getArrivalTime(time, waitTime):
 # def getValidArrangements(arrangement, memo):
 #         if len(arrangement) == 1:
 #             return 1
-        
+
 #         if arrangement in memo:
 #             return memo[arrangement]
 #         total = 0
@@ -463,15 +463,27 @@ def getArrivalTime(time, waitTime):
 #                 remaining = arrangement[:j] + arrangement[j+1:]
 #                 print(remaining)
 #                 total += getValidArrangements(remaining, memo)
-                
-#         memo[arrangement] = total 
-#         return total 
-    
+
+#         memo[arrangement] = total
+#         return total
+
 # def isValid(array, idx):
 #     return array[idx] % len(array) == 0 or len(array) % array[idx] == 0
 
-# print(countArrangement(3)) 
+# print(countArrangement(3))
 
 
-val = ord("z")+1
-print(chr(val) if val <= 122 else chr((val % 122) + 96) )
+# val = ord("z")+1
+# print(chr(val) if val <= 122 else chr((val % 122) + 96) )
+
+# -------------------------------------< HOW TO IMPORT A MODULE  >--------------------------------------
+from modules import bst
+import sys
+sys.path.insert(0, './modules/')
+
+BST = bst.BST
+
+binarySearchTree = BST(50)
+binarySearchTree.insert(20).insert(30).insert(5).insert(40).insert(1)
+binarySearchTree.printTree()
+# -------------------------------------< HOW TO IMPORT A MODULE  >--------------------------------------
