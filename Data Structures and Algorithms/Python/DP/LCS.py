@@ -1,37 +1,70 @@
 import numpy as np
-def LCS(s1, s2, m, n, memo):
+s1 = "BATD"
+s2 = "ABACD"
+m = len(s1) - 1
+n = len(s2) - 1
 
+# O(2^n) Time || O(2^n) Space
+
+
+def lcsRecursive(s1, s2, m, n):
     if m < 0 or n < 0:
         return 0
 
-    if memo[m][n] is not None:
-        # print("\nHERE", memo)
-        return memo[m][n]
+    if s1[m] == s2[n]:
+        count = 1 + lcsRecursive(s1, s2, m - 1, n - 1)
     else:
-        if s1[m] == s2[n]:
-            result = 1 + LCS(s1, s2, m-1, n-1, memo)
+                    lcsRecursive(s1, s2, m, n - 1))
+    return count
+
+
+
+memo=[[0 for col in range(len(s1) + 1)] for row in range(len(s2) + 1)]
+
+# O(mn) Time | O(mn) Space
+def lcsMemoizedRecursive(s1, s2, m, n, memo):
+    if m == 0 or n == 0:
+        return 0
+    if memo[m][n] != 0:
+        return memo[m][n]
+
+    if s1[n - 1] == s2[m - 1]:
+        count=1 + lcsMemoizedRecursive(s1, s2, m - 1, n - 1, memo)
+    else:
+        count=max(lcsMemoizedRecursive(s1, s2, m - 1, n, memo),
+                    lcsMemoizedRecursive(s1, s2, m, n - 1, memo))
+    memo[m][n]=count
+    return count
+
+
+def trverseSubstring(string, memo):
+    sequence=[]
+    row=len(memo) - 1
+    col=len(memo[0]) - 1
+    while row > 0 and col > 0:
+        if memo[row][col] == memo[row - 1][col]:
+            row -= 1
+        elif memo[row][col] == memo[row][col - 1]:
+            col -= 1
         else:
-            result = max(LCS(s1, s2, m-1, n, memo), LCS(s1, s2, m, n-1, memo))
-        memo[m][n] = result
-    return result
+            sequence.append(string[row - 1])
+            row -= 1
+            col -= 1
+    return "".join(list(reversed(sequence)))
 
-
-def longestCommonSubsequence(str1, str2):
-    lcs = [[[] for col in range(len(str1)+1)] for row in range(len(str2)+1)]
-
-    for row in range(1, len(lcs)):
-        for col in range(1, len(lcs[0])):
-            if str2[row-1] == str1[col-1]:
-                lcs[row][col] = lcs[row - 1][col - 1] + [str2[row - 1]]
+# O(mn) Time | O(mn) Space
+def lcsBottomsUp(s1, s2):
+    cache=[[0 for col in range(len(s1) + 1)] for row in range(len(s2) + 1)]
+    for row in range(1, len(cache)):
+        for col in range(1, len(cache[0])):
+            if s2[row - 1] == s1[col - 1]:
+                cache[row][col]=cache[row - 1][col - 1] + 1
             else:
-                lcs[row][col] = max(lcs[row-1][col], lcs[row][col-1], key=len)
-    return ''.join(lcs[-1][-1])
+                cache[row][col]=max(cache[row][col - 1], cache[row - 1][col])
+    return cache[-1][-1]
 
 
-string1 = 'BATD'
-string2 = 'ABACD'
-memo = [[0 for _ in range(len(string2) + 1)] for _ in range(len(string1) + 1)]
-# print(memo)
-print(LCS(string1, string2, len(string1)-1, len(string2)-1, memo))
-print(np.array(memo))
-print(longestCommonSubsequence(string1, string2))
+# print(lcsRecursive(s1, s2, m, n))
+print(lcsMemoizedRecursive(s1, s2, len(s2), len(s1), memo))
+print(trverseSubstring(s2, memo))
+print(np.array(lcsBottomsUp(s1, s2)))
