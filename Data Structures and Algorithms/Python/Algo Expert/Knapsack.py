@@ -5,8 +5,6 @@ idx = len(items) - 1
 memo = {}
 
 # Top Down
-
-
 def knapsack(array, capacity, idx, memo):
     if idx == 0 or capacity == 0:
         return 0
