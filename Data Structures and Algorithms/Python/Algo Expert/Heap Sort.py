@@ -1,5 +1,5 @@
 
-# O(n) Time | O(1) Space
+# O(nlogn) Time | O(1) Space
 import minheap as M
 
 def heapSort( array ):
@@ -15,5 +15,3 @@ if __name__ == "__main__":
 
     heapSort = heapSort(array)
     print(list(reversed(heapSort)))
-    
-    
