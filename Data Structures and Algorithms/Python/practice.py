@@ -488,11 +488,13 @@ PRACTICE
 # binarySearchTree.printTree()
 # -------------------------------------< HOW TO IMPORT A MODULE  >--------------------------------------
 
-import numpy as np
-s1 = "BATD"
-s2 = "ABACD"
-m = len(s1) - 1
-n = len(s2) - 1
+# import sys
+# from modules import heap
+# import numpy as np
+# s1 = "BATD"
+# s2 = "ABACD"
+# m = len(s1) - 1
+# n = len(s2) - 1
 
 
 # def lcsRecursive(s1, s2, m, n):
@@ -556,8 +558,6 @@ n = len(s2) - 1
 # print(lcsMemoizedRecursive(s1, s2, len(s2), len(s1), memo))
 # print(trverseSubstring(s2, memo))
 # print(np.array(lcsBottomsUp(s1, s2)))
-
-
 
 from modules import heap
 import sys
