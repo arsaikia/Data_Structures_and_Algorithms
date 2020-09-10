@@ -12,14 +12,14 @@ def longestIncreasingSubsequence(array):
                 sequence[i] = j
         if longest[i] >= longest[maxIdx]:
             maxIdx = i
-        
+
     return buildSequence(array, sequence, maxIdx)
 
 
 def buildSequence(array, sequence, maxIdx):
     seq = []
 
-    while maxIdx:
+    while maxIdx is not None:
         seq.append(array[maxIdx])
         maxIdx = sequence[maxIdx]
 
@@ -27,5 +27,5 @@ def buildSequence(array, sequence, maxIdx):
 
 
 if __name__ == "__main__":
-    array = [5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35]
+    array = [5]
     print(longestIncreasingSubsequence(array))
