@@ -91,7 +91,8 @@ def branchSums(tree):
     getBranchSums(tree, 0, sums)
     return sums
 
-def getBranchSums( node, runningSum, sums):
+
+def getBranchSums(node, runningSum, sums):
     if node is None:
         return
     runningSum += node.value
@@ -99,13 +100,13 @@ def getBranchSums( node, runningSum, sums):
         sums.append(runningSum)
     getBranchSums(node.left, runningSum, sums)
     getBranchSums(node.right, runningSum, sums)
-    
 
 
 # ----------------------------------------< Node Depths >--------------------------------------
 # O(n) Time | O(1) Space
 def nodeDepths(tree):
     return getNodeDepths(tree, 0)
+
 
 def getNodeDepths(node, depth):
     if node is None:
@@ -114,9 +115,6 @@ def getNodeDepths(node, depth):
         return depth
     depth += 1
     return getNodeDepths(node.left, depth) + getNodeDepths(node.right, depth)
-    
-    
-
 
 
 if __name__ == "__main__":
@@ -142,12 +140,10 @@ if __name__ == "__main__":
     # tree.right.left.right = Node(14)
     # target = 12
     # print(findClosest(tree, target))
-    
-    
+
     # print(branchSums(tree))
-    
+
     from binarytree import bst
     tree = bst(3, True)
     print(tree)
     print(nodeDepths(tree))
-    
