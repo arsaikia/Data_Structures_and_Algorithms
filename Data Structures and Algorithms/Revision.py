@@ -196,7 +196,7 @@ def getProductSums(nums, depth):
     return depth * sum
 
 
-# ----------------------------------------< BINARY SEARCH >-----------------------------------------------
+# ----------------------------------------< BINARY SEARCH >------------------------------------------------------------
 # O(nlog(n)) Time | O(nlog(n)) Space
 def binarySearch(array, target):
     start, end = 0, len(array) - 1
@@ -209,6 +209,33 @@ def binarySearch(array, target):
         else:
             start = mid + 1
     return -1
+
+
+# ----------------------------------------< Find Three Largest Numbers >-----------------------------------------------
+# O(n) Time | O(1) Space
+def findThreeLargest(array):
+    threeLargest = [float("-inf") for _ in range(3)]
+    for num in array:
+        if num > threeLargest[2]:
+            insertAndShift(threeLargest, num, 2, threeLargest)
+        elif num > threeLargest[1]:
+            insertAndShift(threeLargest, num, 1, threeLargest)
+        elif num > threeLargest[0]:
+            insertAndShift(threeLargest, num, 0, threeLargest)
+    return threeLargest
+        
+def insertAndShift(array, num, idx, threeLargest):
+    i = 0
+    while i <= idx:
+        if i == idx:
+            threeLargest[idx] = num
+        else:
+            threeLargest[i] = threeLargest[i + 1]
+        i += 1
+            
+# ----------------------------------------< Bubble Sort >-----------------------------------------------
+
+
 
 
 if __name__ == "__main__":
@@ -270,7 +297,13 @@ if __name__ == "__main__":
     # nums = [5, 2, [7, -1], 3, [6, [-13, 8], 4]]
     # print(productSum(nums))
 
-    array = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
-    target = 33
-    print(binarySearch(array, target))
+    '''Binary Search'''
+    # array = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
+    # target = 33
+    # print(binarySearch(array, target))
     
+    '''Find Three Largest Numbers'''
+    # arr = [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]
+    # print(findThreeLargest(arr))
+    
+    '''Find Three Largest Numbers'''
