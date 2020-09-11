@@ -117,6 +117,29 @@ def getNodeDepths(node, depth):
     return getNodeDepths(node.left, depth) + getNodeDepths(node.right, depth)
 
 
+
+# ----------------------------------------< DFS >-----------------------------------------------
+# O(V + E) Time | O(V) Space
+class MyNode:
+    def __init__(self, name):
+        self.children = []
+        self.name = name
+
+    def addChild(self, name):
+        self.children.append(MyNode(name))
+        return self
+
+    def depthFirstSearch(self, array):
+        node = [self]
+        while len(node):
+            curr = node.pop()
+            array.append(curr.name)
+            for child in curr.children:
+                child.depthFirstSearch(array)
+        return array          
+            
+
+
 if __name__ == "__main__":
     # array = [2, -1, 4, 6, 10, 13]
     # target = 12
@@ -128,7 +151,7 @@ if __name__ == "__main__":
     # seq = [1, 6, -1, 10]
     # print(validateSubsequence(arr, seq))
 
-    from binarytree import Node
+    # from binarytree import Node
     # tree = Node(10)
     # tree.left = Node(5)
     # tree.left.left = Node(2)
@@ -143,7 +166,21 @@ if __name__ == "__main__":
 
     # print(branchSums(tree))
 
-    from binarytree import bst
-    tree = bst(3, True)
-    print(tree)
-    print(nodeDepths(tree))
+    # from binarytree import bst
+    # tree = bst(3, True)
+    # print(tree)
+    # print(nodeDepths(tree))
+    
+    node = MyNode("A")
+    first = node.addChild("B")
+    first.addChild("E")
+    second = first.addChild("F").addChild("I")
+    second.addChild("J")
+    node.addChild("C")
+    third = node.addChild("D")
+    fourth = third.addChild("G")
+    fourth.addChild("K")
+    third.addChild("H")
+    arr = []
+    node.depthFirstSearch(arr)
+    print(arr)
