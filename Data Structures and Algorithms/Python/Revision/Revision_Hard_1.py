@@ -15,6 +15,8 @@ Worst:  O(n^3)  |   O(N^2) Space
   
 In both cases we are storing n^2 values in the hashtable, which causes this space complexity.      
 '''
+
+
 def fourSum(array, target):
     complements = {}
     allSums = []
@@ -35,9 +37,48 @@ def fourSum(array, target):
     return allSums
 
 
+# ----------------------------------------< Subarray Sort >-----------------------------------------------
+# O(n) Time | O(1) Space
+def subarraysort(array):
+    minOutOfPlace = float("inf")
+    maxOutOfPlace = float("-inf")
+
+    for idx, num in enumerate(array):
+        if isOutOfPlace(array, num, idx):
+            minOutOfPlace = min(minOutOfPlace, num)
+            maxOutOfPlace = max(maxOutOfPlace, num)
+
+    start, end = 0, len(array) - 1
+    while start < len(array):
+        if minOutOfPlace > array[start]:
+            start += 1
+        else:
+            break
+    while end > -1:
+        if maxOutOfPlace < array[end]:
+            end -= 1
+        else:
+            break
+
+    print(start, end)
+
+
+def isOutOfPlace(array, num, idx):
+    if idx == 0:
+        return num > array[idx + 1]
+    if idx == len(array) - 1:
+        return array[idx] < array[len(array) - 2]
+
+    return array[idx - 1] > array[idx] or array[idx + 1] < array[idx]
+
+
 if __name__ == "__main__":
-    
+
     '''Four Number Sum'''
-    array = [7, 6, 4, -1, 1, 2]
-    target = 16
-    print(fourSum(array, target))
+    # array = [7, 6, 4, -1, 1, 2]
+    # target = 16
+    # print(fourSum(array, target))
+
+    '''Subarray Sort'''
+    array = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
+    print(subarraysort(array))
