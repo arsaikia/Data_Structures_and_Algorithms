@@ -223,7 +223,8 @@ def findThreeLargest(array):
         elif num > threeLargest[0]:
             insertAndShift(threeLargest, num, 0, threeLargest)
     return threeLargest
-        
+
+
 def insertAndShift(array, num, idx, threeLargest):
     i = 0
     while i <= idx:
@@ -232,28 +233,45 @@ def insertAndShift(array, num, idx, threeLargest):
         else:
             threeLargest[i] = threeLargest[i + 1]
         i += 1
-            
+
 # ----------------------------------------< Bubble Sort >-----------------------------------------------
 # WORST and Average: O(n^2) Time | O(1) Space
 # Best: O(n) Time | O(1) Space
-def bubbleSort( array ):
-    isSorted = False
-    while not isSorted:
-        isSorted = True
-        for i in reversed(range(len(array))):
-            for j in range(1, i + 1):
-                if array[j - 1] > array[j]:
-                    swap(array, j - 1, j)
-                    isSorted = False
-                
-    return array           
-                
-                
+
+
+def bubbleSort(array):
+    isSorted = True
+    for i in reversed(range(len(array))):
+        for j in range(1, i + 1):
+            if array[j - 1] > array[j]:
+                swap(array, j - 1, j)
+                isSorted = False
+        if isSorted:
+            break
+    return array
+
+
 def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
 
 
 # ----------------------------------------< Selection Sort >-----------------------------------------------
+# O(n^2) Time | O(1) Space
+def selectionSort(array):
+    isSorted = True
+    for i in reversed(range(len(array))):
+        maxIdx = 0
+        for j in range(1, i + 1):
+            if array[j] > array[maxIdx]:
+                maxIdx = j
+                isSorted = False
+        if maxIdx != i:
+            swap(array, maxIdx, i)
+
+        if isSorted:
+            break
+        
+    return array
 
 
 if __name__ == "__main__":
@@ -319,10 +337,11 @@ if __name__ == "__main__":
     # array = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
     # target = 33
     # print(binarySearch(array, target))
-    
+
     '''Find Three Largest Numbers'''
     # arr = [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]
     # print(findThreeLargest(arr))
-    
+
     '''bubbleSort'''
     print(bubbleSort([2, 10, 4, 8, -12, 13, -14]))
+    print(selectionSort([2, 10, 4, 8, -12, 13, -14]))
