@@ -296,6 +296,20 @@ def checkPalindrome(string) -> bool :
         end -= 1
     return True
 
+# ----------------------------------------< Ceaser Cypher Encryptor >-----------------------------------------
+# O(n) Time | O(n) Space
+def ceaserCypherEncryptor(string, k):
+    charList = list(string)
+    key = k & 26
+    for idx, ch in enumerate(charList):
+        charList[idx] = getEncrypted(ch, key)
+    return "".join(charList)
+    
+def getEncrypted(char, key):
+    code = ord(char) + key
+    return chr(code) if code <= 122 else chr((code % 122) + 96)    
+
+
 
 if __name__ == "__main__":
     '''2SUM'''
@@ -371,5 +385,10 @@ if __name__ == "__main__":
     # print(insertionSort([2, 10, 4, 8, -12, 13, -14]))
     
     '''Palindrome Check'''
-    print(checkPalindrome("aA"))
+    # print(checkPalindrome("aA"))
+    
+    '''Ceaser Cypher Encoder'''
+    string = "xyz"
+    key = 2
+    print(ceaserCypherEncryptor(string, key))
     
