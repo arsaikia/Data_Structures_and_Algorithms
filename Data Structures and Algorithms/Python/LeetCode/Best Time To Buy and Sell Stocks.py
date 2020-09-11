@@ -22,22 +22,29 @@
 
 '''
 
+from typing import List
 
-def BuySellStocks(arr):
+# O(n) Time | O(1) Space
+def maxProfit(prices: List[int]) -> int:
+    currMax = globalMax = 0
+    for i in range(1, len(prices)):
+        profit = prices[i] - prices[i - 1]
+        currMax = max(currMax + profit, profit)
+        globalMax = max(currMax, globalMax)
+    return globalMax
 
-    curr = 0
-    soFar = 0
-
-    for i in range(1, len(arr)):
-        curr += arr[i]-arr[i-1]
-        curr = max(0, curr)
-        soFar = max(curr, soFar)
-
-    return soFar
-
+# O(n) Time | O(1) Space
+def maxProfitII(prices: List[int]) -> int:
+        currMax, globalMax = 0, 0
+        for idx in range(1, len(prices)):
+            profit = prices[idx] - prices[idx-1]
+            currMax = max(currMax + profit, currMax)
+            globalMax = max(currMax, globalMax)
+        return globalMax
 
 if __name__ == "__main__":
 
-    arr = [7, 1, 5, 3, 6, 4]
+    prices = [7, 1, 5, 3, 6, 4]
 
-    print(BuySellStocks(arr))
+    print(maxProfit(prices))
+    print(maxProfitII(prices))
