@@ -234,8 +234,26 @@ def insertAndShift(array, num, idx, threeLargest):
         i += 1
             
 # ----------------------------------------< Bubble Sort >-----------------------------------------------
+# WORST and Average: O(n^2) Time | O(1) Space
+# Best: O(n) Time | O(1) Space
+def bubbleSort( array ):
+    isSorted = False
+    while not isSorted:
+        isSorted = True
+        for i in reversed(range(len(array))):
+            for j in range(1, i + 1):
+                if array[j - 1] > array[j]:
+                    swap(array, j - 1, j)
+                    isSorted = False
+                
+    return array           
+                
+                
+def swap(arr, i, j):
+    arr[i], arr[j] = arr[j], arr[i]
 
 
+# ----------------------------------------< Selection Sort >-----------------------------------------------
 
 
 if __name__ == "__main__":
@@ -306,4 +324,5 @@ if __name__ == "__main__":
     # arr = [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]
     # print(findThreeLargest(arr))
     
-    '''Find Three Largest Numbers'''
+    '''bubbleSort'''
+    print(bubbleSort([2, 10, 4, 8, -12, 13, -14]))
