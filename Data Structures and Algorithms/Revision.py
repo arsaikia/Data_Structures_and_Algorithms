@@ -285,6 +285,16 @@ def insertionSort( array ):
         array[idx] = val
     return array
 
+# ----------------------------------------< Palindrome Chcek >-----------------------------------------------
+# O(n) Time | O(1) Space
+def checkPalindrome(string) -> bool :
+    start, end = 0, len(string) - 1
+    while start <= end:
+        if string[start].lower() != string[end].lower():
+            return False
+        start += 1
+        end -= 1
+    return True
 
 
 if __name__ == "__main__":
@@ -355,7 +365,11 @@ if __name__ == "__main__":
     # arr = [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]
     # print(findThreeLargest(arr))
 
-    '''bubbleSort'''
-    print(bubbleSort([2, 10, 4, 8, -12, 13, -14]))
-    print(selectionSort([2, 10, 4, 8, -12, 13, -14]))
-    print(insertionSort([2, 10, 4, 8, -12, 13, -14]))
+    '''SORT'''
+    # print(bubbleSort([2, 10, 4, 8, -12, 13, -14]))
+    # print(selectionSort([2, 10, 4, 8, -12, 13, -14]))
+    # print(insertionSort([2, 10, 4, 8, -12, 13, -14]))
+    
+    '''Palindrome Check'''
+    print(checkPalindrome("aA"))
+    
