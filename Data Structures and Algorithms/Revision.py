@@ -180,11 +180,8 @@ def fib(n):
 
 # ----------------------------------------< PRODUCT SUM >-----------------------------------------------
 # O(n) Time | O(d) Space where d is the max depth -> stack frames
-
-
 def productSum(nums):
     return getProductSums(nums, 1)
-
 
 def getProductSums(nums, depth):
     sum = 0
