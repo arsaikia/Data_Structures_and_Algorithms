@@ -173,6 +173,21 @@ def fib(n):
         
     return lastTwo[-1] if k > 1 else lastTwo[0]
 
+# ----------------------------------------< PRODUCT SUM >-----------------------------------------------
+# O(n) Time | O(d) Space where d is the max depth -> stack frames
+
+def productSum(nums):
+    return getProductSums(nums, 1)
+
+def getProductSums(nums, depth):
+    sum = 0
+    for num in nums:
+        if type(num) == list:
+            sum +=  getProductSums(num, depth + 1)  
+        else:
+            sum += num
+    return depth * sum
+    
 
 
 
@@ -228,5 +243,10 @@ if __name__ == "__main__":
     # print(arr)
 
     '''Naive Fib'''
-    print(naiveFib(18) == 1597)
-    print(memoizedFib(18) == memoizedFibonacci(18) == fib(18))
+    # print(naiveFib(18) == 1597)
+    # print(memoizedFib(18) == memoizedFibonacci(18) == fib(18))
+    
+    
+    '''Product Sums'''
+    nums = [5, 2, [7, -1], 3, [6, [-13, 8], 4]]
+    print(productSum(nums))
