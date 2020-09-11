@@ -117,7 +117,6 @@ def getNodeDepths(node, depth):
     return getNodeDepths(node.left, depth) + getNodeDepths(node.right, depth)
 
 
-
 # ----------------------------------------< DFS >-----------------------------------------------
 # O(V + E) Time | O(V) Space
 class MyNode:
@@ -136,21 +135,61 @@ class MyNode:
             array.append(curr.name)
             for child in curr.children:
                 child.depthFirstSearch(array)
-        return array          
-            
+        return array
+
+
+# ----------------------------------------< FIBONACCI >-----------------------------------------------
+# O(2^n) Time | O(n) Time
+def naiveFib(n):
+    if n == 1:
+        return 0
+    if n == 2:
+        return 1
+    return naiveFib(n - 1) + naiveFib(n - 2)
+
+# O(N) Time | O(N) Space
+from functools import lru_cache
+@lru_cache
+def memoizedFib(n):
+    if n == 1:
+        return 0
+    if n == 2:
+        return 1
+    return naiveFib(n - 1) + naiveFib(n - 2)
+
+def memoizedFibonacci(n, memo={1:0, 2: 1}):
+    if n in memo:
+        return memo[n]
+    
+    memo[n] =  naiveFib(n - 1) + naiveFib(n - 2)
+    return memo[n]
+    
+def fib(n):
+    lastTwo = [0, 1]
+    k = 3
+    while k <= n:
+        lastTwo[0], lastTwo[1] = lastTwo[1], (lastTwo[0] + lastTwo[1])
+        k += 1
+        
+    return lastTwo[-1] if k > 1 else lastTwo[0]
+
+
 
 
 if __name__ == "__main__":
+    '''2SUM'''
     # array = [2, -1, 4, 6, 10, 13]
     # target = 12
     # print(naiveTwoSum(array, target))
     # print(twoPointerTwoSum(array, target))
     # print(twoSum(array, target))
 
+    '''validateSubsequence'''
     # arr = [5, 1, 22, 25, 6, -1, 8, 10]
     # seq = [1, 6, -1, 10]
     # print(validateSubsequence(arr, seq))
 
+    '''findClosest'''
     # from binarytree import Node
     # tree = Node(10)
     # tree.left = Node(5)
@@ -164,23 +203,30 @@ if __name__ == "__main__":
     # target = 12
     # print(findClosest(tree, target))
 
+    '''branchSums'''
     # print(branchSums(tree))
 
+    '''nodeDepths'''
     # from binarytree import bst
     # tree = bst(3, True)
     # print(tree)
     # print(nodeDepths(tree))
-    
-    node = MyNode("A")
-    first = node.addChild("B")
-    first.addChild("E")
-    second = first.addChild("F").addChild("I")
-    second.addChild("J")
-    node.addChild("C")
-    third = node.addChild("D")
-    fourth = third.addChild("G")
-    fourth.addChild("K")
-    third.addChild("H")
-    arr = []
-    node.depthFirstSearch(arr)
-    print(arr)
+
+    '''DFS'''
+    # node = MyNode("A")
+    # first = node.addChild("B")
+    # first.addChild("E")
+    # second = first.addChild("F").addChild("I")
+    # second.addChild("J")
+    # node.addChild("C")
+    # third = node.addChild("D")
+    # fourth = third.addChild("G")
+    # fourth.addChild("K")
+    # third.addChild("H")
+    # arr = []
+    # node.depthFirstSearch(arr)
+    # print(arr)
+
+    '''Naive Fib'''
+    print(naiveFib(18) == 1597)
+    print(memoizedFib(18) == memoizedFibonacci(18) == fib(18))
