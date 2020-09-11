@@ -273,6 +273,19 @@ def selectionSort(array):
         
     return array
 
+# ----------------------------------------< Insertion Sort >-----------------------------------------------
+# O(n^2) time | O(1) Space
+def insertionSort( array ):
+    for i in range(1, len(array)):
+        idx = i
+        val = array[idx]
+        while idx - 1 >= 0 and array[idx - 1] > val:
+            array[idx] = array[idx - 1]
+            idx -= 1
+        array[idx] = val
+    return array
+
+
 
 if __name__ == "__main__":
     '''2SUM'''
@@ -345,3 +358,4 @@ if __name__ == "__main__":
     '''bubbleSort'''
     print(bubbleSort([2, 10, 4, 8, -12, 13, -14]))
     print(selectionSort([2, 10, 4, 8, -12, 13, -14]))
+    print(insertionSort([2, 10, 4, 8, -12, 13, -14]))
