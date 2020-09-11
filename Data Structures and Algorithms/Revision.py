@@ -83,6 +83,26 @@ def findClosestHelper(node, closest, target):
         return closest
 
 
+# ----------------------------------------< Branch Sums >--------------------------------------
+# O(n) Time | O(n) Space
+# The space is because imagine a tree with one root and every other node is leaf
+def branchSums(tree):
+    sums = []
+    getBranchSums(tree, 0, sums)
+    return sums
+
+def getBranchSums( node, runningSum, sums):
+    if node is None:
+        return
+    runningSum += node.value
+    if node.left is None and node.right is None:
+        sums.append(runningSum)
+    getBranchSums(node.left, runningSum, sums)
+    getBranchSums(node.right, runningSum, sums)
+    
+
+
+
 if __name__ == "__main__":
     # array = [2, -1, 4, 6, 10, 13]
     # target = 12
@@ -106,3 +126,6 @@ if __name__ == "__main__":
     tree.right.left.right = Node(14)
     target = 12
     print(findClosest(tree, target))
+    
+    
+    print(branchSums(tree))
