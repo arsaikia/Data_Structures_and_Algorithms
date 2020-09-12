@@ -351,6 +351,34 @@ def waterArea(array):
     return sum(area)
             
 
+# ----------------------------------------< 0-1 Knapsack >--------------------------------------------------------------
+# O(nm) Time | O(nm) Space
+def knapsack(items, capacity):
+    knapsackMatrix = [ [0 for i in range(capacity + 1)] for j in range(len(items) + 1)]
+    for item in range(1, len(items) + 1):
+        currValue = items[item - 1][0]
+        currWeight = items[item - 1][1]
+        for weightCapacity in range(1, capacity + 1):
+            if currWeight > weightCapacity:
+                knapsackMatrix[item][weightCapacity] = knapsackMatrix[item - 1][weightCapacity]
+            else:
+                knapsackMatrix[item][weightCapacity] = max(knapsackMatrix[item - 1][weightCapacity], currValue + knapsackMatrix[item - 1][weightCapacity - currWeight])
+        
+    return getItemsInKnapsack(knapsackMatrix, items)
+
+def getItemsInKnapsack(matrix, items):
+    seq = []
+    row = len(matrix) - 1
+    col = len(matrix[0]) - 1
+    while row > 0:
+        if matrix[row][col] == matrix[row - 1][col]:
+           row -= 1
+        else:
+            seq.append(items[row - 1])
+            col = col - items[row - 1][1]
+            row -= 1 
+    return list(reversed(seq))
+
 
 
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
@@ -421,5 +449,10 @@ if __name__ == "__main__":
     # print(minNumOfJumps(jumps))
     
     '''Water Area'''
-    water = [0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]
-    print(waterArea(water))
+    # water = [0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]
+    # print(waterArea(water))
+    
+    ''''knapsack'''
+    items = [[1, 2], [4, 3], [5, 6], [6, 7]]
+    capacity = 10
+    print(knapsack(items, capacity))
