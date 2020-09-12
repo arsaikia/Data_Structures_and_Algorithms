@@ -74,6 +74,7 @@ def isOutOfPlace(array, num, idx):
 
 
 # ----------------------------------------< Largest Range >-----------------------------------------------
+# O(n) Time | O(n) Space
 def largestRange(array):
     nums = { num : True for num in array}
     longest = []
@@ -96,10 +97,19 @@ def largestRange(array):
     return longest
 
 
+# ----------------------------------------< Largest Range >-----------------------------------------------
+# O(n) Time | O(1) Space
+def minRewards(array):
+    rewards = [1 for _ in array]
+    for i in range(1, len(array)):
+        if array[i] > array[i - 1]:
+            rewards[i] = rewards[i - 1] + 1
+    
+    for i in reversed(range(len(array) - 1)):
+        if array[i] > array[i + 1]:
+            rewards[i] = max(rewards[i], rewards[i + 1] + 1)
 
-
-
-
+    return rewards
 
 if __name__ == "__main__":
 
@@ -114,5 +124,10 @@ if __name__ == "__main__":
     
     
     '''Largest Range'''
-    array = [1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]
-    print(largestRange(array))
+    # array = [1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]
+    # print(largestRange(array))
+    
+    '''Min Rewards'''
+    rewards = [8, 4, 2, 1, 3, 6, 7, 9, 5]
+    print(minRewards(rewards))
+    
