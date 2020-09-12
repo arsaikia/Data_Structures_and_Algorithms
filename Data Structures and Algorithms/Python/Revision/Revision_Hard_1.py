@@ -212,8 +212,106 @@ def buildSequence(array, sequence, maxSumIdx):
         maxSumIdx = sequence[maxSumIdx]
     return list(reversed(seq))
 
+# ----------------------------------------< LCS >--------------------------------------------------------------------------
+# O(2^(m+n) Time)
+def recusiveLCS(stringOne, stringTwo):
+    return getLCS(stringOne, stringTwo, len(stringOne) - 1, len(stringTwo) - 1)
+
+def getLCS(s1, s2, m, n):
+    if m < 0 or n < 0:
+        return 0
+    
+    count = 0
+    
+    if s1[m] == s2[n]:
+        count = 1 + getLCS(s1, s2, m - 1, n - 1)
+    else:
+        count = max(getLCS(s1, s2, m - 1, n), getLCS(s1, s2, m, n - 1))
+    return count
+
+# ----------------------------------------< LCS MEMOIZED
+
+def memoizedLCS(stringOne, stringTwo):
+    
+    def trverseSubstring(string, memo):
+        sequence=[]
+        row=len(memo) - 1
+        col=len(memo[0]) - 1
+        while row > 0 and col > 0:
+            if memo[row][col] == memo[row - 1][col]:
+                row -= 1
+            elif memo[row][col] == memo[row][col - 1]:
+                col -= 1
+            else:
+                sequence.append(string[row - 1])
+                row -= 1
+                col -= 1
+        return "".join(list(reversed(sequence)))
+    
+    def memoizedLCSX(stringOne, stringTwo):
+        memo = [ [0 for col in stringTwo] for row in stringOne ]
+        getMemoizedLCS(stringOne, stringTwo, len(stringOne) - 1, len(stringTwo) - 1, memo)
+        print(trverseSubstring("BATD", memo))
+        print(np.array(memo))
+    
+    def getMemoizedLCS(s1, s2, m, n, memo):
+        if m < 0 or n < 0:
+            return 0
+
+        if memo[m][n]:
+            return memo[m][n]
+        
+        count = 0
+        
+        if s1[m] == s2[n]:
+            count = 1 + getMemoizedLCS(s1, s2, m - 1, n - 1, memo)
+        else:
+            count = max(getMemoizedLCS(s1, s2, m - 1, n, memo), getMemoizedLCS(s1, s2, m, n - 1, memo))
+        
+        memo[m][n] = count
+        return count
+
+    return memoizedLCSX(stringOne, stringTwo)
+
+# ----------------------------------------< LCS BOTTOMS UP
+# O(mn) Time | O(mn) Space
+def bottomupLcs(s1, s2):
+    cache = [[0 for col in range(len(s1) + 1)]  for row in range(len(s2) + 1)]
+    for row in range(1, len(cache)):
+        for col in range(1, len(cache[0])):
+            if s1[col - 1] == s2[row - 1]:
+                cache[row][col] = 1 + cache[row - 1][col - 1]
+            else:
+                cache[row][col] = max(cache[row - 1][col], cache[row][col - 1])
+        
+        
+    print("\n",np.array(cache))
+    return (getCommonSubstring(stringOne, cache))
+
+def getCommonSubstring(string, cache):
+    row = len(cache) - 1
+    col = len(cache[0]) - 1
+    substring = []
+    while row > 0 and col > 0:
+        
+        if cache[row][col] == cache[row - 1][col]:
+            row -= 1
+        elif cache[row][col] == cache[row][col - 1]:
+            col -= 1
+        else:
+            substring.append(string[col - 1])
+            row -= 1
+            col -=1
+    return "".join(list(reversed(substring)))
+        
+        
+    
+
+
+
 
 if __name__ == "__main__":
+    from functools import lru_cache
     import numpy as np
 
     '''Four Number Sum'''
@@ -258,5 +356,19 @@ if __name__ == "__main__":
     # print(maxPathSum(tree))
 
     '''Max Sum Increasing Subsequence'''
-    array = [10, 70, 20, 30, 50, 11, 30]
-    print(maxIncreasingSum(array))
+    # array = [10, 70, 20, 30, 50, 11, 30]
+    # print(maxIncreasingSum(array))
+    
+    '''LCS'''
+    stringOne = "BATD"
+    stringTwo = "ABACD"
+    # import time
+    # one = time.perf_counter()
+    # print("recusiveLCS", recusiveLCS(stringOne, stringTwo))
+    # two = time.perf_counter()
+    # print(two - one)
+    # print("memoizedLCS", memoizedLCS(stringOne, stringTwo))
+    # three = time.perf_counter()
+    # print(three - two)
+    print(bottomupLcs(stringOne, stringTwo))
+    

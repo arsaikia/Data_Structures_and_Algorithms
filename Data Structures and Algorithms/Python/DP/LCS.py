@@ -4,7 +4,7 @@ s2 = "ABACD"
 m = len(s1) - 1
 n = len(s2) - 1
 
-# O(2^n) Time || O(2^n) Space
+# O(2^(m+n)) Time || O(2^n) Space
 
 
 def lcsRecursive(s1, s2, m, n):
