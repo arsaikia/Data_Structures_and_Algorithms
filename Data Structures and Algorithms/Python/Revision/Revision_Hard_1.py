@@ -165,6 +165,26 @@ def getLeftAndRight(array):
     return left, right
 
 
+# ----------------------------------------< Max Path sum in BT >-----------------------------------------------
+# O(n) Time | O(log n) Space
+def maxPathSum(tree):
+    _, maxPathSum = getMaxPathSum(tree)
+    return maxPathSum
+
+
+def getMaxPathSum(node):
+    if node is None:
+        return 0, float("-inf")
+
+    LCBS, LPS = getMaxPathSum(node.left)
+    RCBS, RPS = getMaxPathSum(node.right)
+    childSum = max(LCBS, RCBS)
+    branchSum = max(node.value, childSum + node.value)
+    pathSum = max(LPS, RPS, branchSum, LCBS + node.value + RCBS)
+
+    return branchSum, pathSum
+
+
 if __name__ == "__main__":
     import numpy as np
 
@@ -193,6 +213,18 @@ if __name__ == "__main__":
     # print(zigzagTrverse(array))
 
     '''Same Bsts'''
-    arrayOne = [10, 8, 5, 15, 2, 12, 11, 94, 81]
-    arrayTwo = [10, 15, 8, 12, 94, 81, 5, 2, 11]
-    print(sameBst(arrayOne, arrayTwo))
+    # arrayOne = [10, 8, 5, 15, 2, 12, 11, 94, 81]
+    # arrayTwo = [10, 15, 8, 12, 94, 81, 5, 2, 11]
+    # print(sameBst(arrayOne, arrayTwo))
+
+    '''maxPathSum'''
+    from binarytree import Node
+    tree = Node(1)
+    tree.left = Node(2)
+    tree.left.left = Node(4)
+    tree.left.right = Node(5)
+    tree.right = Node(3)
+    tree.right.left = Node(6)
+    tree.right.right = Node(7)
+    print(tree)
+    print(maxPathSum(tree))
