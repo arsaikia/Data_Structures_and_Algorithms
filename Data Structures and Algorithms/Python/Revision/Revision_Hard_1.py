@@ -325,6 +325,34 @@ def minNumOfJumps(array):
     return jumps[-1]
 
 
+# ----------------------------------------< Water Area >--------------------------------------------------------------
+# O(n) Time | O(n) Space
+def waterArea(array):
+    leftMax = [ 0 for _ in array]
+    rightMax = [ 0 for _ in array]
+    leftM = 0
+    rightM = 0
+    area = [0 for _ in array]
+    
+    for i in range(len(array)):
+        leftMax[i] = max(leftM, array[i])
+        leftM = max(leftM, array[i])
+    for i in reversed(range(len(array))):
+        rightMax[i] = max(rightM, array[i])
+        rightM = max(rightM, array[i])
+    
+    for i in range(len(array)):
+        left = leftMax[i]
+        right = rightMax[i]
+        curr = array[i]
+        height = min(left, right)
+        if height > curr:
+            area[i] = height - curr
+    return sum(area)
+            
+
+
+
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
 if __name__ == "__main__":
     from functools import lru_cache
@@ -391,3 +419,7 @@ if __name__ == "__main__":
     '''Jums Game'''
     # jumps = [3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]
     # print(minNumOfJumps(jumps))
+    
+    '''Water Area'''
+    water = [0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]
+    print(waterArea(water))
