@@ -72,14 +72,13 @@ def isOutOfPlace(array, num, idx):
     return array[idx - 1] > array[idx] or array[idx + 1] < array[idx]
 
 
-
 # ----------------------------------------< Largest Range >-----------------------------------------------
 # O(n) Time | O(n) Space
 def largestRange(array):
-    nums = { num : True for num in array}
+    nums = {num: True for num in array}
     longest = []
     globalMax = float("-inf")
-    
+
     for each in array:
         if each in nums:
             currMax = 1
@@ -104,14 +103,45 @@ def minRewards(array):
     for i in range(1, len(array)):
         if array[i] > array[i - 1]:
             rewards[i] = rewards[i - 1] + 1
-    
+
     for i in reversed(range(len(array) - 1)):
         if array[i] > array[i + 1]:
             rewards[i] = max(rewards[i], rewards[i + 1] + 1)
 
     return rewards
 
+
+# ----------------------------------------< Zigzag Traverse >-----------------------------------------------
+# O(nm) Time | O(nm) Space
+def zigzagTrverse(array):
+    result = []
+    startRow, startCol, endRow, endCol = 0, 0, len(
+        array) - 1, len(array[0]) - 1
+
+    while startRow <= endRow and startCol <= endCol:
+        for col in range(startCol, endCol + 1):
+            result.append(array[startRow][col])
+        for row in range(startRow + 1, endRow + 1):
+            result.append(array[row][endCol])
+        for col in reversed(range(startCol, endCol)):
+            if startRow == endRow:
+                continue
+            result.append(array[row][col])
+        for row in reversed(range(startRow + 1, endRow)):
+            if startCol == endCol:
+                continue
+            result.append(array[row][startCol])
+
+        startRow += 1
+        endRow -= 1
+        startCol += 1
+        endCol -= 1
+
+    return result
+
+
 if __name__ == "__main__":
+    import numpy as np
 
     '''Four Number Sum'''
     # array = [7, 6, 4, -1, 1, 2]
@@ -121,13 +151,18 @@ if __name__ == "__main__":
     '''Subarray Sort'''
     # array = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
     # print(subarraysort(array))
-    
-    
+
     '''Largest Range'''
     # array = [1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]
     # print(largestRange(array))
-    
+
     '''Min Rewards'''
-    rewards = [8, 4, 2, 1, 3, 6, 7, 9, 5]
-    print(minRewards(rewards))
-    
+    # rewards = [8, 4, 2, 1, 3, 6, 7, 9, 5]
+    # print(minRewards(rewards))
+
+    '''Zigzag Traverse'''
+    array = [[1, 2, 3, 4],
+             [12, 13, 14, 5],
+             [11, 16, 15, 6],
+             [10, 9, 8, 7]]
+    print(zigzagTrverse(array))
