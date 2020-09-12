@@ -17,6 +17,9 @@ In both cases we are storing n^2 values in the hashtable, which causes this spac
 '''
 
 
+import heapq as heap
+
+
 def fourSum(array, target):
     complements = {}
     allSums = []
@@ -426,6 +429,7 @@ def minSpacesForNumbersInPi(pi, numbers):
     minSpaces = getMinSpacesStartingAtIdx(pi, allNums, 0, cache)
     return minSpaces
 
+
 def minSpacesForNumbersInPiBottomUp(pi, numbers):
     allNums = {num: True for num in numbers}
     cache = {}
@@ -435,6 +439,8 @@ def minSpacesForNumbersInPiBottomUp(pi, numbers):
 
 # Bottom-up
 # O(n^3 + m) Space | O(n + m) Space
+
+
 def getMinSpacesStartingAtIdx(pi, nums, idx, cache):
     if idx == len(pi):
         return 0
@@ -449,6 +455,41 @@ def getMinSpacesStartingAtIdx(pi, nums, idx, cache):
             minSpaces = min(minSpaces, currSpaces)
     cache[idx] = minSpaces
     return minSpaces
+
+
+# ----------------------------------------< Contiuous Median >--------------------------------------------------------------
+
+class ContinuousMedianHandler:
+    def __init__(self):
+        self.lowerHalf = []     # MAX HEAP
+        self.upperHalf = []     # MIN HEAP
+        self.median = None
+    # O(log n) Time | O(n) Space
+
+    def insert(self, number):
+        if not len(self.lowerHalf) or number < (-1 * self.lowerHalf[0]):
+            heap.heappush(self.lowerHalf, -1 * number)
+        else:
+            heap.heappush(self.upperHalf, number)
+        self.rebalanceHeaps()
+        self.calculateMedian()
+
+    def rebalanceHeaps(self):
+        if len(self.lowerHalf) - len(self.upperHalf) == 2:
+            heap.heappush(self.upperHalf, -1 * heap.heappop(self.lowerHalf))
+        elif len(self.upperHalf) - len(self.lowerHalf) == 2:
+            heap.heappush(self.lowerHalf, -1 * heap.heappop(self.upperHalf))
+
+    def calculateMedian(self):
+        if len(self.lowerHalf) == len(self.upperHalf):
+            self.median = ((self.lowerHalf[0] * -1) + self.upperHalf[0]) / 2
+        elif len(self.lowerHalf) > len(self.upperHalf):
+            self.median = self.lowerHalf[0] * -1
+        else:
+            self.median = self.upperHalf[0]
+
+    def getMedian(self):
+        return self.median
 
 
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
@@ -545,4 +586,13 @@ if __name__ == "__main__":
 
     # print(minSpacesForNumbersInPi(pi, numbers))
     # print(minSpacesForNumbersInPiBottomUp(pi, numbers))
-    
+
+    '''Contiuous Median'''
+    median = ContinuousMedianHandler()
+    median.insert(1)
+    median.insert(10)
+    median.insert(20)
+    median.insert(30)
+    median.insert(40)
+    median.insert(50)
+    print(median.lowerHalf, median.upperHalf, median.getMedian())
