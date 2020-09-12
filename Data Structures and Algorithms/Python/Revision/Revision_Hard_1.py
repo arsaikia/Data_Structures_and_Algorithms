@@ -492,6 +492,34 @@ class ContinuousMedianHandler:
         return self.median
 
 
+
+# ----------------------------------------< Find Loop in a Singly Linked List >--------------------------------------------------------------
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def findLoop(head):
+    slowPtr = head.next
+    fastPtr = head.next.next
+    
+    while slowPtr != fastPtr:
+        slowPtr = slowPtr.next
+        fastPtr = fastPtr.next.next
+    
+    slowPtr = head
+    
+    while slowPtr != fastPtr:
+        slowPtr = slowPtr.next
+        fastPtr = fastPtr.next
+    
+    return slowPtr
+    
+
+
+
+
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
 if __name__ == "__main__":
     # from functools import lru_cache
@@ -588,11 +616,26 @@ if __name__ == "__main__":
     # print(minSpacesForNumbersInPiBottomUp(pi, numbers))
 
     '''Contiuous Median'''
-    median = ContinuousMedianHandler()
-    median.insert(1)
-    median.insert(10)
-    median.insert(20)
-    median.insert(30)
-    median.insert(40)
-    median.insert(50)
-    print(median.lowerHalf, median.upperHalf, median.getMedian())
+    # median = ContinuousMedianHandler()
+    # median.insert(1)
+    # median.insert(10)
+    # median.insert(20)
+    # median.insert(30)
+    # median.insert(40)
+    # median.insert(50)
+    # print(median.lowerHalf, median.upperHalf, median.getMedian())
+    
+    '''' Linked List Loop'''
+    llist = LinkedList(1)
+    llist.next = LinkedList(2)
+    llist.next.next = LinkedList(3)
+    loop = llist.next.next.next = LinkedList(4)
+    loop.next = LinkedList(5)
+    loop.next.next = LinkedList(6)
+    loop.next.next.next = LinkedList(7)
+    loop.next.next.next.next = LinkedList(8)
+    x = loop.next.next.next.next.next = LinkedList(9)
+    x.next = loop
+    
+    nodeWithLoop = findLoop(llist)
+    print(nodeWithLoop.value)
