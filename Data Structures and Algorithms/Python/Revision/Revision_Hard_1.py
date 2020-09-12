@@ -185,6 +185,34 @@ def getMaxPathSum(node):
     return branchSum, pathSum
 
 
+# ----------------------------------------< Max Sum Increasing Subsequence >-----------------------------------------------
+# O(n^2) Time | O(n) Space
+def maxIncreasingSum(array):
+    sums = array[:]
+    maxSumIdx = 0
+    sequence = [None for _ in array]
+
+    for i in range(1, len(array)):
+        currNum = array[i]
+        for j in range(0, i):
+            prevNum = array[j]
+            if prevNum < currNum and sums[j] + array[i] > sums[i]:
+                sums[i] = sums[j] + array[i]
+                sequence[i] = j
+        if sums[i] > sums[maxSumIdx]:
+            maxSumIdx = i
+    return buildSequence(array, sequence, maxSumIdx)
+
+
+def buildSequence(array, sequence, maxSumIdx):
+    seq = []
+
+    while maxSumIdx is not None:
+        seq.append(array[maxSumIdx])
+        maxSumIdx = sequence[maxSumIdx]
+    return list(reversed(seq))
+
+
 if __name__ == "__main__":
     import numpy as np
 
@@ -218,13 +246,17 @@ if __name__ == "__main__":
     # print(sameBst(arrayOne, arrayTwo))
 
     '''maxPathSum'''
-    from binarytree import Node
-    tree = Node(1)
-    tree.left = Node(2)
-    tree.left.left = Node(4)
-    tree.left.right = Node(5)
-    tree.right = Node(3)
-    tree.right.left = Node(6)
-    tree.right.right = Node(7)
-    print(tree)
-    print(maxPathSum(tree))
+    # from binarytree import Node
+    # tree = Node(1)
+    # tree.left = Node(2)
+    # tree.left.left = Node(4)
+    # tree.left.right = Node(5)
+    # tree.right = Node(3)
+    # tree.right.left = Node(6)
+    # tree.right.right = Node(7)
+    # print(tree)
+    # print(maxPathSum(tree))
+
+    '''Max Sum Increasing Subsequence'''
+    array = [10, 70, 20, 30, 50, 11, 30]
+    print(maxIncreasingSum(array))
