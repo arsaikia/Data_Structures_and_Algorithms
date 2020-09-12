@@ -140,6 +140,31 @@ def zigzagTrverse(array):
     return result
 
 
+# ----------------------------------------< SAME BSTS >-----------------------------------------------
+# O(n) Time | O(d) Space where d is the depth of the BST
+def sameBst(arr1, arr2):
+
+    if len(arr1) == 0:
+        return True
+
+    if len(arr1) != len(arr2):
+        return False
+
+    if arr1[0] != arr2[0]:
+        return False
+
+    leftOne, rightOne = getLeftAndRight(arr1)
+    leftTwo, rightTwo = getLeftAndRight(arr2)
+
+    return sameBst(leftOne, leftTwo) and sameBst(rightOne, rightTwo)
+
+
+def getLeftAndRight(array):
+    left = [array[i] for i in range(1, len(array)) if array[i] < array[0]]
+    right = [array[i] for i in range(1, len(array)) if array[i] >= array[0]]
+    return left, right
+
+
 if __name__ == "__main__":
     import numpy as np
 
@@ -161,8 +186,13 @@ if __name__ == "__main__":
     # print(minRewards(rewards))
 
     '''Zigzag Traverse'''
-    array = [[1, 2, 3, 4],
-             [12, 13, 14, 5],
-             [11, 16, 15, 6],
-             [10, 9, 8, 7]]
-    print(zigzagTrverse(array))
+    # array = [[1, 2, 3, 4],
+    #          [12, 13, 14, 5],
+    #          [11, 16, 15, 6],
+    #          [10, 9, 8, 7]]
+    # print(zigzagTrverse(array))
+
+    '''Same Bsts'''
+    arrayOne = [10, 8, 5, 15, 2, 12, 11, 94, 81]
+    arrayTwo = [10, 15, 8, 12, 94, 81, 5, 2, 11]
+    print(sameBst(arrayOne, arrayTwo))
