@@ -328,19 +328,19 @@ def minNumOfJumps(array):
 # ----------------------------------------< Water Area >--------------------------------------------------------------
 # O(n) Time | O(n) Space
 def waterArea(array):
-    leftMax = [ 0 for _ in array]
-    rightMax = [ 0 for _ in array]
+    leftMax = [0 for _ in array]
+    rightMax = [0 for _ in array]
     leftM = 0
     rightM = 0
     area = [0 for _ in array]
-    
+
     for i in range(len(array)):
         leftMax[i] = max(leftM, array[i])
         leftM = max(leftM, array[i])
     for i in reversed(range(len(array))):
         rightMax[i] = max(rightM, array[i])
         rightM = max(rightM, array[i])
-    
+
     for i in range(len(array)):
         left = leftMax[i]
         right = rightMax[i]
@@ -349,22 +349,26 @@ def waterArea(array):
         if height > curr:
             area[i] = height - curr
     return sum(area)
-            
+
 
 # ----------------------------------------< 0-1 Knapsack >--------------------------------------------------------------
 # O(nm) Time | O(nm) Space
 def knapsack(items, capacity):
-    knapsackMatrix = [ [0 for i in range(capacity + 1)] for j in range(len(items) + 1)]
+    knapsackMatrix = [[0 for i in range(capacity + 1)]
+                      for j in range(len(items) + 1)]
     for item in range(1, len(items) + 1):
         currValue = items[item - 1][0]
         currWeight = items[item - 1][1]
         for weightCapacity in range(1, capacity + 1):
             if currWeight > weightCapacity:
-                knapsackMatrix[item][weightCapacity] = knapsackMatrix[item - 1][weightCapacity]
+                knapsackMatrix[item][weightCapacity] = knapsackMatrix[item -
+                                                                      1][weightCapacity]
             else:
-                knapsackMatrix[item][weightCapacity] = max(knapsackMatrix[item - 1][weightCapacity], currValue + knapsackMatrix[item - 1][weightCapacity - currWeight])
-        
+                knapsackMatrix[item][weightCapacity] = max(
+                    knapsackMatrix[item - 1][weightCapacity], currValue + knapsackMatrix[item - 1][weightCapacity - currWeight])
+
     return getItemsInKnapsack(knapsackMatrix, items)
+
 
 def getItemsInKnapsack(matrix, items):
     seq = []
@@ -372,22 +376,22 @@ def getItemsInKnapsack(matrix, items):
     col = len(matrix[0]) - 1
     while row > 0:
         if matrix[row][col] == matrix[row - 1][col]:
-           row -= 1
+            row -= 1
         else:
             seq.append(items[row - 1])
             col = col - items[row - 1][1]
-            row -= 1 
+            row -= 1
     return list(reversed(seq))
 
 
 # ----------------------------------------< Disk Stacking >--------------------------------------------------------------
 # O(n^2) Time | O(n) Space
 def stackDisks(disks):
-    disks.sort(key = lambda disk: disk[2])
+    disks.sort(key=lambda disk: disk[2])
     heights = [disk[2] for disk in disks]
     sequence = [None for _ in disks]
     maxHeightIdx = 0
-    
+
     for i in range(1, len(heights)):
         currDisk = disks[i]
         for j in range(0, i):
@@ -400,9 +404,11 @@ def stackDisks(disks):
             maxHeightIdx = i
     return buildHeightSequence(sequence, maxHeightIdx, disks)
 
+
 def canGoOnTop(prev, curr):
     return prev[0] < curr[0] and prev[1] < curr[1] and prev[2] < curr[2]
-            
+
+
 def buildHeightSequence(sequence, maxHeightIdx, disks):
     seq = []
     while maxHeightIdx is not None:
@@ -411,9 +417,43 @@ def buildHeightSequence(sequence, maxHeightIdx, disks):
     return list(reversed(seq))
 
 
+# ----------------------------------------< Numbers In PI >--------------------------------------------------------------
+# TOP-DOWN
+# O(n^3 + m) Space | O(n + m) Space
+def minSpacesForNumbersInPi(pi, numbers):
+    allNums = {num: True for num in numbers}
+    cache = {}
+    minSpaces = getMinSpacesStartingAtIdx(pi, allNums, 0, cache)
+    return minSpaces
+
+def minSpacesForNumbersInPiBottomUp(pi, numbers):
+    allNums = {num: True for num in numbers}
+    cache = {}
+    for i in reversed(range(len(pi))):
+        getMinSpacesStartingAtIdx(pi, allNums, i, cache)
+    return cache[0]
+
+# Bottom-up
+# O(n^3 + m) Space | O(n + m) Space
+def getMinSpacesStartingAtIdx(pi, nums, idx, cache):
+    if idx == len(pi):
+        return 0
+    if idx in cache:
+        return cache[idx]
+
+    minSpaces = float("inf")
+    for i in range(idx, len(pi)):
+        prefix = pi[idx: i + 1]
+        if prefix in nums:
+            currSpaces = 1 + getMinSpacesStartingAtIdx(pi, nums, i + 1, cache)
+            minSpaces = min(minSpaces, currSpaces)
+    cache[idx] = minSpaces
+    return minSpaces
+
+
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
 if __name__ == "__main__":
-    from functools import lru_cache
+    # from functools import lru_cache
     import numpy as np
 
     '''Four Number Sum'''
@@ -477,16 +517,32 @@ if __name__ == "__main__":
     '''Jums Game'''
     # jumps = [3, 4, 2, 1, 2, 3, 7, 1, 1, 1, 3]
     # print(minNumOfJumps(jumps))
-    
+
     '''Water Area'''
     # water = [0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]
     # print(waterArea(water))
-    
+
     ''''knapsack'''
     # items = [[1, 2], [4, 3], [5, 6], [6, 7]]
     # capacity = 10
     # print(knapsack(items, capacity))
-    
+
     '''Stack Disks'''
-    disks = [[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]]
-    print(stackDisks(disks))
+    # disks = [[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]]
+    # print(stackDisks(disks))
+
+    '''Numbers in Pi'''
+    # pi = "3141592653589793238462643383279"
+    # numbers = [
+    #     "314159265358979323846",
+    #     "26433",
+    #     "8",
+    #     "3279",
+    #     "314159265",
+    #     "35897932384626433832",
+    #     "79"
+    # ]
+
+    # print(minSpacesForNumbersInPi(pi, numbers))
+    # print(minSpacesForNumbersInPiBottomUp(pi, numbers))
+    
