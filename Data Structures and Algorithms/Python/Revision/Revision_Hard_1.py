@@ -72,6 +72,35 @@ def isOutOfPlace(array, num, idx):
     return array[idx - 1] > array[idx] or array[idx + 1] < array[idx]
 
 
+
+# ----------------------------------------< Largest Range >-----------------------------------------------
+def largestRange(array):
+    nums = { num : True for num in array}
+    longest = []
+    globalMax = float("-inf")
+    
+    for each in array:
+        if each in nums:
+            currMax = 1
+            left = each - 1
+            while left in nums:
+                left -= 1
+                currMax += 1
+            right = each + 1
+            while right in nums:
+                right += 1
+                currMax += 1
+            if currMax > globalMax:
+                globalMax = currMax
+                longest = [left + 1, right - 1]
+    return longest
+
+
+
+
+
+
+
 if __name__ == "__main__":
 
     '''Four Number Sum'''
@@ -80,5 +109,10 @@ if __name__ == "__main__":
     # print(fourSum(array, target))
 
     '''Subarray Sort'''
-    array = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
-    print(subarraysort(array))
+    # array = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
+    # print(subarraysort(array))
+    
+    
+    '''Largest Range'''
+    array = [1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]
+    print(largestRange(array))
