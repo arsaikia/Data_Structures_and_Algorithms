@@ -499,7 +499,7 @@ class LinkedList:
         self.value = value
         self.next = None
 
-
+# O(n) Time | O(1) Space
 def findLoop(head):
     slowPtr = head.next
     fastPtr = head.next.next
@@ -515,8 +515,17 @@ def findLoop(head):
         fastPtr = fastPtr.next
     
     return slowPtr
-    
-
+ 
+# ----------------------------------------< Reverse a Singly Linked List >--------------------------------------------------------------
+# O(n) Time | O(1) Space
+def reverseLinkedList(head):
+    p1, p2 = None, head
+    while p2:
+        p3 = p2.next
+        p2.next = p1
+        p1 = p2
+        p2 = p3
+    return p1
 
 
 
@@ -639,3 +648,7 @@ if __name__ == "__main__":
     
     nodeWithLoop = findLoop(llist)
     print(nodeWithLoop.value)
+    
+    '''Reverse LinkedList'''
+    revLlist = reverseLinkedList(llist)
+    print(revLlist.value)
