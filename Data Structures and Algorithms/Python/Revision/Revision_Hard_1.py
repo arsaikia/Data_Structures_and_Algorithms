@@ -380,6 +380,36 @@ def getItemsInKnapsack(matrix, items):
     return list(reversed(seq))
 
 
+# ----------------------------------------< Disk Stacking >--------------------------------------------------------------
+# O(n^2) Time | O(n) Space
+def stackDisks(disks):
+    disks.sort(key = lambda disk: disk[2])
+    heights = [disk[2] for disk in disks]
+    sequence = [None for _ in disks]
+    maxHeightIdx = 0
+    
+    for i in range(1, len(heights)):
+        currDisk = disks[i]
+        for j in range(0, i):
+            prevDisk = disks[j]
+            if canGoOnTop(prevDisk, currDisk):
+                if heights[j] + currDisk[2] > heights[i]:
+                    heights[i] = heights[j] + currDisk[2]
+                    sequence[i] = j
+        if heights[i] > heights[maxHeightIdx]:
+            maxHeightIdx = i
+    return buildHeightSequence(sequence, maxHeightIdx, disks)
+
+def canGoOnTop(prev, curr):
+    return prev[0] < curr[0] and prev[1] < curr[1] and prev[2] < curr[2]
+            
+def buildHeightSequence(sequence, maxHeightIdx, disks):
+    seq = []
+    while maxHeightIdx is not None:
+        seq.append(disks[maxHeightIdx])
+        maxHeightIdx = sequence[maxHeightIdx]
+    return list(reversed(seq))
+
 
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
 if __name__ == "__main__":
@@ -453,6 +483,10 @@ if __name__ == "__main__":
     # print(waterArea(water))
     
     ''''knapsack'''
-    items = [[1, 2], [4, 3], [5, 6], [6, 7]]
-    capacity = 10
-    print(knapsack(items, capacity))
+    # items = [[1, 2], [4, 3], [5, 6], [6, 7]]
+    # capacity = 10
+    # print(knapsack(items, capacity))
+    
+    '''Stack Disks'''
+    disks = [[2, 1, 2], [3, 2, 3], [2, 2, 8], [2, 3, 4], [1, 3, 1], [4, 4, 5]]
+    print(stackDisks(disks))
