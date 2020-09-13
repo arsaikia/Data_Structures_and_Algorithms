@@ -492,7 +492,6 @@ class ContinuousMedianHandler:
         return self.median
 
 
-
 # ----------------------------------------< Find Loop in a Singly Linked List >--------------------------------------------------------------
 class LinkedList:
     def __init__(self, value):
@@ -500,24 +499,28 @@ class LinkedList:
         self.next = None
 
 # O(n) Time | O(1) Space
+
+
 def findLoop(head):
     slowPtr = head.next
     fastPtr = head.next.next
-    
+
     while slowPtr != fastPtr:
         slowPtr = slowPtr.next
         fastPtr = fastPtr.next.next
-    
+
     slowPtr = head
-    
+
     while slowPtr != fastPtr:
         slowPtr = slowPtr.next
         fastPtr = fastPtr.next
-    
+
     return slowPtr
- 
+
 # ----------------------------------------< Reverse a Singly Linked List >--------------------------------------------------------------
 # O(n) Time | O(1) Space
+
+
 def reverseLinkedList(head):
     p1, p2 = None, head
     while p2:
@@ -528,6 +531,30 @@ def reverseLinkedList(head):
     return p1
 
 
+
+# ----------------------------------------< Shifted Linked List >--------------------------------------------------------------
+# O(n) Time | O(1) Space
+def shiftedLinkList(head, k):
+    tail = head
+    length = 1
+    while tail.next is not None:
+        tail = tail.next
+        length += 1
+    
+    offsetSize = abs(k) % length
+    if offsetSize == 0:
+        return head
+    
+    newOffset = length - offsetSize if k > 0 else offsetSize
+    
+    newTail = head
+    for i in range(1, newOffset):
+        newTail = newTail.next
+    
+    newHead = newTail.next
+    newTail.next = None
+    tail.next = head
+    return newHead
 
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
 if __name__ == "__main__":
@@ -633,22 +660,28 @@ if __name__ == "__main__":
     # median.insert(40)
     # median.insert(50)
     # print(median.lowerHalf, median.upperHalf, median.getMedian())
-    
+
     '''' Linked List Loop'''
+    # llist = LinkedList(1)
+    # llist.next = LinkedList(2)
+    # llist.next.next = LinkedList(3)
+    # loop = llist.next.next.next = LinkedList(4)
+    # loop.next = LinkedList(5)
+    # loop.next.next = LinkedList(6)
+    # loop.next.next.next = LinkedList(7)
+    # loop.next.next.next.next = LinkedList(8)
+    # x = loop.next.next.next.next.next = LinkedList(9)
+    # x.next = loop
+
+    # nodeWithLoop = findLoop(llist)
+    # print(nodeWithLoop.value)
+
+    # '''Reverse LinkedList'''
+    # revLlist = reverseLinkedList(llist)
+    # print(revLlist.value)
+    
+    '''Shift Linked List'''
     llist = LinkedList(1)
     llist.next = LinkedList(2)
     llist.next.next = LinkedList(3)
-    loop = llist.next.next.next = LinkedList(4)
-    loop.next = LinkedList(5)
-    loop.next.next = LinkedList(6)
-    loop.next.next.next = LinkedList(7)
-    loop.next.next.next.next = LinkedList(8)
-    x = loop.next.next.next.next.next = LinkedList(9)
-    x.next = loop
-    
-    nodeWithLoop = findLoop(llist)
-    print(nodeWithLoop.value)
-    
-    '''Reverse LinkedList'''
-    revLlist = reverseLinkedList(llist)
-    print(revLlist.value)
+    print(shiftedLinkList(llist, 1).value)
