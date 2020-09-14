@@ -556,6 +556,13 @@ def shiftedLinkList(head, k):
     tail.next = head
     return newHead
 
+
+# ----------------------------------------< Shifted Linked List >--------------------------------------------------------------
+
+
+
+
+
 # ------------------------------------------------< MAIN >------------------------------------------------------------------
 if __name__ == "__main__":
     # from functools import lru_cache
@@ -681,7 +688,7 @@ if __name__ == "__main__":
     # print(revLlist.value)
     
     '''Shift Linked List'''
-    llist = LinkedList(1)
-    llist.next = LinkedList(2)
-    llist.next.next = LinkedList(3)
-    print(shiftedLinkList(llist, 1).value)
+    # llist = LinkedList(1)
+    # llist.next = LinkedList(2)
+    # llist.next.next = LinkedList(3)
+    # print(shiftedLinkList(llist, 1).value)

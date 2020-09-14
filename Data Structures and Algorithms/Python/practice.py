@@ -624,3 +624,33 @@ def knapsackBottomUp(array, capacity):
 
 
 print("Bottom Up", knapsackBottomUp(items, capacity))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def smallestDivisor(self, A, threshold):
+    l, r = 1, max(A)
+    while l < r:
+        m = (l + r) / 2
+        if sum((i + m - 1) / m for i in A) > threshold:
+            l = m + 1
+        else:
+            r = m
+    return l
