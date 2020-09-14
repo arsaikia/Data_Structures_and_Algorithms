@@ -1,40 +1,43 @@
+'''
+You have to use both strings completely
+'''
 import numpy as np
 
-one = "aab"
-two = "axy"
-three = "aaxaby"
+
+def interweaving(one, two, three):
+    if len(one) + len(two) != len(three):
+        return False
+    cache = [[None for col in range(len(two) + 1)]
+             for row in range(len(one) + 1)]
+
+    return areInterwoven(one, two, three, 0, 0, cache)
 
 
-def interleavingStrings(one, two, three):
+def areInterwoven(one, two, three, i, j, cache):
 
-    cache = np.array([[None for __ in range(len(one) + 1)]
-                      for __ in range(len(two) + 1)])
+    k = i + j
 
-    cache[0][0] = True
+    if cache[i][j] is not None:
+        return cache[i][j]
 
-    for col in range(1, len(cache[0])):
-        if one[col - 1] == three[col - 1]:
-            cache[0][col] = True
-        else:
-            cache[0][col] = False
+    if k == len(three):
+        return True
 
-    for row in range(1, len(cache)):
-        if two[row - 1] == three[row - 1]:
-            cache[row][0] = True
-        else:
-            cache[row][0] = False
+    if i < len(one) and one[i] == three[k]:
+        cache[i][j] = areInterwoven(one, two, three, i + 1, j, cache)
+        if cache[i][j]:
+            return True
 
-    for row in range(1, len(cache)):
-        for col in range(1, len(cache[0])):
-            print(row-1, col-1, col + row - 1, one[col - 1], two[row - 1])
+    if j < len(two) and two[j] == three[k]:
+        cache[i][j] = areInterwoven(one, two, three, i, j + 1, cache)
+        return cache[i][j]
 
-            if one[col - 1] == three[col + row - 2]:
-                cache[row][col] = cache[row - 1][col]
-            elif two[row - 1] == three[col + row - 2]:
-                cache[row][col] = cache[row][col - 1]
-
-    cache[row][col] = False
-    print(cache)
+    cache[i][j] = False
+    return False
 
 
-print(interleavingStrings(one, two, three))
+if __name__ == "__main__":
+    one = "aa"
+    two = "b"
+    three = "aba"
+    print(interweaving(one, two, three))
