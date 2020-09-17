@@ -108,6 +108,32 @@ def uniqueThreeSum(array, target):
     return [list(triplet) for triplet in triplets]
             
     
+ # ----------------------------------------< Smallest Difference >-----------------------------------------
+# O(n log(n) + m log(m)) Time | O(1) Space
+def smallestDifference(arrOne, arrTwo):
+    arrOne.sort()
+    arrTwo.sort()
+    elements = []
+    
+    globalMin = float("inf")
+    arrOneIdx, arrTwoIdx = 0, 0
+    while arrOneIdx < len(arrOne) and arrTwoIdx < len(arrTwo):
+        currMin = abs(arrOne[arrOneIdx] - arrTwo[arrTwoIdx])
+        elementOne = arrOne[arrOneIdx]
+        elementTwo = arrTwo[arrTwoIdx]
+        if elementOne < elementTwo:
+            arrOneIdx += 1
+        elif elementOne > elementTwo:
+            arrTwoIdx += 1
+        else:
+            return [arrOneIdx, arrTwoIdx]
+        
+        if currMin < globalMin:
+            globalMin = currMin
+            elements = [elementOne, elementTwo]
+        
+    return elements
+        
     
     
 
@@ -131,5 +157,11 @@ if __name__ == "__main__":
     
     '''Three Sum'''
     # print(threeSum([12, 3, 1, 2, -6, 5, -8, 6], 0))
-    print(uniqueThreeSum([-1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,-1,-4], 0))
+    # print(uniqueThreeSum([-1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,-1,-4], 0))
+    
+    '''Smallest Difference'''
+    arr1 = [-1, 5, 10, 20, 28, 3]
+    arr2 = [26, 134, 135, 15, 17]
+    print(smallestDifference(arr1, arr2))
+    
     
