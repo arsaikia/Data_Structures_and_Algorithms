@@ -509,6 +509,60 @@ def getYongest(lower, higher, difference):
     return higher
 
 
+# ----------------------------------------< Min Heap Construction >-----------------------------------------
+class Heap:
+    def __init__(self, array):
+        self.heap = self.buildHeap(array)
+    
+    def peek(self):
+        return self.heap[0]
+    
+    def swap(self, array, i, j):
+        array[i], array[j] = array[j], array[i]
+    
+    def remove(self):
+        self.swap(self.heap, 0, len(self.heap) - 1)
+        toRemove = self.heap.pop()
+        self.siftDown(self.heap, 0, len(self.heap) - 1)
+        return toRemove
+    
+    def insert(self, value):
+        self.heap.append(value)
+        self.siftUp(self.heap, len(self.heap) - 1)
+    
+    def siftUp(self, array, currentIdx):
+        parentIdx = (currentIdx - 1) // 2
+        while parentIdx > 0 and array[currentIdx] < array[parentIdx]:
+            self.swap(array, parentIdx, currentIdx)
+            currentIdx = parentIdx
+            parentIdx = (currentIdx - 1) //2
+    
+    def siftDown(self, array, currentIdx, endIdx):
+        childOneIdx = (2 * currentIdx) + 1
+        if childOneIdx <= endIdx:
+            childTwoIdx = (childOneIdx + 1) if (childOneIdx + 1) <= endIdx else -1
+            if childTwoIdx != -1 and array[childTwoIdx] < array[childOneIdx]:
+                idxToSwap = childTwoIdx
+            else:
+                idxToSwap = childOneIdx
+            if array[currentIdx] > array[idxToSwap]:
+                self.swap(array, currentIdx, idxToSwap)
+                currentIdx = idxToSwap
+                childOneIdx = (2 * currentIdx) + 1
+            else:
+                return
+    
+    def buildHeap(self, array):
+        firstParentIdx = (len(array) - 2) // 2
+        for currentIdx in reversed(range(firstParentIdx + 1)):
+            self.siftDown(array, currentIdx, len(array) - 1)
+        return array
+        
+                
+
+
+
+
 if __name__ == "__main__":
     import numpy as np
     from binarytree import Node
@@ -591,3 +645,15 @@ if __name__ == "__main__":
     #     [1, 0, 1, 1, 0]
     # ]
     # print(riverSize(rivers))
+    
+    '''MinHeap'''
+    arr = [48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41]
+    heap = Heap(arr)
+    heap.insert(76)
+    print(heap.peek())
+    heap.remove()
+    print(heap.peek())
+    heap.remove()
+    heap.insert(87)
+    print(heap.peek())
+    
