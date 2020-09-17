@@ -558,7 +558,23 @@ class Heap:
             self.siftDown(array, currentIdx, len(array) - 1)
         return array
         
-                
+
+# ----------------------------------------< Permutations >-----------------------------------------
+# O(N^2 . N!) Time | O(N . N!) Space
+def permutations(array):
+    perms = []
+    getPerms(array, [], perms)
+    return perms
+
+def getPerms(array, perm, perms):
+    if not len(array) and len(perm):
+        perms.append(perm)
+    else:
+        for i in range(len(array)):
+            newArray = array[:i] + array[i + 1:]
+            newPerm = perm + [array[i]]
+            getPerms(newArray, newPerm, perms)
+
 
 
 
@@ -647,13 +663,15 @@ if __name__ == "__main__":
     # print(riverSize(rivers))
     
     '''MinHeap'''
-    arr = [48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41]
-    heap = Heap(arr)
-    heap.insert(76)
-    print(heap.peek())
-    heap.remove()
-    print(heap.peek())
-    heap.remove()
-    heap.insert(87)
-    print(heap.peek())
+    # arr = [48, 12, 24, 7, 8, -5, 24, 391, 24, 56, 2, 6, 8, 41]
+    # heap = Heap(arr)
+    # heap.insert(76)
+    # print(heap.peek())
+    # heap.remove()
+    # print(heap.peek())
+    # heap.remove()
+    # heap.insert(87)
+    # print(heap.peek())
     
+    '''Perms'''
+    print(permutations([1,2,3]))
