@@ -2,7 +2,7 @@
 # O(mn) Time | O(mn) Space
 def spiralTraverse(matrix):
     traversal = []
-    startRow, endRow, startCol, endCol = 0,len(
+    startRow, endRow, startCol, endCol = 0, len(
         matrix) - 1, 0, len(matrix[0]) - 1
 
     while startRow <= endRow and startCol <= endCol:
@@ -28,9 +28,12 @@ def spiralTraverse(matrix):
 
 # ----------------------------------------< Longest Peak >-----------------------------------------
 # O(N) Time | O(N) Space
+
+
 def longestPeak(array):
     peaks = getPeaks(array)
     return getLongestPeak(array, peaks)
+
 
 def getPeaks(array):
     peaks = []
@@ -39,6 +42,7 @@ def getPeaks(array):
             peaks.append(idx)
     print(peaks)
     return peaks
+
 
 def getLongestPeak(array, peaks):
     globalLongest = 0
@@ -50,14 +54,17 @@ def getLongestPeak(array, peaks):
         endIdx = peak
         while endIdx + 1 < len(array) and array[endIdx] > array[endIdx + 1]:
             endIdx += 1
-        currLongest =  endIdx - startIdx
+        currLongest = endIdx - startIdx
         globalLongest = max(currLongest, globalLongest)
     return globalLongest + 1 if globalLongest != 0 else 0
-    
+
 # ----------------------------------------< Three Sum >-----------------------------------------
 
-'''When the given array has unique integers and required output should be in sorted order'''    
+
+'''When the given array has unique integers and required output should be in sorted order'''
 # O(n^2) Time | O(n) Space
+
+
 def threeSum(array, target):
     array.sort()
     triplets = []
@@ -73,8 +80,9 @@ def threeSum(array, target):
             elif array[start] + array[end] > required:
                 end -= 1
             else:
-                start += 1 
+                start += 1
     return triplets
+
 
 '''
 Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? 
@@ -86,6 +94,8 @@ Because we need unique triplets, we can do the same sorted approach, but at any 
 duing travering the first loop if we get the current element same as the previous, we skip it
 '''
 # O(n^2) Time | O(n) Space
+
+
 def uniqueThreeSum(array, target):
     triplets = set()
     array.sort()
@@ -104,17 +114,18 @@ def uniqueThreeSum(array, target):
             elif array[start] + array[end] > required:
                 end -= 1
             else:
-                start += 1 
+                start += 1
     return [list(triplet) for triplet in triplets]
-            
-    
+
  # ----------------------------------------< Smallest Difference >-----------------------------------------
 # O(n log(n) + m log(m)) Time | O(1) Space
+
+
 def smallestDifference(arrOne, arrTwo):
     arrOne.sort()
     arrTwo.sort()
     elements = []
-    
+
     globalMin = float("inf")
     arrOneIdx, arrTwoIdx = 0, 0
     while arrOneIdx < len(arrOne) and arrTwoIdx < len(arrTwo):
@@ -127,41 +138,77 @@ def smallestDifference(arrOne, arrTwo):
             arrTwoIdx += 1
         else:
             return [arrOneIdx, arrTwoIdx]
-        
+
         if currMin < globalMin:
             globalMin = currMin
             elements = [elementOne, elementTwo]
-        
+
     return elements
-        
-    
-    
+
+ # ----------------------------------------< Move Elements To End >-----------------------------------------
+# O(n) Time | O(1) Space
 
 
+def moveElementsToEnd(array, num):
+    start = 0
+    end = len(array) - 1
+    while start < end:
+        if array[start] == num and array[end] != num:
+            swap(array, start, end)
+        if array[start] != num:
+            start += 1
+        if array[end] == num:
+            end -= 1
+    return array
+
+ # ----------------------------------------< Monotonic >-----------------------------------------
+
+
+def isMonotonnic(array):
+    return validateMonotonicity(array, "increasing") or validateMonotonicity(array, "indecreasing")
+
+
+def validateMonotonicity(array, isType):
+
+    for i in range(1, len(array)):
+        if compare(array[i - 1], array[i], isType):
+            return False
+    return True
+
+
+def compare(num1, num2, isType):
+    return num1 > num2 if isType == "increasing" else num1 < num2
+
+
+def swap(array, i, j):
+    array[i], array[j] = array[j], array[i]
 
 
 if __name__ == "__main__":
     import numpy as np
-    
+
     '''Spiral Traverse'''
-    # matrix = [[1, 2, 3, 4], 
-    #           [12, 13, 14, 5], 
-    #           [11, 16, 15, 6], 
+    # matrix = [[1, 2, 3, 4],
+    #           [12, 13, 14, 5],
+    #           [11, 16, 15, 6],
     #           [10, 9, 8, 7]]
-    
+
     # print(np.array(spiralTraverse(matrix)))
-    
+
     '''Longest Peak'''
     # array = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
     # print(longestPeak(array))
-    
+
     '''Three Sum'''
     # print(threeSum([12, 3, 1, 2, -6, 5, -8, 6], 0))
     # print(uniqueThreeSum([-1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,-1,-4], 0))
-    
+
     '''Smallest Difference'''
-    arr1 = [-1, 5, 10, 20, 28, 3]
-    arr2 = [26, 134, 135, 15, 17]
-    print(smallestDifference(arr1, arr2))
-    
-    
+    # arr1 = [-1, 5, 10, 20, 28, 3]
+    # arr2 = [26, 134, 135, 15, 17]
+    # print(smallestDifference(arr1, arr2))
+
+    '''Move to end'''
+    # print(moveElementsToEnd([2, 1, 2, 2, 2, 3, 4, 2], 2))
+
+    print(isMonotonnic([-1, -5, -10, -1100, -1100, -1101, -1102, -9001]))
