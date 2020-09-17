@@ -576,7 +576,23 @@ def getPerms(array, perm, perms):
             getPerms(newArray, newPerm, perms)
 
 
+# O(N. N!) Time | O(N. N!) Space
+def getPermutations(array):
+    perms = []
+    getAllPerms(array, 0, perms)
+    return perms
 
+def getAllPerms(array, j, perms):
+    if j == len(array):
+        perms.append(array[:])
+    else:
+        for i in range(j, len(array)):
+            swapped(array, i, j)
+            getAllPerms(array, j + 1, perms)
+            swapped(array, i, j)
+
+def swapped(array, i, j):
+    array[i], array[j] = array[j], array[i]
 
 
 if __name__ == "__main__":
@@ -674,4 +690,6 @@ if __name__ == "__main__":
     # print(heap.peek())
     
     '''Perms'''
-    print(permutations([1,2,3]))
+    # print(permutations([1,2,3]))
+    # print(getPermutations([1,2,3]))
+    
