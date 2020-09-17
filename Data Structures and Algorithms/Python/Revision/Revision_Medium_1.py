@@ -272,6 +272,19 @@ class BST:
             curr = curr.left
         return curr.value
 
+# ----------------------------------------< Validate BST >-----------------------------------------
+# O(n) time || O(log(n)) Space
+def validateBST(tree):
+    return getValidatedBST(tree, float("-inf"), float("inf"))
+
+def getValidatedBST(node, minValue, maxValue):
+    if node is None:
+        return True
+    if node.value > maxValue or node.value < minValue:
+        return False
+    return getValidatedBST(node.left, minValue, node.value) and getValidatedBST(node.right, node.value, maxValue)
+        
+
 
 if __name__ == "__main__":
     import numpy as np
@@ -302,10 +315,14 @@ if __name__ == "__main__":
 
     # print(isMonotonnic([-1, -5, -10, -1100, -1100, -1101, -1102, -9001]))
 
+    '''BST'''
     bst = BST(10)
     bst.insert(30).insert(5).insert(2).insert(12).insert(20)
-    bst.printTree()
-    print(bst.contains(12))
+    # bst.printTree()
+    # print(bst.contains(12))
     bst.remove(12)
-    print("\n")
-    bst.printTree()
+    # print("\n")
+    # bst.printTree()
+
+    '''Validate BST'''
+    print(validateBST(bst))
