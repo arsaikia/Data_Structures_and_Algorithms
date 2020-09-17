@@ -53,7 +53,65 @@ def getLongestPeak(array, peaks):
         currLongest =  endIdx - startIdx
         globalLongest = max(currLongest, globalLongest)
     return globalLongest + 1 if globalLongest != 0 else 0
+    
+# ----------------------------------------< Three Sum >-----------------------------------------
+
+'''When the given array has unique integers and required output should be in sorted order'''    
+# O(n^2) Time | O(n) Space
+def threeSum(array, target):
+    array.sort()
+    triplets = []
+    for idx, num in enumerate(array):
+        required = target - num
+        start = idx + 1
+        end = len(array) - 1
+        while start < end:
+            if array[start] + array[end] == required:
+                triplets.append([num, array[start], array[end]])
+                start += 1
+                end -= 1
+            elif array[start] + array[end] > required:
+                end -= 1
+            else:
+                start += 1 
+    return triplets
+
+'''
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? 
+Find all unique triplets in the array which gives the sum of zero.
+Notice that the solution set must not contain duplicate triplets.
+
+IMPORTANT:
+Because we need unique triplets, we can do the same sorted approach, but at any moment
+duing travering the first loop if we get the current element same as the previous, we skip it
+'''
+# O(n^2) Time | O(n) Space
+def uniqueThreeSum(array, target):
+    triplets = set()
+    array.sort()
+    print(array, "\n\n\n")
+    for idx, num in enumerate(array):
+        if idx > 0 and array[idx - 1] == num:
+            continue
+        required = target - num
+        start = idx + 1
+        end = len(array) - 1
+        while start < end:
+            if array[start] + array[end] == required:
+                triplets.add((num, array[start], array[end]))
+                start += 1
+                end -= 1
+            elif array[start] + array[end] > required:
+                end -= 1
+            else:
+                start += 1 
+    return [list(triplet) for triplet in triplets]
             
+    
+    
+    
+
+
 
 
 if __name__ == "__main__":
@@ -68,6 +126,10 @@ if __name__ == "__main__":
     # print(np.array(spiralTraverse(matrix)))
     
     '''Longest Peak'''
-    array = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
-    print(longestPeak(array))
+    # array = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
+    # print(longestPeak(array))
+    
+    '''Three Sum'''
+    # print(threeSum([12, 3, 1, 2, -6, 5, -8, 6], 0))
+    print(uniqueThreeSum([-1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2,-1,-4], 0))
     
