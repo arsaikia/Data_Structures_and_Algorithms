@@ -336,6 +336,17 @@ def maxSubarraysum(array):
         sums[idx] = max(sums[idx - 1], (array[idx] + sums[idx - 2]))
     return sums[-1]
 
+# O(n) Time | O(1) Space
+def maxSubarraysumImproved(array):
+    if len(array) < 2:
+        return array[0] if len(array) == 1 else []
+    
+    secondLast, last = array[0], max(array[0], array[1])
+    for idx in range(2, len(array)):
+        currValue = max(last, (array[idx] + secondLast))
+        secondLast, last = last, currValue
+    return last
+
 
 
 
@@ -396,4 +407,5 @@ if __name__ == "__main__":
     '''Max Subarray Sum'''
     array = [75, 105, 120, 75, 90, 135]
     print(maxSubarraysum(array))
+    print(maxSubarraysumImproved(array))
     
