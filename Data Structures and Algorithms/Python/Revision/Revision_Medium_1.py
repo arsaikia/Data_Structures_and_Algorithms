@@ -361,7 +361,7 @@ denom 10 =   [1   1   2   2   3   4   5   6   6   8   11]
 '''
 
 # O(amount x denom) Time | O(amount) Space
-def numWays(amount, denom):
+def numberOfWaysToMakeChange(amount, denom):
     ways = [0 for _ in range(amount + 1)]
     ways[0] = 1
     for coin in denom:
@@ -370,6 +370,20 @@ def numWays(amount, denom):
                 ways[value] += ways[value - coin]
     return ways[-1]
             
+
+# ----------------------------------------< Min Number Of Coins >-----------------------------------------
+# O(amount x denom) Time | O(amount) Space
+def minNumberOfCoinsForChange(n, denoms):
+    coins = [float('inf') for i in range(n+1)]
+    coins[0] = 0
+    for denom in denoms:
+        for amount in range(1, n+1):
+            if denom <= amount:
+                coins[amount] = min(coins[amount], 1+coins[amount-denom])
+    return coins[-1] if coins[-1] != float('inf') else -1
+
+
+
 
 
 if __name__ == "__main__":
@@ -432,5 +446,6 @@ if __name__ == "__main__":
     # print(maxSubarraysumImproved(array))
     
     '''Make Change'''
-    print(numWays(10, [1, 2, 5, 10]))
+    print(numberOfWaysToMakeChange(10, [1, 2, 5, 10]))
+    print(minNumberOfCoinsForChange(10, [1, 2, 5, 10]))
     
