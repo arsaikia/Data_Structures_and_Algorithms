@@ -324,6 +324,19 @@ def swap(node):
     node.left, node.right = node.right, node.left
     
 
+# ----------------------------------------< Maax Subarray Sum No Adjacent >-----------------------------------------
+# O(n) Time | O(n) Space
+def maxSubarraysum(array):
+    if len(array) < 2:
+        return array[0] if len(array) == 1 else []
+    sums = [0 for _ in array]
+    sums[0] = array[0]
+    sums[1] = max(array[0], array[1])
+    for idx in range(2, len(array)):
+        sums[idx] = max(sums[idx - 1], (array[idx] + sums[idx - 2]))
+    return sums[-1]
+
+
 
 
 if __name__ == "__main__":
@@ -370,12 +383,17 @@ if __name__ == "__main__":
     # print(validateBST(bst))
     
     '''Min Height BST'''
-    arr = [1, 2, 5, 7, 10, 13, 14, 15, 22]
-    bst = minHeightBST(arr)
-    print(bst)
+    # arr = [1, 2, 5, 7, 10, 13, 14, 15, 22]
+    # bst = minHeightBST(arr)
+    # print(bst)
     
-    invertBtRecursive(bst)
-    print("\n", bst)
+    # invertBtRecursive(bst)
+    # print("\n", bst)
     
-    invertBtIterative(bst)
-    print("\n", bst)
+    # invertBtIterative(bst)
+    # print("\n", bst)
+    
+    '''Max Subarray Sum'''
+    array = [75, 105, 120, 75, 90, 135]
+    print(maxSubarraysum(array))
+    
