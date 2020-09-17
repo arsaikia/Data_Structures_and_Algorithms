@@ -348,6 +348,28 @@ def maxSubarraysumImproved(array):
     return last
 
 
+# ----------------------------------------< Num Ways to Make Change >-----------------------------------------
+'''
+Amount = 10
+denoms = [1, 2, 5, 10]
+
+ways    =    [0   1   2   3   4   5   6   7   8   9   10]
+denom 1 =    [1   1   1   1   1   1   1   1   1   1   1 ]
+denom 2 =    [1   1   2   2   3   3   4   4   5   5   6 ]
+denom 5 =    [1   1   2   2   3   4   5   6   6   8   10]
+denom 10 =   [1   1   2   2   3   4   5   6   6   8   11]
+'''
+
+# O(amount x denom) Time | O(amount) Space
+def numWays(amount, denom):
+    ways = [0 for _ in range(amount + 1)]
+    ways[0] = 1
+    for coin in denom:
+        for value in range(1, amount + 1):
+            if coin <= value:
+                ways[value] += ways[value - coin]
+    return ways[-1]
+            
 
 
 if __name__ == "__main__":
@@ -405,7 +427,10 @@ if __name__ == "__main__":
     # print("\n", bst)
     
     '''Max Subarray Sum'''
-    array = [75, 105, 120, 75, 90, 135]
-    print(maxSubarraysum(array))
-    print(maxSubarraysumImproved(array))
+    # array = [75, 105, 120, 75, 90, 135]
+    # print(maxSubarraysum(array))
+    # print(maxSubarraysumImproved(array))
+    
+    '''Make Change'''
+    print(numWays(10, [1, 2, 5, 10]))
     
