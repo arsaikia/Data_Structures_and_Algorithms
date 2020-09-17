@@ -285,10 +285,24 @@ def getValidatedBST(node, minValue, maxValue):
     return getValidatedBST(node.left, minValue, node.value) and getValidatedBST(node.right, node.value, maxValue)
         
 
+# ----------------------------------------< Min Height BST >-----------------------------------------
+# o(n) Time | O(n) Space
+def minHeightBST(array):
+    return buildMinHeightBST(array, 0, len(array) - 1)
+
+def buildMinHeightBST(array, startIdx, endIdx):
+    if startIdx > endIdx:
+        return None
+
+    midIdx = (startIdx + endIdx) // 2
+    bst = Node(array[midIdx])
+    bst.left = buildMinHeightBST(array, startIdx, midIdx - 1)
+    bst.right = buildMinHeightBST(array, midIdx + 1, endIdx)
+    return bst
 
 if __name__ == "__main__":
     import numpy as np
-
+    from binarytree import Node
     '''Spiral Traverse'''
     # matrix = [[1, 2, 3, 4],
     #           [12, 13, 14, 5],
@@ -316,13 +330,17 @@ if __name__ == "__main__":
     # print(isMonotonnic([-1, -5, -10, -1100, -1100, -1101, -1102, -9001]))
 
     '''BST'''
-    bst = BST(10)
-    bst.insert(30).insert(5).insert(2).insert(12).insert(20)
+    # bst = BST(10)
+    # bst.insert(30).insert(5).insert(2).insert(12).insert(20)
     # bst.printTree()
     # print(bst.contains(12))
-    bst.remove(12)
+    # bst.remove(12)
     # print("\n")
     # bst.printTree()
 
     '''Validate BST'''
-    print(validateBST(bst))
+    # print(validateBST(bst))
+    
+    '''Min Height BST'''
+    arr = [1, 2, 5, 7, 10, 13, 14, 15, 22]
+    print(minHeightBST(arr))
