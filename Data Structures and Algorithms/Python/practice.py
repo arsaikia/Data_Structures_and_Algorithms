@@ -574,83 +574,143 @@ PRACTICE
 
 # print(heapSort([-1, 21, 10, 8, 9, 12]))
 import numpy as np
-items = [[1, 2], [4, 3], [5, 6], [6, 7]]
-capacity = 10
-idx = len(items) - 1
-memo = [[None for col in range(capacity)] for row in range(len(items))]
+# items = [[1, 2], [4, 3], [5, 6], [6, 7]]
+# capacity = 10
+# idx = len(items) - 1
+# memo = [[None for col in range(capacity)] for row in range(len(items))]
 
-# Top Down
-
-
-def knapsack(array, capacity, idx, memo):
-    if idx == 0 or capacity == 0:
-        return 0
-
-    if memo[idx][capacity - 1] is not None:
-        return memo[idx][capacity]
-
-    curr = array[idx]
-    value = curr[0]
-    weight = curr[1]
-
-    if capacity >= weight:
-        val = max(value + knapsack(array, capacity - weight, idx - 1, memo),
-                  knapsack(array, capacity, idx - 1, memo))
-    else:
-        val = knapsack(array, capacity, idx - 1, memo)
-
-    memo[idx][capacity - 1] = val
-    return val
+# # Top Down
 
 
-print("Top Down", knapsack(items, capacity, idx, memo))
+# def knapsack(array, capacity, idx, memo):
+#     if idx == 0 or capacity == 0:
+#         return 0
+
+#     if memo[idx][capacity - 1] is not None:
+#         return memo[idx][capacity]
+
+#     curr = array[idx]
+#     value = curr[0]
+#     weight = curr[1]
+
+#     if capacity >= weight:
+#         val = max(value + knapsack(array, capacity - weight, idx - 1, memo),
+#                   knapsack(array, capacity, idx - 1, memo))
+#     else:
+#         val = knapsack(array, capacity, idx - 1, memo)
+
+#     memo[idx][capacity - 1] = val
+#     return val
 
 
-def knapsackBottomUp(array, capacity):
-    cache = [[0 for col in range(capacity + 1)]
-             for row in range(len(items) + 1)]
-    for row in range(1, len(cache)):
-        for col in range(1, len(cache[0])):
-            value = array[row - 1][0]
-            weight = array[row - 1][1]
-
-            if weight > col:
-                cache[row][col] = cache[row - 1][col]
-            else:
-                cache[row][col] = max(cache[row - 1][col],
-                                      value + cache[row - 1][col - weight])
-
-    return cache[-1][-1]
+# # print("Top Down", knapsack(items, capacity, idx, memo))
 
 
-print("Bottom Up", knapsackBottomUp(items, capacity))
+# def knapsackBottomUp(array, capacity):
+#     cache = [[0 for col in range(capacity + 1)]
+#              for row in range(len(items) + 1)]
+#     for row in range(1, len(cache)):
+#         for col in range(1, len(cache[0])):
+#             value = array[row - 1][0]
+#             weight = array[row - 1][1]
+
+#             if weight > col:
+#                 cache[row][col] = cache[row - 1][col]
+#             else:
+#                 cache[row][col] = max(cache[row - 1][col],
+#                                       value + cache[row - 1][col - weight])
+
+#     return cache[-1][-1]
 
 
+# # print("Bottom Up", knapsackBottomUp(items, capacity))
 
 
+# def solve(input):
+#     res = [[None for _ in range(len(input[0]))] for row in input]
+#     for i in reversed(range(len(input))):
+#         for j in reversed(range(len(input[i]))):
+#             diagonal_element = 0
+#             if i > 0 and j > 0:
+#                 diagonal_element = input[i-1][j-1]
+
+#             up_row = 0
+#             if i > 0:
+#                 up_row = input[i-1][j]
+
+#             prev_col = 0
+#             if j > 0:
+#                 prev_col = input[i][j-1]
+
+#             res[i][j] = input[i][j] + diagonal_element - up_row - prev_col
+#     return res
 
 
+# arr = [[33, 94, 56, 34, 77], [89, 27, 55, 74, 3], [38, 20, 90, 45, 60], [98, 65, 58, 18, 14], [2, 64, 11, 1, 79], [4, 67, 78, 13, 53],
+#        [98, 68, 90, 2, 62], [13, 1, 34, 75, 95], [23, 16, 39, 95, 42]]
+
+# print(np.array(arr), "\n")
+# print(np.array(solve(arr)))
 
 
+# def transpose(matrix):
+
+#     for row in range(len(matrix)):
+#         for col in range(row + 1, len(matrix[0])):
+#             matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+
+#     for row in range(len(matrix)):
+#         for col in range(len(matrix[0]) // 2):
+#             matrix[row][col], matrix[row][len(
+#                 matrix[0]) - 1 - col] = matrix[row][len(matrix[0]) - 1 - col],  matrix[row][col]
+
+#     return np.array(matrix, "\n")
 
 
+# print(transpose([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), "\n")
+# print(np.array([[7, 4, 1], [8, 5, 2], [9, 6, 3]]))
+
+def knmuthMorrisPratt(string, substring):
+    pattern = buildPattern(substring)
+    # return doesMatch(string, substring, pattern)
+    count = 0
+    for i in range(0, len(string) - len(substring) + 1):
+        # [i : i + len(substring)]
+        if doesMatch(string, i, substring, pattern):
+            count += 1
+    return count
 
 
-
-
-
-
-
-
-
-
-
-def smallestDivisor(self, A, threshold):
-    l, r = 1, max(A)
-    while l < r:
-        m = (l + r) / 2
-        if sum((i + m - 1) / m for i in A) > threshold:
-            l = m + 1
+def buildPattern(substring):
+    pattern = [-1 for _ in substring]
+    i, j = 1, 0
+    while i < len(substring):
+        if substring[i] == substring[j]:
+            pattern[i] = j
+            i += 1
+            j += 1
+        elif j > 0:
+            j = pattern[j - 1] + 1
         else:
-            r = m
-    return l
+            i += 1
+    return pattern
+
+
+def doesMatch(string, startIdx, substring, pattern):
+    i, j = startIdx, 0
+    while i <= startIdx + len(substring) - 1:
+        if string[i] == substring[j]:
+            if j == len(substring) - 1:
+                return True
+            i += 1
+            j += 1
+        elif j > 0:
+            j = pattern[j - 1] + 1
+        else:
+            i += 1
+    return False
+
+testArray = [["01010101", "01", 4], [
+    "0100010", "010", 2], ["00000000000", "00", 10]]
+for test in testArray:
+    print(test, knmuthMorrisPratt(test[0], test[1]) == test[2])
