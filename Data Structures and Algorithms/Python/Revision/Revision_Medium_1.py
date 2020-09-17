@@ -311,13 +311,26 @@ def invertBtRecursive(tree):
 
 # O(n) Time | O(n) Space
 def invertBtIterative(tree):
-    pass
+    que =deque([tree])
+    while len(que):
+        node = que.popleft()
+        if node is None:
+            continue
+        swap(node)
+        que.append(node.left)
+        que.append(node.right)
+
+def swap(node):
+    node.left, node.right = node.right, node.left
+    
 
 
 
 if __name__ == "__main__":
     import numpy as np
     from binarytree import Node
+    from collections import deque
+    from functools import lru_cache
     '''Spiral Traverse'''
     # matrix = [[1, 2, 3, 4],
     #           [12, 13, 14, 5],
@@ -362,4 +375,7 @@ if __name__ == "__main__":
     print(bst)
     
     invertBtRecursive(bst)
+    print("\n", bst)
+    
+    invertBtIterative(bst)
     print("\n", bst)
