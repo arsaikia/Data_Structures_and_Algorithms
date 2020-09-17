@@ -84,7 +84,7 @@ def threeSum(array, target):
 
 
 '''
-Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? 
+Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0?
 Find all unique triplets in the array which gives the sum of zero.
 Notice that the solution set must not contain duplicate triplets.
 
@@ -439,7 +439,8 @@ def hasSingleCycle(array):
 # O(nm) Time | O(nm) Space
 def riverSize(matrix):
     sizes = []
-    visited = [[False for col in range(len(matrix[0]))] for row in range(len(matrix)) ]
+    visited = [[False for col in range(len(matrix[0]))]
+               for row in range(len(matrix))]
     for row in range(len(matrix)):
         for col in range(len(matrix[0])):
             if visited[row][col]:
@@ -480,11 +481,40 @@ def getNeighbors(i, j, matrix, visited):
     return neighborsX
 
 
+# ----------------------------------------< Yongest common Ancestor >-----------------------------------------
+# O(d) Time | O(1) Space
+def getYoungestCommonAncestor(topAncestor, descendantOne, descendantTwo):
+    depthOne = getDepth(descendantOne, topAncestor, 0)
+    depthTwo = getDepth(descendantTwo, topAncestor, 0)
+    if depthOne > depthTwo:
+        return getYongest(descendantOne, descendantTwo, depthOne - depthTwo)
+    else:
+        return getYongest(descendantTwo, descendantOne, depthTwo - depthOne)
+
+
+def getDepth(node, root, depth):
+    if node is None:
+        return depth
+    return getDepth(node.ancestor, root, depth + 1)
+
+
+def getYongest(lower, higher, difference):
+    while difference > 0:
+        lower = lower.ancestor
+        difference -= 1
+
+    while lower != higher:
+        lower = lower.ancestor
+        higher = higher.ancestor
+    return higher
+
+
 if __name__ == "__main__":
     import numpy as np
     from binarytree import Node
     from collections import deque
     from functools import lru_cache
+
     '''Spiral Traverse'''
     # matrix = [[1, 2, 3, 4],
     #           [12, 13, 14, 5],
@@ -553,11 +583,11 @@ if __name__ == "__main__":
     # print(hasSingleCycle(singleCycle))
 
     '''River Sizes'''
-    rivers = [
-        [1, 0, 0, 1, 0],
-        [1, 0, 1, 0, 0],
-        [0, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1],
-        [1, 0, 1, 1, 0]
-    ]
-    print(riverSize(rivers))
+    # rivers = [
+    #     [1, 0, 0, 1, 0],
+    #     [1, 0, 1, 0, 0],
+    #     [0, 0, 1, 0, 1],
+    #     [1, 0, 1, 0, 1],
+    #     [1, 0, 1, 1, 0]
+    # ]
+    # print(riverSize(rivers))
