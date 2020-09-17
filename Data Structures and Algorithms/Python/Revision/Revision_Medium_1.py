@@ -187,7 +187,7 @@ class BST:
         self.value = value
         self.left = None
         self.right = None
-        
+
     # O(n) Time | O(1) Space
     def printTree(self):
         curr = self
@@ -219,7 +219,7 @@ class BST:
                 else:
                     curr = curr.right
         return self
-    
+
     # Average : O(log(n)) Time | O(log(n)) Space
     # Worst: O(n) Time | O(n) Space
     def contains(self, value, parent=None):
@@ -274,8 +274,11 @@ class BST:
 
 # ----------------------------------------< Validate BST >-----------------------------------------
 # O(n) time || O(log(n)) Space
+
+
 def validateBST(tree):
     return getValidatedBST(tree, float("-inf"), float("inf"))
+
 
 def getValidatedBST(node, minValue, maxValue):
     if node is None:
@@ -283,12 +286,13 @@ def getValidatedBST(node, minValue, maxValue):
     if node.value > maxValue or node.value < minValue:
         return False
     return getValidatedBST(node.left, minValue, node.value) and getValidatedBST(node.right, node.value, maxValue)
-        
+
 
 # ----------------------------------------< Min Height BST >-----------------------------------------
 # o(n) Time | O(n) Space
 def minHeightBST(array):
     return buildMinHeightBST(array, 0, len(array) - 1)
+
 
 def buildMinHeightBST(array, startIdx, endIdx):
     if startIdx > endIdx:
@@ -302,6 +306,8 @@ def buildMinHeightBST(array, startIdx, endIdx):
 
 # ----------------------------------------< Invert a Binary Tree >-----------------------------------------
 # O(n) Time | O(d) Space
+
+
 def invertBtRecursive(tree):
     if tree is None:
         return
@@ -310,8 +316,10 @@ def invertBtRecursive(tree):
     tree.left, tree.right = tree.right, tree.left
 
 # O(n) Time | O(n) Space
+
+
 def invertBtIterative(tree):
-    que =deque([tree])
+    que = deque([tree])
     while len(que):
         node = que.popleft()
         if node is None:
@@ -320,9 +328,10 @@ def invertBtIterative(tree):
         que.append(node.left)
         que.append(node.right)
 
+
 def swap(node):
     node.left, node.right = node.right, node.left
-    
+
 
 # ----------------------------------------< Maax Subarray Sum No Adjacent >-----------------------------------------
 # O(n) Time | O(n) Space
@@ -337,10 +346,12 @@ def maxSubarraysum(array):
     return sums[-1]
 
 # O(n) Time | O(1) Space
+
+
 def maxSubarraysumImproved(array):
     if len(array) < 2:
         return array[0] if len(array) == 1 else []
-    
+
     secondLast, last = array[0], max(array[0], array[1])
     for idx in range(2, len(array)):
         currValue = max(last, (array[idx] + secondLast))
@@ -361,6 +372,8 @@ denom 10 =   [1   1   2   2   3   4   5   6   6   8   11]
 '''
 
 # O(amount x denom) Time | O(amount) Space
+
+
 def numberOfWaysToMakeChange(amount, denom):
     ways = [0 for _ in range(amount + 1)]
     ways[0] = 1
@@ -369,7 +382,7 @@ def numberOfWaysToMakeChange(amount, denom):
             if coin <= value:
                 ways[value] += ways[value - coin]
     return ways[-1]
-            
+
 
 # ----------------------------------------< Min Number Of Coins >-----------------------------------------
 # O(amount x denom) Time | O(amount) Space
@@ -383,7 +396,88 @@ def minNumberOfCoinsForChange(n, denoms):
     return coins[-1] if coins[-1] != float('inf') else -1
 
 
+# ----------------------------------------< Levenshtein Distance >-----------------------------------------
+# O(mn) Time | O(mn) Space
+def editDistance(stringOne, stringTwo):
+    edits = [[i for i in range(len(stringTwo) + 1)]
+             for row in range(len(stringOne) + 1)]
+    for i in range(1, len(edits)):
+        edits[i][0] = 1 + edits[i - 1][0]
+    for row in range(1, len(edits)):
+        for col in range(1, len(edits[0])):
+            if stringOne[row - 1] == stringTwo[col - 1]:
+                edits[row][col] = edits[row - 1][col - 1]
+            else:
+                edits[row][col] = 1 + min(edits[row - 1][col],
+                                          edits[row][col - 1], edits[row - 1][col - 1])
+    return edits[-1][-1]
 
+
+# ----------------------------------------< Array Single Cycle >-----------------------------------------
+# O(n) Time | O(1) Space
+def hasSingleCycle(array):
+    if len(array) < 2:
+        return False
+    nextIdx = 0
+    for i in range(len(array)):
+        if array[nextIdx] != None:
+            currIdx = nextIdx
+            currVal = array[nextIdx]
+            array[nextIdx] = None
+            nextIdx = (currIdx+currVal) % len(array)
+        else:
+            return False
+
+    for each in array:
+        if each is not None:
+            return False
+
+    return nextIdx == 0
+
+
+# ----------------------------------------< River Sizes >-----------------------------------------
+# O(nm) Time | O(nm) Space
+def riverSize(matrix):
+    sizes = []
+    visited = [[False for col in range(len(matrix[0]))] for row in range(len(matrix)) ]
+    for row in range(len(matrix)):
+        for col in range(len(matrix[0])):
+            if visited[row][col]:
+                continue
+            traverseNode(row, col, matrix, visited, sizes)
+    return sizes
+
+
+def traverseNode(i, j, matrix, visited, sizes):
+    currSize = 0
+    stack = [[i, j]]
+    while len(stack):
+        node = stack.pop()
+        row, col = node
+        if visited[row][col]:
+            continue
+        visited[row][col] = True
+        if matrix[row][col] == 0:
+            continue
+        currSize += 1
+        children = getNeighbors(row, col, matrix, visited)
+        for child in children:
+            stack.append(child)
+    if currSize > 0:
+        sizes.append(currSize)
+
+
+def getNeighbors(i, j, matrix, visited):
+    neighborsX = []
+    if i > 0 and not visited[i-1][j]:
+        neighborsX.append([i-1, j])
+    if i < len(matrix)-1 and not visited[i+1][j]:
+        neighborsX.append([i+1, j])
+    if j > 0 and not visited[i][j-1]:
+        neighborsX.append([i, j-1])
+    if j < len(matrix[0])-1 and not visited[i][j+1]:
+        neighborsX.append([i, j+1])
+    return neighborsX
 
 
 if __name__ == "__main__":
@@ -428,24 +522,42 @@ if __name__ == "__main__":
 
     '''Validate BST'''
     # print(validateBST(bst))
-    
+
     '''Min Height BST'''
     # arr = [1, 2, 5, 7, 10, 13, 14, 15, 22]
     # bst = minHeightBST(arr)
     # print(bst)
-    
+
     # invertBtRecursive(bst)
     # print("\n", bst)
-    
+
     # invertBtIterative(bst)
     # print("\n", bst)
-    
+
     '''Max Subarray Sum'''
     # array = [75, 105, 120, 75, 90, 135]
     # print(maxSubarraysum(array))
     # print(maxSubarraysumImproved(array))
-    
+
     '''Make Change'''
-    print(numberOfWaysToMakeChange(10, [1, 2, 5, 10]))
-    print(minNumberOfCoinsForChange(10, [1, 2, 5, 10]))
-    
+    # print(numberOfWaysToMakeChange(10, [1, 2, 5, 10]))
+    # print(minNumberOfCoinsForChange(10, [1, 2, 5, 10]))
+
+    '''Edit Distance'''
+    # stringOne = "BATD"
+    # stringTwo = "ABACD"
+    # print(editDistance(stringOne, stringTwo))
+
+    '''Single Cycle Check'''
+    # singleCycle = [2, 3, 1, -4, -4, 2]
+    # print(hasSingleCycle(singleCycle))
+
+    '''River Sizes'''
+    rivers = [
+        [1, 0, 0, 1, 0],
+        [1, 0, 1, 0, 0],
+        [0, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 1, 1, 0]
+    ]
+    print(riverSize(rivers))
