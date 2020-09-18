@@ -595,6 +595,11 @@ def swapped(array, i, j):
     array[i], array[j] = array[j], array[i]
 
 
+# ----------------------------------------< Permutations >-----------------------------------------
+
+
+
+
 if __name__ == "__main__":
     import numpy as np
     from binarytree import Node
