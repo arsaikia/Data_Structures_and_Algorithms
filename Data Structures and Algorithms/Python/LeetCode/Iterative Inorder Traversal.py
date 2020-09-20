@@ -4,11 +4,12 @@ def iterativeInorderTraversal(tree):
 
     while stack or tree:
         if tree:
-            result.append(tree.val)
+
             stack.append(tree)
             tree = tree.left
         else:
             node = stack.pop()
+            result.append(node.val)
             tree = node.right
 
     return result
