@@ -1,22 +1,33 @@
 # O(n) Time | O(n) Space
-def paintHouse(n, k):
-    if n == 0:
+def paintHouses(costs):
+    if len(costs) == 0:
         return 0
-    if n == 1:
-        return k
-    elif n == 2:
-        return k * k
 
-    cache = [0 for __ in range(n + 1)]
-    cache[0] = 0
-    cache[1] = k
-    cache[2] = k * k
+    memo = {}
+    return min(getMinPrices(costs, 0, 0, memo), getMinPrices(costs, 0, 1, memo), getMinPrices(costs, 0, 2, memo))
 
-    for i in range(3, n + 1):
-        cache[i] = (cache[i - 1] * (k - 1)) + (cache[i - 2] * (k - 1))
 
-    return cache[-1]
+def getMinPrices(costs, houseIdx, color, memo):
+    paintCost = costs[houseIdx][color]
+    if houseIdx == len(costs) - 1:
+        return paintCost
+
+    if (houseIdx, color) in memo:
+        return memo[(houseIdx, color)]
+
+    if color == 0:
+        memo[(houseIdx, color)] = paintCost + min(getMinPrices(costs,
+                                                               houseIdx + 1, 1, memo), getMinPrices(costs, houseIdx + 1, 2, memo))
+    elif color == 1:
+        memo[(houseIdx, color)] = paintCost + min(getMinPrices(costs,
+                                                               houseIdx + 1, 0, memo), getMinPrices(costs, houseIdx + 1, 2, memo))
+    elif color == 2:
+        memo[(houseIdx, color)] = paintCost + min(getMinPrices(costs,
+                                                               houseIdx + 1, 0, memo), getMinPrices(costs, houseIdx + 1, 1, memo))
+
+    return memo[(houseIdx, color)]
 
 
 if __name__ == "__main__":
-    print(paintHouse(3, 2))
+    costs = [[17, 2, 17], [16, 16, 5], [14, 3, 19]]
+    print(paintHouses(costs))
