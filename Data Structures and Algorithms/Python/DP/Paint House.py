@@ -7,6 +7,7 @@ def paintHouses(costs):
     return min(getMinPrices(costs, 0, 0, memo), getMinPrices(costs, 0, 1, memo), getMinPrices(costs, 0, 2, memo))
 
 
+
 def getMinPrices(costs, houseIdx, color, memo):
     paintCost = costs[houseIdx][color]
     if houseIdx == len(costs) - 1:
