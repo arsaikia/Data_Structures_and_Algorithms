@@ -146,6 +146,7 @@ def productSumWithDepth( array, depth ):
 	return sum * depth
 
 # --------------------------------------<  BINARY SEARCH  >---------------------------------
+# O(logn) Time | O(1) Space
 def binarySearch(array, target):
     start, end = 0, len(array) - 1
     while start <= end:
@@ -158,6 +159,7 @@ def binarySearch(array, target):
             return mid
     return -1
 
+# --------------------------------------<  Find Three largest Numbers  >---------------------------------
 
 
 
