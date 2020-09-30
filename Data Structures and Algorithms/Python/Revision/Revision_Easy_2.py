@@ -115,6 +115,7 @@ def nodeDepth(tree, depth) -> int:
 
 
 # --------------------------------------<  DFS  >---------------------------------
+# O(v+e) Time | O(v) Space
 def dfs(node, result):
     stack = [node]
     for each in stack:
@@ -124,7 +125,38 @@ def dfs(node, result):
         dfs(each.left, result)
         dfs(each.right, result)
     
+# --------------------------------------<  FIBONACCI  >---------------------------------
+# O(n) Time | O(1) Space
+def fib(n):
+    values = [0, 1]
+    for _ in range(3, n+1):
+        values[0], values[1] = values[1], (values[0] + values[1])
+    return values[1] if n > 1 else values[0]
 
+
+# --------------------------------------<  PRODUCT SUM  >---------------------------------
+# O(logn) Time | O(1) Space
+def productSumWithDepth( array, depth ):
+	sum = 0
+	for each in array:
+		if type(each) is list:
+			sum += productSumWithDepth( each, depth+1 )
+		else:
+			sum += each
+	return sum * depth
+
+# --------------------------------------<  BINARY SEARCH  >---------------------------------
+def binarySearch(array, target):
+    start, end = 0, len(array) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if array[mid] > target:
+            end = mid - 1
+        elif array[mid] < target:
+            start = mid + 1
+        else:
+            return mid
+    return -1
 
 
 
@@ -166,3 +198,13 @@ if __name__ == "__main__":
     result = []
     dfs(bst, result)
     print(result)
+    
+    print(fib(6))
+    
+    array = [5, 2, [7, -1], 3, [6, [-13, 8], 4]]
+    print(productSumWithDepth( array, 1 ))
+    
+    
+    arr = [0, 1, 21, 33, 45, 45, 61, 71, 72, 73]
+    target = 33
+    print(binarySearch(arr, target))
