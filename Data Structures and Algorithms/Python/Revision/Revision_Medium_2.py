@@ -1,7 +1,4 @@
 # O(n^2) Time | O(n) Space
-from ast import NodeTransformer
-
-
 def threeSum(array, target):
     array.sort()
     output = []
@@ -35,6 +32,7 @@ class DoublyLinkedList:
         self.head = None
         self.tail = None
 
+    # O(n) Time | O(1) Space
     def containsNodeWithValue(self, value) -> bool:
         node = self.head
         while node is not None and node.value != value:
@@ -124,25 +122,61 @@ class DoublyLinkedList:
         print(result)
 
 
+# O(nm) Time where n = row and m = col in matrix; O(mn) Space
+# We mst traverse all elements once and store the elements in an Auxiliary array
+def spiralTraverse(array):
+    rowStart, rowEnd = 0, len(array) - 1
+    colStart, colEnd = 0, len(array[0]) - 1
+    result = []
+
+    while rowStart < rowEnd and colStart < colEnd:
+        for col in range(colStart, colEnd + 1):
+            result.append(array[rowStart][col])
+        for row in range(rowStart + 1, rowEnd + 1):
+            result.append(array[row][colEnd])
+        for col in reversed(range(colStart, colEnd)):
+            if rowStart == rowEnd:
+                continue
+            result.append(array[rowEnd][col])
+        for row in reversed(range(rowStart + 1, rowEnd)):
+            if colStart == colEnd:
+                continue
+            result.append(array[row][colStart])
+
+        rowStart += 1
+        rowEnd -= 1
+        colStart += 1
+        colEnd -= 1
+
+    return result
+
+
 if __name__ == "__main__":
     # arr = [12, 3, 1, 2, -6, 5, -8, 6]
     # targetSum = 0
     # print(threeSum(arr, targetSum))
 
     # Doubly Linked List
-    ll = DoublyLinkedList()
-    ll.setHead(Node(1))
-    node = Node(3)
-    ll.insertAfter(ll.head, node)
-    ll.insertBefore(ll.tail, Node(2))
+    # ll = DoublyLinkedList()
+    # ll.setHead(Node(1))
+    # node = Node(3)
+    # ll.insertAfter(ll.head, node)
+    # ll.insertBefore(ll.tail, Node(2))
 
-    ll.insertAtPosition(4, Node(4))
-    ll.setHead(Node(-100))
-    ll.setTail(Node(100))
+    # ll.insertAtPosition(4, Node(4))
+    # ll.setHead(Node(-100))
+    # ll.setTail(Node(100))
 
-    ll.removeNodeWithValue(4)
-    ll.remove(node)
+    # ll.removeNodeWithValue(4)
+    # ll.remove(node)
 
-    ll.tail = ll.head
+    # ll.tail = ll.head
 
-    ll.printList()
+    # ll.printList()
+
+    sArray = [[1, 2, 3, 4],
+              [12, 13, 14, 5],
+              [11, 16, 15, 6],
+              [10, 9, 8, 7]]
+
+    print(spiralTraverse(sArray))
