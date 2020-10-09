@@ -151,6 +151,76 @@ def spiralTraverse(array):
     return result
 
 
+def longestPeak(array):
+    if len(array) < 3:
+        return 0
+    peaks = getPeaks(array)
+    globalMax = 0
+    for peak in peaks:
+        currMax = 0
+        start = peak
+        while start - 1 >= 0 and array[start - 1] < array[start]:
+            start -= 1
+
+        end = peak
+        while end + 1 <= len(array) - 1 and array[end + 1] < array[end]:
+            end += 1
+
+        currMax = end - start + 1
+        globalMax = max(currMax, globalMax)
+
+    return globalMax
+
+
+def getPeaks(arr):
+    peaks = []
+    for i in range(1, len(arr) - 1):
+        if arr[i - 1] < arr[i] > arr[i + 1]:
+            peaks.append(i)
+    return peaks
+
+
+def smallestDifference(arr1, arr2):
+    arr1.sort()
+    arr2.sort()
+    arrOneIdx, arrTwoIdx = 0, 0
+    smallestGlobal = float("inf")
+    smallest = []
+
+    while arrOneIdx < len(arr1) and arrTwoIdx < len(arr2):
+        numberOne = arr1[arrOneIdx]
+        numberTwo = arr2[arrTwoIdx]
+        if numberOne > numberTwo:
+            arrTwoIdx += 1
+        elif numberTwo > numberOne:
+            arrOneIdx += 1
+        else:
+            return [numberOne, numberTwo]
+
+        if abs(numberOne - numberTwo) < smallestGlobal:
+            smallestGlobal = abs(numberOne - numberTwo)
+            smallest = [numberOne, numberTwo]
+    return smallest
+
+
+# O(n) Time | O(1) Space
+def moveElementsToEnd(array, toMove):
+    start = 0
+    end = len(array) - 1
+    while start < end:
+        if array[start] == toMove and array[end] != toMove:
+            swap(array, start, end)
+
+        elif array[start] != toMove:
+            start += 1
+        elif array[end] == toMove:
+            end -= 1
+
+
+def swap(arr, i, j):
+    arr[i], arr[j] = arr[j], arr[i]
+
+
 if __name__ == "__main__":
     # arr = [12, 3, 1, 2, -6, 5, -8, 6]
     # targetSum = 0
@@ -174,9 +244,19 @@ if __name__ == "__main__":
 
     # ll.printList()
 
-    sArray = [[1, 2, 3, 4],
-              [12, 13, 14, 5],
-              [11, 16, 15, 6],
-              [10, 9, 8, 7]]
+    # sArray = [[1, 2, 3, 4],
+    #           [12, 13, 14, 5],
+    #           [11, 16, 15, 6],
+    #           [10, 9, 8, 7]]
 
-    print(spiralTraverse(sArray))
+    # print(spiralTraverse(sArray))
+    # array = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
+    # print(f'The lonest Peak for {array} is : {longestPeak(array)}')
+
+    # arr1 = [-1, 5, 10, 20, 28, 3]
+    # arr2 = [26, 134, 135, 15, 17]
+    # print(f'The smallest pair is: {smallestDifference(arr1, arr2)}')
+
+    array = [2, 1, 2, 2, 2, 3, 4, 2]
+    moveElementsToEnd(array, 2)
+    print(array)
