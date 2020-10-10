@@ -356,7 +356,20 @@ def invertBstRecursive(tree):
     invertBstRecursive(tree.right)
     tree.left, tree.right = tree.right, tree.left
 
-
+def maxSubsetSumNoAdjacent(array):
+    if len(array) < 1:
+        return 0
+    if len(array) == 2:
+        return max(array[0], array[1])
+    
+    first = array[0]
+    second = max(array[0], array[1])
+    
+    for i in range(2, len(array)):
+        curr = array[i]
+        curr = max( (curr + first) , second)
+        first = second
+        second = curr
 
 
 
@@ -424,13 +437,13 @@ if __name__ == "__main__":
 
     # print(validateBST(myBst))
     
-    from binarytree import bst
-    myBst = bst(2, is_perfect=True)
+    # from binarytree import bst
+    # myBst = bst(2, is_perfect=True)
 
-    print(myBst)
-    invertBinaryTree(myBst)
-    print(myBst)
+    # print(myBst)
+    # invertBinaryTree(myBst)
+    # print(myBst)
     
-    print(myBst)
-    invertBstRecursive(myBst)
-    print(myBst)
+    # print(myBst)
+    # invertBstRecursive(myBst)
+    # print(myBst)
