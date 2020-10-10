@@ -221,7 +221,127 @@ def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
 
 
+def isMonotnicArray(array):
+    increasing = True
+    for i in range(1, len(array)):
+        if array[i] < array[i - 1]:
+            increasing = False
+
+    decreasing = True
+    for i in range(1, len(array)):
+        if array[i] > array[i - 1]:
+            decreasing = False
+    return increasing or decreasing
+
+
+class BST:
+    def __init__(self, value) -> None:
+        self.value = value
+        self.left = None
+        self.right = None
+
+    def insert(self, value):
+        node = self
+        while True:
+            if value < node.value:
+                if node.left is None:
+                    node.left = BST(value)
+                    break
+                else:
+                    node = node.left
+            else:
+                if node.right is None:
+                    node.right = BST(value)
+                    break
+                else:
+                    node = node.right
+        return self
+
+    def printBst(self):
+        node = self
+        if node.left is not None:
+            node.left.printBst()
+
+        print(node.value, end="\t")
+
+        if node.right is not None:
+            node.right.printBst()
+
+    def contains(self, value):
+        node = self
+        while node is not None:
+            if value < node.value:
+                node = node.left
+            elif value > node.value:
+                node = node.right
+            else:
+                return True
+        return False
+
+    def remove(self, value, parent=None):
+        node = self
+        while node is not None:
+            if value < node.value:
+                parent = node
+                node = node.left
+            elif value > node.value:
+                parent = node
+                node = node.right
+            else:
+                if node.left is not None and node.right is not None:
+                    node.value = node.right.getMinValue()
+                    node.right.remove(node.value, node)
+                elif parent is None:
+                    if node.left is not None:
+                        node.value = node.left.value
+                        node.right = node.left.right
+                        node.left = node.left.left
+                    elif node.right is not None:
+                        node.value = node.right.value
+                        node.left = node.right.left
+                        node.right = node.right.right
+                    else:
+                        return None
+                elif parent.left == node:
+                    parent.left = node.left if node.left is not None else node.right
+                elif parent.right == node:
+                    parent.right = node.left if node.left is not None else node.right
+                break
+        return self
+
+    def getMinValue(self):
+        node = self
+        while node.left is not None:
+            node = node.left
+        return node.value
+
+
+def validateBST(tree):
+    return isBstValid(tree, float("-inf"), float("inf"))
+
+
+def isBstValid(tree, minValue, maxValue):
+    if tree is None:
+        return True
+
+    if tree.value > maxValue or tree.value < minValue:
+        return False
+    return isBstValid(tree.left, minValue, tree.value) and isBstValid(tree.right, tree.value, maxValue)
+
+
+def minHeightBst(array, startIdx, endIdx):
+    if startIdx > endIdx:
+        return None
+    mid = (startIdx + endIdx) // 2
+    bst = BST(array[mid])
+    bst.left = minHeightBst(array, startIdx, mid - 1)
+    bst.right = minHeightBst(array, mid + 1, endIdx)
+
+    return bst
+
+
 if __name__ == "__main__":
+
     # arr = [12, 3, 1, 2, -6, 5, -8, 6]
     # targetSum = 0
     # print(threeSum(arr, targetSum))
@@ -257,6 +377,25 @@ if __name__ == "__main__":
     # arr2 = [26, 134, 135, 15, 17]
     # print(f'The smallest pair is: {smallestDifference(arr1, arr2)}')
 
-    array = [2, 1, 2, 2, 2, 3, 4, 2]
-    moveElementsToEnd(array, 2)
-    print(array)
+    # array = [2, 1, 2, 2, 2, 3, 4, 2]
+    # moveElementsToEnd(array, 2)
+    # print(array)
+
+    # print(isMonotnicArray([4,3, 2, 0]))
+
+    # myBst = BST(50)
+    # myBst.insert(25)
+    # myBst.insert(10)
+    # myBst.insert(30)
+
+    # myBst.insert(75)
+    # myBst.insert(60)
+    # myBst.insert(80)
+
+    # print(myBst.contains(10))
+    # myBst.remove(10)
+    # myBst.remove(25)
+
+    # myBst.printBst()
+
+    # print(validateBST(myBst))
