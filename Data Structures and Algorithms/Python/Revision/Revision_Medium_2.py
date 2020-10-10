@@ -442,6 +442,18 @@ def removeKthNodeFromEnd(head, k):
     return head
 
 
+def searchInSortedMatrix(matrix, target):
+    row, col = 0, len(matrix[0]) - 1
+    
+    while row < len(matrix) and col > -1:
+        if matrix[row][col] == target:
+            return [row, col]
+        elif target > matrix[row][col]:
+            row += 1
+        elif target < matrix[row][col]:
+            col -= 1
+    return [-1, -1]
+
 
 
 
@@ -522,11 +534,21 @@ if __name__ == "__main__":
     # print(kadane([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]))
     # print(levenshteinDistance("abc", "yabd"))
 
-    graph = Graph("A")
-    graph.addChild("B")
-    graph.addChild("C")
-    graph.addChild("D")
+    # graph = Graph("A")
+    # graph.addChild("B")
+    # graph.addChild("C")
+    # graph.addChild("D")
 
-    myArr = []
-    graph.breadthFirstSearch(myArr)
-    print(myArr)
+    # myArr = []
+    # graph.breadthFirstSearch(myArr)
+    # print(myArr)
+    
+    matrix = [
+                [1, 4, 7, 12, 15, 1000],
+                [2, 5, 19, 31, 32, 1001],
+                [3, 8, 24, 33, 35, 1002],
+                [40, 41, 42, 44, 45, 1003],
+                [99, 100, 103, 106, 128, 1004]
+            ]
+
+    print(searchInSortedMatrix(matrix, 44))
