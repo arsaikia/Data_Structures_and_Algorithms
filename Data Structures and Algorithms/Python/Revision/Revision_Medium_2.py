@@ -371,10 +371,12 @@ def maxSubsetSumNoAdjacent(array):
         first = second
         second = curr
 
-
-
-
-
+def kadane(array):
+    maxCurr = maxGlobal = float("-inf")
+    for num in array:
+        maxCurr = max( num, num + maxCurr )
+        maxGlobal = max(maxCurr, maxGlobal)
+    return maxGlobal
 
 
 if __name__ == "__main__":
@@ -447,3 +449,5 @@ if __name__ == "__main__":
     # print(myBst)
     # invertBstRecursive(myBst)
     # print(myBst)
+
+    # print(kadane([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]))
