@@ -423,28 +423,28 @@ class Graph:
 
 def removeKthNodeFromEnd(head, k):
     slowPtr = fastPtr = head
-    
+
     while k > 0:
         if fastPtr is not None:
             fastPtr = fastPtr.next
         k -= 1
-    
+
     if fastPtr is None:
         head = head.next
         return
-    
+
     while fastPtr is not None:
         slowPtr = slowPtr.next
         fastPtr = fastPtr.next
-    
+
     slowPtr.next = slowPtr.next.next
-    
+
     return head
 
 
 def searchInSortedMatrix(matrix, target):
     row, col = 0, len(matrix[0]) - 1
-    
+
     while row < len(matrix) and col > -1:
         if matrix[row][col] == target:
             return [row, col]
@@ -455,8 +455,48 @@ def searchInSortedMatrix(matrix, target):
     return [-1, -1]
 
 
+def riverSizes(matrix):
+    sizes = []
+    visited = [[False for col in row] for row in matrix]
+
+    for row in range(len(matrix)):
+        for col in range(len(matrix[0])):
+            if visited[row][col]:
+                continue
+            traverseNode([row, col], matrix, visited, sizes)
+    return sizes
 
 
+def traverseNode(currNode, matrix, visited, sizes):
+    size = 0
+    node = [currNode]
+    while len(node):
+        curr = node.pop()
+        row, col = curr[0], curr[1]
+        if visited[row][col]:
+            continue
+        visited[row][col] = True
+        if matrix[row][col] == 0:
+            continue
+        size += 1
+        neighbors = getNeighbors(row, col, matrix, visited)
+        for neighbor in neighbors:
+            node.append(neighbor)
+    if size > 0:
+        sizes.append(size)
+
+
+def getNeighbors(i, j, matrix, visited):
+    neighborsX = []
+    if i > 0 and not visited[i-1][j]:
+        neighborsX.append([i-1, j])
+    if i < len(matrix)-1 and not visited[i+1][j]:
+        neighborsX.append([i+1, j])
+    if j > 0 and not visited[i][j-1]:
+        neighborsX.append([i, j-1])
+    if j < len(matrix[0])-1 and not visited[i][j+1]:
+        neighborsX.append([i, j+1])
+    return neighborsX
 
 
 if __name__ == "__main__":
@@ -542,13 +582,21 @@ if __name__ == "__main__":
     # myArr = []
     # graph.breadthFirstSearch(myArr)
     # print(myArr)
-    
-    matrix = [
-                [1, 4, 7, 12, 15, 1000],
-                [2, 5, 19, 31, 32, 1001],
-                [3, 8, 24, 33, 35, 1002],
-                [40, 41, 42, 44, 45, 1003],
-                [99, 100, 103, 106, 128, 1004]
-            ]
 
-    print(searchInSortedMatrix(matrix, 44))
+    # matrix = [
+    #             [1, 4, 7, 12, 15, 1000],
+    #             [2, 5, 19, 31, 32, 1001],
+    #             [3, 8, 24, 33, 35, 1002],
+    #             [40, 41, 42, 44, 45, 1003],
+    #             [99, 100, 103, 106, 128, 1004]
+    #         ]
+
+    # print(searchInSortedMatrix(matrix, 44))
+    mat = [
+        [1, 0, 0, 1, 0],
+        [1, 0, 1, 0, 0],
+        [0, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 1, 1, 0]
+    ]
+    print(riverSizes(mat))
