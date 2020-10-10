@@ -31,7 +31,7 @@ def replaceChar(s1, s2):
         if s1[idx] != s2[idx]:
             if isReplaced:
                 return False
-        isReplaced = True
+            isReplaced = True
     return True
 
 

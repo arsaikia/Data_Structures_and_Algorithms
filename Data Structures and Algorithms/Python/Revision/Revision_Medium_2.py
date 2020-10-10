@@ -1,4 +1,7 @@
 # O(n^2) Time | O(n) Space
+from collections import deque
+
+
 def threeSum(array, target):
     array.sort()
     output = []
@@ -349,6 +352,7 @@ def invertBinaryTree(tree):
         node.left, node.right = node.right, node.left
         que.extend([node.left, node.right])
 
+
 def invertBstRecursive(tree):
     if tree is None:
         return
@@ -356,30 +360,69 @@ def invertBstRecursive(tree):
     invertBstRecursive(tree.right)
     tree.left, tree.right = tree.right, tree.left
 
+
 def maxSubsetSumNoAdjacent(array):
     if len(array) < 1:
         return 0
     if len(array) == 2:
         return max(array[0], array[1])
-    
+
     first = array[0]
     second = max(array[0], array[1])
-    
+
     for i in range(2, len(array)):
         curr = array[i]
-        curr = max( (curr + first) , second)
+        curr = max((curr + first), second)
         first = second
         second = curr
+
 
 def kadane(array):
     maxCurr = maxGlobal = float("-inf")
     for num in array:
-        maxCurr = max( num, num + maxCurr )
+        maxCurr = max(num, num + maxCurr)
         maxGlobal = max(maxCurr, maxGlobal)
     return maxGlobal
 
 
+def levenshteinDistance(str1, str2):
+    edits = [[i for i in range(len(str2) + 1)] for __ in range(len(str1) + 1)]
+    for i in range(1, len(edits)):
+        edits[i][0] = edits[i - 1][0] + 1
+
+    for row in range(1, len(edits)):
+        for col in range(1, len(edits[0])):
+            if str1[row - 1] == str2[col - 1]:
+                edits[row][col] = edits[row - 1][col - 1]
+            else:
+                edits[row][col] = 1 + min(edits[row - 1][col - 1],
+                                          edits[row - 1][col], edits[row][col - 1])
+
+    return edits[-1][-1]
+
+
+class Graph:
+    def __init__(self, name):
+        self.children = []
+        self.name = name
+
+    def addChild(self, name):
+        self.children.append(Graph(name))
+        return self
+
+    def breadthFirstSearch(self, array):
+        que = deque()
+        que.append(self)
+        while que:
+            curr = que.popleft()
+            array.append(curr.name)
+            for child in curr.children:
+                que.append(child)
+        return array
+
+
 if __name__ == "__main__":
+    import numpy as np
 
     # arr = [12, 3, 1, 2, -6, 5, -8, 6]
     # targetSum = 0
@@ -438,16 +481,26 @@ if __name__ == "__main__":
     # myBst.printBst()
 
     # print(validateBST(myBst))
-    
+
     # from binarytree import bst
     # myBst = bst(2, is_perfect=True)
 
     # print(myBst)
     # invertBinaryTree(myBst)
     # print(myBst)
-    
+
     # print(myBst)
     # invertBstRecursive(myBst)
     # print(myBst)
 
     # print(kadane([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]))
+    # print(levenshteinDistance("abc", "yabd"))
+
+    graph = Graph("A")
+    graph.addChild("B")
+    graph.addChild("C")
+    graph.addChild("D")
+
+    myArr = []
+    graph.breadthFirstSearch(myArr)
+    print(myArr)
