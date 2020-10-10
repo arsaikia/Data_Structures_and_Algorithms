@@ -421,6 +421,32 @@ class Graph:
         return array
 
 
+def removeKthNodeFromEnd(head, k):
+    slowPtr = fastPtr = head
+    
+    while k > 0:
+        if fastPtr is not None:
+            fastPtr = fastPtr.next
+        k -= 1
+    
+    if fastPtr is None:
+        head = head.next
+        return
+    
+    while fastPtr is not None:
+        slowPtr = slowPtr.next
+        fastPtr = fastPtr.next
+    
+    slowPtr.next = slowPtr.next.next
+    
+    return head
+
+
+
+
+
+
+
 if __name__ == "__main__":
     import numpy as np
 
