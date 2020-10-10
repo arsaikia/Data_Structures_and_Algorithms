@@ -340,6 +340,30 @@ def minHeightBst(array, startIdx, endIdx):
     return bst
 
 
+def invertBinaryTree(tree):
+    que = [tree]
+    while len(que):
+        node = que.pop()
+        if node is None:
+            continue
+        node.left, node.right = node.right, node.left
+        que.extend([node.left, node.right])
+
+def invertBstRecursive(tree):
+    if tree is None:
+        return
+    invertBstRecursive(tree.left)
+    invertBstRecursive(tree.right)
+    tree.left, tree.right = tree.right, tree.left
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
 
     # arr = [12, 3, 1, 2, -6, 5, -8, 6]
@@ -399,3 +423,14 @@ if __name__ == "__main__":
     # myBst.printBst()
 
     # print(validateBST(myBst))
+    
+    from binarytree import bst
+    myBst = bst(2, is_perfect=True)
+
+    print(myBst)
+    invertBinaryTree(myBst)
+    print(myBst)
+    
+    print(myBst)
+    invertBstRecursive(myBst)
+    print(myBst)
