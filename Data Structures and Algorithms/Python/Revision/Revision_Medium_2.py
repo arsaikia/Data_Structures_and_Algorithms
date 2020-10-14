@@ -502,7 +502,6 @@ def getNeighbors(i, j, matrix, visited):
 
 
 
-
 if __name__ == "__main__":
     import numpy as np
 
@@ -596,11 +595,11 @@ if __name__ == "__main__":
     #         ]
 
     # print(searchInSortedMatrix(matrix, 44))
-    # mat = [
-    #     [1, 0, 0, 1, 0],
-    #     [1, 0, 1, 0, 0],
-    #     [0, 0, 1, 0, 1],
-    #     [1, 0, 1, 0, 1],
-    #     [1, 0, 1, 1, 0]
-    # ]
-    # print(riverSizes(mat))
+    mat = [
+        [1, 0, 0, 1, 0],
+        [1, 0, 1, 0, 0],
+        [0, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 1, 1, 0]
+    ]
+    print(riverSizes(mat))
