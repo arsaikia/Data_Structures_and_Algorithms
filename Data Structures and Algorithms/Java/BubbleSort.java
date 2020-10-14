@@ -9,7 +9,7 @@ class BubbleSort{
         array[i] = temp;
     }
 
-    // O(n^2) Time | O(n^2) space
+    // O(n^2) Time | O(1) space
     public static int[] sort( int[] array){
         for (int i = array.length; i >= 0 ; i--) {
             for (int j = 1; j < i; j++) {
