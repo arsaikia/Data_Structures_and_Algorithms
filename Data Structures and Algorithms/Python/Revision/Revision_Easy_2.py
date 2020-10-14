@@ -193,6 +193,23 @@ def shiftAndUpdate(largest, value, idx):
             largest[i] = largest[i + 1]
 
 
+# --------------------------------------<  Ceaser Cypher Encryptor  >---------------------------------
+
+def ceaserCypherEncryptor(str, key):
+    opArray = []
+    key %= 26
+    for char in str:
+        opArray.append(getEncrypted(char, key))
+    return "".join(opArray)
+
+def getEncrypted(char, key):
+    currKey = key + ord(char)
+    return chr(currKey) if currKey <= 122 else chr(96 + (currKey % 122))
+
+
+
+
+
 if __name__ == "__main__":
     import numpy as np
 
@@ -240,5 +257,7 @@ if __name__ == "__main__":
     # target = 33
     # print(binarySearch(arr, target))
 
-    print(findThreeLargestNumbers(
-        [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]))
+    # print(findThreeLargestNumbers(
+    #     [141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]))
+
+    # print(ceaserCypherEncryptor("xyz", 2))
