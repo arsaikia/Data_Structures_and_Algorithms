@@ -1,4 +1,5 @@
 # O(n^2) Time | O(n) Space
+import unittest
 from collections import deque
 from os import curdir
 
@@ -572,14 +573,16 @@ def getPermutations(array):
     getPerms(array, [], perms)
     return perms
 
+
 def getPerms(array, perm, perms):
     if not len(array) and len(perm):
         perms.append(perm)
     else:
         for i in range(len(array)):
-            newArr = array[ : i] + array[i+1 : ]
+            newArr = array[: i] + array[i+1:]
             newPerm = perm + [array[i]]
             getPerms(newArr, newPerm, perms)
+
 
 def getPermsEfficient(i, array, perms):
     if i == len(array) - 1:
@@ -598,15 +601,15 @@ def groupAnagrams(words):
         if sortedWord in allWords:
             allWords[sortedWord].append(word)
         else:
-            allWords[sortedWord] = [ word ]
+            allWords[sortedWord] = [word]
     return allWords.values()
 
-import unittest
 
 class TestProgram(unittest.TestCase):
     def test_case_1(self):
         words = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"]
-        expected = [["yo", "oy"], ["flop", "olfp"], ["act", "tac", "cat"], ["foo"]]
+        expected = [["yo", "oy"], ["flop", "olfp"],
+                    ["act", "tac", "cat"], ["foo"]]
         output = list(map(lambda x: sorted(x), groupAnagrams(words)))
 
         self.compare(expected, output)
@@ -620,7 +623,58 @@ class TestProgram(unittest.TestCase):
             self.assertTrue(sorted(group) in output)
 
 
+class SuffixTrie:
+    def __init__(self, string) -> None:
+        self.root = {}
+        self.endElement = "*"
+        self.populateSuffixTrie(string)
 
+    def populateSuffixTrie(self, string):
+        for i in range(len(string)):
+            self.buildSuffixTrie(i, string)
+
+    def buildSuffixTrie(self, idx, string):
+        node = self.root
+        for i in range(idx, len(string)):
+            letter = string[i]
+            if letter not in node:
+                node[letter] = {}
+            node = node[letter]
+        node[self.endElement] = True
+
+    def contains(self, string):
+        node = self.root
+        for i in range(len(string)):
+            letter = string[i]
+            if letter not in node:
+                return False
+            else:
+                node = node[letter]
+        return self.endElement in node
+
+# O(n^2) Time | O(n^2) Space Average
+# O(n^3) Time | O(n^3) Space
+
+
+def fourSum(array, target):
+    allNums = {}
+    result = []
+    for idx in range(1, len(array) - 1):
+        for i in range(idx + 1, len(array)):
+            currSum = array[idx] + array[i]
+            required = target - currSum
+            if required in allNums:
+                for each in allNums[required]:
+                    result.append(each + [array[idx], array[i]])
+
+        for j in range(0, idx):
+            currSum = array[j] + array[idx]
+            if currSum not in allNums:
+                allNums[currSum] = [[array[j], array[idx]]]
+            else:
+                allNums[currSum].append([array[j], array[idx]])
+
+    return result
 
 
 if __name__ == "__main__":
@@ -727,7 +781,8 @@ if __name__ == "__main__":
 
     # print(getPermutations([1, 2, 3]))
 
-    wordsArray = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"]
-    print(groupAnagrams(wordsArray))
-    
+    # wordsArray = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"]
+    # print(groupAnagrams(wordsArray))
 
+    nums = [7, 6, 4, -1, 1, 2]
+    print(fourSum(nums, 16))
