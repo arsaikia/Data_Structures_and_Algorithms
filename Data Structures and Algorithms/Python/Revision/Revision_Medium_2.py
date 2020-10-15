@@ -1,5 +1,6 @@
 # O(n^2) Time | O(n) Space
 from collections import deque
+from os import curdir
 
 
 def threeSum(array, target):
@@ -499,6 +500,126 @@ def getNeighbors(i, j, matrix, visited):
     return neighborsX
 
 
+class MinHeap:
+    def __init__(self, array) -> None:
+        self.heap = self.buildHeap(array)
+
+    # O(n) Time | O(1) Space
+    def buildHeap(self, array):
+        parentIdx = (len(array) - 2) // 2
+        for currentIdx in reversed(range(parentIdx + 1)):
+            self.siftDown(array, currentIdx, len(array) - 1)
+        return array
+
+    # O(logn) Time | O(1) Space
+    def siftDown(self, array, currentIdx, endIdx):
+        childOneIdx = (2 * currentIdx) + 1
+        while childOneIdx <= endIdx:
+            childTwoIdx = (2 * currentIdx) + 1 if (2 *
+                                                   currentIdx) + 1 <= endIdx else -1
+            if childTwoIdx != -1 and array[childTwoIdx] < array[childOneIdx]:
+                smallerIdx = childTwoIdx
+            else:
+                smallerIdx = childOneIdx
+
+            if array[smallerIdx] < array[currentIdx]:
+                self.swap(array, smallerIdx, currentIdx)
+                currentIdx = smallerIdx
+                childOneIdx = (2 * currentIdx) + 1
+            else:
+                return
+
+    # O(logn) Time | O(1) Space
+    def siftUp(self, array, currentIdx):
+        firstParentIdx = (currentIdx - 1) // 2
+        while currentIdx > 0 and array[firstParentIdx] > array[currentIdx]:
+            self.swap(array, firstParentIdx, currentIdx)
+            currentIdx = firstParentIdx
+            firstParentIdx = (currentIdx - 1) // 2
+
+    # O(logn) Time | O(1) Space
+    def insert(self, value):
+        '''
+            Append the value and then sift it up
+        '''
+        self.heap.append(value)
+        self.siftUp(self.heap, len(self.heap) - 1)
+
+    # O(logn) Time | O(1) Space
+    def remove(self):
+        '''
+            swap the first and the last values in the array
+            and then pop the last element. Then sift down the
+            first value down to correct position
+        '''
+        self.swap(self.heap, 0, len(self.heap) - 1)
+        toRemove = self.heap.pop()
+        self.siftDown(self.heap, 0, len(self.heap) - 1)
+        return toRemove
+
+    # O(1) Time | O(1) Space
+    def peek(self):
+        return self.heap[0]
+
+    # O(1) Time | O(1) Space
+    def swap(self, arr, i, j):
+        arr[i], arr[j] = arr[j], arr[i]
+
+
+# O(N^2 . N!) Time | O(N . N!) Space
+def getPermutations(array):
+    perms = []
+    getPerms(array, [], perms)
+    return perms
+
+def getPerms(array, perm, perms):
+    if not len(array) and len(perm):
+        perms.append(perm)
+    else:
+        for i in range(len(array)):
+            newArr = array[ : i] + array[i+1 : ]
+            newPerm = perm + [array[i]]
+            getPerms(newArr, newPerm, perms)
+
+def getPermsEfficient(i, array, perms):
+    if i == len(array) - 1:
+        perms.append(array)
+    else:
+        for j in range(i, len(array)):
+            swap(array, i, j)
+            getPermsEfficient(i + 1, array, perms)
+            swap(array, i, j)
+
+
+def groupAnagrams(words):
+    allWords = {}
+    for word in words:
+        sortedWord = "".join(sorted(word))
+        if sortedWord in allWords:
+            allWords[sortedWord].append(word)
+        else:
+            allWords[sortedWord] = [ word ]
+    return allWords.values()
+
+import unittest
+
+class TestProgram(unittest.TestCase):
+    def test_case_1(self):
+        words = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"]
+        expected = [["yo", "oy"], ["flop", "olfp"], ["act", "tac", "cat"], ["foo"]]
+        output = list(map(lambda x: sorted(x), groupAnagrams(words)))
+
+        self.compare(expected, output)
+
+    def compare(self, expected, output):
+        if len(expected) == 0:
+            self.assertEqual(output, expected)
+            return
+        self.assertEqual(len(expected), len(output))
+        for group in expected:
+            self.assertTrue(sorted(group) in output)
+
+
 
 
 
@@ -603,3 +724,10 @@ if __name__ == "__main__":
     #     [1, 0, 1, 1, 0]
     # ]
     # print(riverSizes(mat))
+
+    # print(getPermutations([1, 2, 3]))
+
+    wordsArray = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"]
+    print(groupAnagrams(wordsArray))
+    
+
