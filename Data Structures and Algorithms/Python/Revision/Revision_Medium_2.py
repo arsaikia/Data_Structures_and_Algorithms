@@ -677,6 +677,49 @@ def fourSum(array, target):
     return result
 
 
+# O(n) Time | O(1) Space
+def subarraySrt(array):
+    
+    minIdxOutOfPlace = float('inf')
+    maxIdxOutOfPlace = float("-inf")
+    result = [-1, -1]
+    if len(array) < 2:
+        return result
+
+    for idx, num in enumerate(array):
+        if isOutOfOrder(idx, array):
+            minIdxOutOfPlace = min(minIdxOutOfPlace, num)
+            maxIdxOutOfPlace = max(maxIdxOutOfPlace, num)
+
+    if minIdxOutOfPlace == float("inf"):
+        return result
+
+
+    startIdx = 0
+    while startIdx < len(array) and minIdxOutOfPlace > array[startIdx]:
+        startIdx += 1
+    result[0] = startIdx
+
+    endIdx = len(array) - 1
+    while endIdx > 0 and maxIdxOutOfPlace < array[endIdx]:
+        endIdx -= 1
+    result[1] = endIdx    
+
+    return result
+
+
+def isOutOfOrder(i, array):
+    if i == 0:
+        return array[i] > array[i + 1]
+    
+    if i == len(array) - 1:
+        return array[i] < array[i - 1]
+    
+    return not array[i - 1] <= array[i] <= array[i + 1]
+
+
+
+
 if __name__ == "__main__":
     import numpy as np
 
@@ -784,5 +827,8 @@ if __name__ == "__main__":
     # wordsArray = ["yo", "act", "flop", "tac", "foo", "cat", "oy", "olfp"]
     # print(groupAnagrams(wordsArray))
 
-    nums = [7, 6, 4, -1, 1, 2]
-    print(fourSum(nums, 16))
+    # nums = [7, 6, 4, -1, 1, 2]
+    # print(fourSum(nums, 16))
+
+    array = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
+    print(subarraySrt(array))
