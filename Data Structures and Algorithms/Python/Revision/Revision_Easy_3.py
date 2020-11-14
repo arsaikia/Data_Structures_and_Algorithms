@@ -181,6 +181,21 @@ def palindromeCheck(string):
         end -= 1
     return True
 
+# O(n) Time | O(n) Space
+def ceaserCypher( string, key ):
+    opArray = list(string)
+    key = key % 26
+
+    for idx, val in enumerate(opArray):
+        opArray[idx] = getEncrypted(val, key)
+
+    return "".join(opArray)
+    
+def getEncrypted(val, key):
+    currKey = key + ord(val)
+    return chr(currKey) if currKey <= 122 else chr( (currKey % 122) + 96)  
+
+
 
 if __name__ == "__main__":
     from binarytree import bst as tree
@@ -197,4 +212,6 @@ if __name__ == "__main__":
 
     # print(binarySearch([1, 3, 5, 7, 12, 19, 21], 4))
 
-    print(palindromeCheck('ababa'))
+    # print(palindromeCheck('ababa'))
+
+    print(ceaserCypher('xyz', 2))
