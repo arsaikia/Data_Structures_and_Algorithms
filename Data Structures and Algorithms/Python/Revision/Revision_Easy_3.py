@@ -154,7 +154,7 @@ def getProductSum(array, depth):
     return sum * depth
 
 
-# O(log n) Time | O(log n) Space
+# O(n) Time | O(log n) Space
 def binarySearch( array, target ):
     startIdx, endIdx = 0, len(array) - 1
     while startIdx <= endIdx:
