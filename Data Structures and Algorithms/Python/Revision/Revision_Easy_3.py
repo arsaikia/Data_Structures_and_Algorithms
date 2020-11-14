@@ -154,6 +154,25 @@ def getProductSum(array, depth):
     return sum * depth
 
 
+# O(log n) Time | O(log n) Space
+def binarySearch( array, target ):
+    startIdx, endIdx = 0, len(array) - 1
+    while startIdx <= endIdx:
+        midIdx = (startIdx + endIdx) // 2
+        potential = array[midIdx]
+        if potential == target:
+            return midIdx
+        elif target > potential :
+            startIdx = midIdx + 1
+        elif target < potential:
+            endIdx = midIdx - 1
+    return -1
+
+
+
+
+
+
 if __name__ == "__main__":
     from binarytree import bst as tree
     bstTree = tree(is_perfect=True)
@@ -162,7 +181,9 @@ if __name__ == "__main__":
 
     # print(branchSums(bstTree))
 
-    num = 20
-    print(memoizedFib(num) == optimizedFib(num) == naiveFib(num))
+    # num = 20
+    # print(memoizedFib(num) == optimizedFib(num) == naiveFib(num))
 
-    print(productSum([5, 2, [7, -1], 3, [6, [-13, 8], 4]]))
+    # print(productSum([5, 2, [7, -1], 3, [6, [-13, 8], 4]]))
+
+    print(binarySearch([1,3,5,7,12,19,21], 4))
