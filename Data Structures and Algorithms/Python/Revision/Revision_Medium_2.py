@@ -830,5 +830,5 @@ if __name__ == "__main__":
     # nums = [7, 6, 4, -1, 1, 2]
     # print(fourSum(nums, 16))
 
-    array = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
-    print(subarraySrt(array))
+    # array = [1, 2, 4, 7, 10, 11, 7, 12, 6, 7, 16, 18, 19]
+    # print(subarraySrt(array))
