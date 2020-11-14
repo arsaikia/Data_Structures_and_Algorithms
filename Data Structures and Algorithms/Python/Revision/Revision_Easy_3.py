@@ -125,6 +125,8 @@ def memoizedFib(n, memoize={1: 0, 2: 1}):
         return memoize[n]
 
 # O(n) Time | O(1) Space
+
+
 def optimizedFib(n):
     memo = [0, 1]
     getFib(n, 3, memo)
@@ -137,6 +139,21 @@ def getFib(n, k, memo):
         getFib(n, k + 1, memo)
 
 
+# O(n) Time | O(d) d: Maximum depth of a special array
+def productSum(array):
+    return getProductSum(array, 1)
+
+
+def getProductSum(array, depth):
+    sum = 0
+    for num in array:
+        if type(num) == int:
+            sum += num
+        elif type(num) == list:
+            sum += getProductSum(num, depth + 1)
+    return sum * depth
+
+
 if __name__ == "__main__":
     from binarytree import bst as tree
     bstTree = tree(is_perfect=True)
@@ -145,5 +162,7 @@ if __name__ == "__main__":
 
     # print(branchSums(bstTree))
 
-    num = 120
+    num = 20
     print(memoizedFib(num) == optimizedFib(num) == naiveFib(num))
+
+    print(productSum([5, 2, [7, -1], 3, [6, [-13, 8], 4]]))
