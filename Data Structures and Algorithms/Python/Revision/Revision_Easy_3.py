@@ -155,22 +155,31 @@ def getProductSum(array, depth):
 
 
 # O(n) Time | O(log n) Space
-def binarySearch( array, target ):
+def binarySearch(array, target):
     startIdx, endIdx = 0, len(array) - 1
     while startIdx <= endIdx:
         midIdx = (startIdx + endIdx) // 2
         potential = array[midIdx]
         if potential == target:
             return midIdx
-        elif target > potential :
+        elif target > potential:
             startIdx = midIdx + 1
         elif target < potential:
             endIdx = midIdx - 1
     return -1
 
 
+# O(n) Time | O(1) Space
+def palindromeCheck(string):
+    start = 0
+    end = len(string) - 1
 
-
+    while start < end:
+        if string[start] != string[end]:
+            return False
+        start += 1
+        end -= 1
+    return True
 
 
 if __name__ == "__main__":
@@ -186,4 +195,6 @@ if __name__ == "__main__":
 
     # print(productSum([5, 2, [7, -1], 3, [6, [-13, 8], 4]]))
 
-    print(binarySearch([1,3,5,7,12,19,21], 4))
+    # print(binarySearch([1, 3, 5, 7, 12, 19, 21], 4))
+
+    print(palindromeCheck('ababa'))
