@@ -1,6 +1,7 @@
 # --------------------------------------<  Two Sum  >---------------------------------
 
 # O(n) Time | O(n) Space
+from random import getrandbits
 from typing import List
 import binarytree
 
@@ -68,6 +69,73 @@ def getBranchSums(node: binarytree, sums: List[int], runningSum: int) -> List[in
     getBranchSums(node.left, sums, runningSum)
     getBranchSums(node.right, sums, runningSum)
 
+# O(n) Time | O(log n) Space
+
+
+def treeDepth(tree: binarytree) -> int:
+    depth = [0]
+    currentDepth = -1
+    getDepths(tree, depth, currentDepth)
+    return depth[0]
+
+
+def getDepths(node: binarytree, depth: List[int], currentDepth: int) -> int:
+    if node is None:
+        return
+    currentDepth += 1
+    if node.left is None and node.right is None:
+        depth[0] += currentDepth
+    getDepths(node.left, depth, currentDepth)
+    getDepths(node.right, depth, currentDepth)
+
+
+class GraphNode:
+    def __init__(self, name):
+        self.children = []
+        self.name = name
+
+    def addChild(self, name):
+        self.children.append(GraphNode(name))
+        return self
+
+    def DFS(self, array):
+        array.append(self.name)
+        for child in self.children:
+            child.DFS(array)
+
+# O(2 ^ n) Time | O(n) Space
+
+
+def naiveFib(num):
+    if num == 1:
+        return 0
+    elif num == 2:
+        return 1
+    else:
+        return naiveFib(num - 1) + naiveFib(num - 2)
+
+# O(n) Time | O(n) Space
+
+
+def memoizedFib(n, memoize={1: 0, 2: 1}):
+    if n in memoize:
+        return memoize[n]
+    else:
+        memoize[n] = memoizedFib(n - 1, memoize) + memoizedFib(n - 2, memoize)
+        return memoize[n]
+
+# O(n) Time | O(1) Space
+def optimizedFib(n):
+    memo = [0, 1]
+    getFib(n, 3, memo)
+    return memo[1] if n > 1 else memo[0]
+
+
+def getFib(n, k, memo):
+    if k <= n:
+        memo[0], memo[1] = memo[1], (memo[0] + memo[1])
+        getFib(n, k + 1, memo)
+
 
 if __name__ == "__main__":
     from binarytree import bst as tree
@@ -75,4 +143,7 @@ if __name__ == "__main__":
     print(bstTree)
     # print(findClosestValueInBst(bstTree, 17))
 
-    print(branchSums(bstTree))
+    # print(branchSums(bstTree))
+
+    num = 120
+    print(memoizedFib(num) == optimizedFib(num) == naiveFib(num))
