@@ -2,7 +2,7 @@
 
 # Define a Node class
 class Node:
-    def __init__(self, value = 0):
+    def __init__(self, value=0):
         self.value = value
         self.prev = None
         self.next = None
@@ -29,7 +29,7 @@ class DoublyLinkedList:
         # Remove remaining bindings if head/tail, else all bindings
         self.removeBindings(nodeToRemove)
 
-    def removeBindings(self, nodeToRemove):    
+    def removeBindings(self, nodeToRemove):
         # Check if we have a previous node
         # If we just removed a head, previous will be None
         if nodeToRemove.prev is not None:
@@ -40,12 +40,12 @@ class DoublyLinkedList:
             nodeToRemove.next.prev = nodeToRemove.prev
         nodeToRemove.next = None
         nodeToRemove.prev = None
-    
+
     def removeNodeWithValue(self, value):
         # Traverse from head
         node = self.head
         while node is not None:
-            # For every node check if the value is same 
+            # For every node check if the value is same
             # as what we want to remove and if yes the remove
             # There might b multiple nodes we need to remove
             # Which is why we traverse the whole list -> O(n) Time
@@ -53,7 +53,7 @@ class DoublyLinkedList:
             node = node.next
             if nodeToRemove.value == value:
                 self.removeNode(nodeToRemove)
-    
+
     def insertBefore(self, node, nodeToInsert):
         # If we have only head and tail, remove and add == do nothing
         if self.head is nodeToInsert and self.tail is nodeToInsert:
@@ -68,7 +68,7 @@ class DoublyLinkedList:
         else:
             node.prev.next = nodeToInsert
         node.prev = nodeToInsert
-    
+
     def insertAfter(self, node, nodeToInsert):
         # If we have only head and tail, remove and add == do nothing
         if self.head is nodeToInsert and self.tail is nodeToInsert:
@@ -83,7 +83,7 @@ class DoublyLinkedList:
         else:
             node.next.prev = nodeToInsert
         node.next = nodeToInsert
-    
+
     def insertAtPosition(self, position, nodeToInsert):
         # Remove the node if it is already there
         self.removeNode(nodeToInsert)
@@ -103,7 +103,7 @@ class DoublyLinkedList:
             self.insertBefore(node, nodeToInsert)
         else:
             self.setTail(nodeToInsert)
-    
+
     def setHead(self, node):
         if self.head is None and self.tail is None:
             self.head = node
@@ -118,17 +118,24 @@ class DoublyLinkedList:
             self.insertAfter(self.tail, node)
 
 
-        
+# ----------------------------------------< Doubly Linked List >-----------------------------------------------
+
+# O(n^2) Time | O(n) Space
+def threeSum(array, target):
+    array.sort()
+    for idx, num in enumerate(array):
+        required = target - num
+        leftIdx = idx + 1
+        rightIdx = len(array) - 1
+        while leftIdx < rightIdx:
+            if array[leftIdx] + array[rightIdx] == required:
+                return True
+            elif array[leftIdx] + array[rightIdx] > required:
+                rightIdx -= 1
+            else:
+                leftIdx += 1
+    return False
 
 
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    print(threeSum([2, 4, 6, 8, 12, 14, 16, 20, 22], 22))
