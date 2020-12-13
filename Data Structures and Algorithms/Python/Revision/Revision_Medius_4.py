@@ -1,3 +1,5 @@
+from typing import List
+
 '''
 Three Sum
 '''
@@ -135,8 +137,40 @@ class DoublyLinkedList:
             self.insertAfter(self.tail, node)
 
 
+# O(n) Time | O(n) Space
+def spiralTraverse(matrix: List[List[int]]) -> List[int]:
+    result = []
+    startRowIdx, endRowIdx = 0, len(matrix) - 1
+    startColIdx, endColIdx = 0, len(matrix[0]) - 1
+
+    while startRowIdx <= endRowIdx and startColIdx <= endColIdx:
+        for col in range(startColIdx, endColIdx + 1):
+            result.append(matrix[startRowIdx][col])
+        for row in range(startRowIdx + 1, endRowIdx + 1):
+            result.append(matrix[row][endColIdx])
+        for col in reversed(range(startColIdx, endColIdx)):
+            if startRowIdx == endRowIdx:
+                break
+            result.append(matrix[endRowIdx][col])
+        for row in reversed(range(startRowIdx + 1, endRowIdx)):
+            if startColIdx == endColIdx:
+                break
+            result.append(matrix[row][startColIdx])
+        startRowIdx += 1
+        endRowIdx -= 1
+        startColIdx += 1
+        endColIdx -= 1
+    return result
+
+
 if __name__ == "__main__":
     # array = [12, 3, 1, 2, -6, 5, -8, 6, 7]
     # target = 0
     # print(threeSum(array, target))
     # print(threeSumWithSorting(array, target))
+    matrix = [
+        [1, 2, 3, 4],
+        [12, 13, 14, 5],
+        [11, 16, 15, 6],
+        [10, 9, 8, 7]]
+    print(spiralTraverse(matrix))
