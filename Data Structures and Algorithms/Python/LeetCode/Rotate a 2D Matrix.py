@@ -13,8 +13,6 @@ def rotateMatrix( matrix: List[List[int]] ):
         row.reverse()
 
     print(matrix)
-    
-    
 
 
 
