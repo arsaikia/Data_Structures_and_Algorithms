@@ -163,14 +163,44 @@ def spiralTraverse(matrix: List[List[int]]) -> List[int]:
     return result
 
 
+# O(n) Time | O(1) Space
+def longestPeak(array):
+    peaks = getAllPeaks(array)
+    longest = float('-inf')
+    for peak in peaks:
+        longest = max(longest, getPeakSize(peak, array))
+    return longest if longest != float('-inf') else 0
+
+
+def getPeakSize(peak, arr):
+    start = end = peak
+    while start >= 0 and arr[start - 1] < arr[start]:
+        start -= 1
+    while end < len(arr) and arr[end] > arr[end + 1]:
+        end += 1
+
+    return end - start + 1
+
+
+def getAllPeaks(arr):
+    peaks = []
+    for i in range(1, len(arr) - 1):
+        if arr[i] > arr[i - 1] and arr[i] > arr[i + 1]:
+            peaks.append(i)
+    return peaks
+
+
 if __name__ == "__main__":
     # array = [12, 3, 1, 2, -6, 5, -8, 6, 7]
     # target = 0
     # print(threeSum(array, target))
     # print(threeSumWithSorting(array, target))
-    matrix = [
-        [1, 2, 3, 4],
-        [12, 13, 14, 5],
-        [11, 16, 15, 6],
-        [10, 9, 8, 7]]
-    print(spiralTraverse(matrix))
+    # matrix = [
+    #     [1, 2, 3, 4],
+    #     [12, 13, 14, 5],
+    #     [11, 16, 15, 6],
+    #     [10, 9, 8, 7]]
+    # print(spiralTraverse(matrix))
+
+    arr = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
+    print(longestPeak(arr))
