@@ -1,3 +1,4 @@
+import deque as que
 from typing import List
 
 '''
@@ -260,6 +261,63 @@ class BST:
         while curr.left is not None:
             curr = curr.left
         return curr.value
+
+
+def validateBst(tree):
+    return validateBST(tree, float('-inf'), float('inf'))
+
+
+def validateBST(tree, minValue, maxValue):
+    if tree is None:
+        return True
+    if tree.value < minValue and tree.value > maxValue:
+        return False
+    return validateBST(tree.left, minValue, tree.value) and validateBST(tree.right, tree.value, maxValue)
+
+
+def inorderTraversal(tree, array):
+    if tree is None:
+        return
+    inorderTraversal(tree.left)
+    array.append(tree.value)
+    inorderTraversal(tree.right)
+
+
+def inorderStack(tree):
+    stack = []
+    res = []
+    while tree is not None or len(stack) != 0:
+        while tree is not None:
+            stack.append(tree)
+            tree = tree.left
+        tree = stack.pop()
+        res.append(tree.value)
+        tree = tree.right
+    return res
+
+
+def minHeightBST(arr):
+    return getMinHeightBST(arr, 0, len(arr) - 1)
+
+
+def getMinHeightBST(arr, startIdx, endIdx):
+    if startIdx > endIdx:
+        return None
+    mid = (startIdx + endIdx) // 2
+    bst = BST(arr[mid])
+    bst.left = getMinHeightBST(arr, startIdx, mid - 1)
+    bst.right = getMinHeightBST(arr, mid + 1, endIdx)
+    return bst
+
+
+def invertBinaryTree(tree):
+    que = [tree]
+    while len(que) > 0:
+        current = que.popleft()
+        if current is None:
+            continue
+        current.left, current.right = current.right, current.left
+        que.extend([current.left, current.right])
 
 
 if __name__ == "__main__":
