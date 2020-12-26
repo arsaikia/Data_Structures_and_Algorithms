@@ -714,3 +714,16 @@ testArray = [["01010101", "01", 4], [
     "0100010", "010", 2], ["00000000000", "00", 10]]
 for test in testArray:
     print(test, knmuthMorrisPratt(test[0], test[1]) == test[2])
+
+
+
+
+    if __name__ == "__main__":
+        li = [1,2,3, 0, 0]
+        print(li)
+        li.pop()
+        print(li)
+
+
+
+

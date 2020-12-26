@@ -1,4 +1,4 @@
-import deque as que
+from collections import deque as que
 from typing import List
 
 '''
@@ -320,6 +320,105 @@ def invertBinaryTree(tree):
         que.extend([current.left, current.right])
 
 
+def invertBT(tree):
+    if tree is None:
+        return
+    invertBT(tree.left)
+    invertBT(tree.right)
+    tree.left, tree.right = tree.right, tree.left
+
+
+def riverSizes(matrix):
+    sizes = []
+    visited = [[False for col in row] for row in matrix]
+    for row in range(len(matrix)):
+        for col in range(len(matrix[0])):
+            if visited[row][col]:
+                continue
+            traverseNode(row, col, matrix, visited, sizes)
+    return sizes
+
+
+def traverseNode(i, j, matrix, visited, sizes):
+    currSize = 0
+    node = [[i, j]]
+    while len(node):
+        currNode = node.pop()
+        # print(currNode)
+        row, col = currNode[0], currNode[1]
+        if visited[row][col]:
+            continue
+        visited[row][col] = True
+        if matrix[row][col] == 0:
+            continue
+        currSize += 1
+        neighbors = getNeighbors(row, col, matrix, visited)
+        for neighbor in neighbors:
+            node.append(neighbor)
+
+    if currSize > 0:
+        sizes.append(currSize)
+
+
+def getNeighbors(i, j, matrix, visited):
+    neighBors = []
+    if i > 0 and not visited[i - 1][j]:
+        neighBors.append([i - 1,  j])
+    if i < len(matrix) - 1 and not visited[i + 1][j]:
+        neighBors.append([i + 1,  j])
+    if j > 0 and not visited[i][j - 1]:
+        neighBors.append([i, j - 1])
+    if j < len(matrix[0]) - 1 and not visited[i][j + 1]:
+        neighBors.append([i, j + 1])
+    return neighBors
+
+
+def getZombiesX(matrix):
+    timeElapsed = 0
+    visited = [ [False for col in range(len(matrix[0]))] for row in range(len(matrix))]
+    zombies = getZombies( matrix, visited )
+    while True:
+        while len(zombies):
+            zombie = zombies.pop()
+            row, col = zombie[0], zombie[1]
+            if visited[row][col]:
+                continue
+            visited[row][col] = True
+            traverseNode(row, col, matrix, visited)
+        
+        if not len(zombies):
+            timeElapsed += 1
+        zombies = getZombies(matrix, visited )
+        if not len(zombies): 
+            break
+
+    return timeElapsed - 1
+
+def traverseNode(row, col, matrix, visited):
+    if row > 0 and not visited[row - 1][col] and matrix[row - 1][col] == 0:
+        matrix[row - 1][col] = 1
+    if row < len(matrix) - 1 and not visited[row + 1][col] and matrix[row + 1][col] == 0:
+        matrix[row + 1][col] = 1
+    if col > 0 and not visited[row][col - 1] and matrix[row][col - 1] == 0:
+        matrix[row][col - 1] = 1
+    if col < len(matrix[0]) - 1 and not visited[row][col + 1] and matrix[row][col + 1] == 0:
+        matrix[row][col + 1] = 1
+
+       
+
+
+
+
+def getZombies( matrix, visited ):
+    zombies = []
+    for row in range(len(matrix)):
+        for col in range(len(matrix[0])):
+            if matrix[row][col] == 1 and not visited[row][col]:
+                zombies.append([row, col])
+    return zombies
+
+
+
 if __name__ == "__main__":
     # array = [12, 3, 1, 2, -6, 5, -8, 6, 7]
     # target = 0
@@ -332,5 +431,21 @@ if __name__ == "__main__":
     #     [10, 9, 8, 7]]
     # print(spiralTraverse(matrix))
 
-    arr = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
-    print(longestPeak(arr))
+    # arr = [1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]
+    # print(longestPeak(arr))
+
+    # matrix = [
+    #     [1, 0, 0, 1, 0],
+    #     [1, 0, 1, 0, 0],
+    #     [0, 0, 1, 0, 1],
+    #     [1, 0, 1, 0, 1],
+    #     [1, 0, 1, 1, 0]
+    # ]
+    # print(riverSizes(matrix))
+
+    matrix = [[0, 1, 1, 0, 1],
+              [0, 1, 0, 1, 0],
+              [0, 0, 0, 0, 1],
+              [0, 1, 0, 0, 0]]
+
+    print(getZombiesX(matrix))

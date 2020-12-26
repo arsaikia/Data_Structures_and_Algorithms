@@ -51,7 +51,7 @@ def findSequence(string, cache):
 Bottom Up : O( mn ) Time | O(mn)  Space
 
 Approach:   We traverse from index 0, 0 to end and at each index we check the following:
-            1. If the characters at the current index are same, value at the cachec location is:
+            1. If the characters at the current index are same, value at the cache location is:
                 1 + cache[i - 1][j - 1]
             2. Else, we need to see max value with two cases:
                 a. String1 to the previous index with string2
