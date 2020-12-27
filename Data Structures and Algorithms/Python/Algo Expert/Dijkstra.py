@@ -80,6 +80,7 @@ Dijkstra Algorithm to find shortest Paths in a graph:
 '''
 
 from typing import List
+import heapq
 
 
 def dijkstraAlgorithm(startNode: int, edges):
@@ -117,8 +118,20 @@ def getNextSmallestNodeDistance(distances, visited):
     return node, minDistance
 
 
+def dijkstraHeap(startIdx, edges):
+    verticesLength = len(edges)
+    minDistances = [float('inf') for __ in range(verticesLength)]
+    minDistances[startIdx] = 0
+
+    minHeap = [(val, idx) for idx, val in enumerate(minDistances)]
+
+    heapq.heapify(minHeap)
+
+    print(minHeap)
+
+
 if __name__ == "__main__":
     edges = [[[1, 7]], [[2, 6], [3, 20], [4, 3]], [[3, 14]], [[4, 2]], [], []]
     startNode = 0
 
-    print(dijkstraAlgorithm(startNode, edges))
+    print(dijkstraHeap(startNode, edges))
