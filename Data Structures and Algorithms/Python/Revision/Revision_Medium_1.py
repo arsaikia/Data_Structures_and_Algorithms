@@ -662,7 +662,7 @@ if __name__ == "__main__":
 
     '''Make Change'''
     # print(numberOfWaysToMakeChange(10, [1, 2, 5, 10]))
-    # print(minNumberOfCoinsForChange(10, [1, 2, 5, 10]))
+    print(minNumberOfCoinsForChange(7323, [281,20,251,251]))
 
     '''Edit Distance'''
     # stringOne = "BATD"
