@@ -13,3 +13,4 @@ def minCoinsToMakeChange(n, denoms):
 n = 7
 denoms = [1, 5, 10]
 print(minCoinsToMakeChange(n, denoms))
+
