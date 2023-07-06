@@ -1,4 +1,5 @@
 class Solution:
+    # O(N) Time | O(N) Space
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         numsCounter = collections.Counter(nums)
         result = []
