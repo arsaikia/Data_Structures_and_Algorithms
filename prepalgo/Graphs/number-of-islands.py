@@ -6,41 +6,25 @@ def numOfIslands(grid):
         for col in range(len(grid[0])):
             if visited[row][col]:
                 continue
-            traverseNode(row, col, grid, visited, islands)
+            size = traverseNode(row, col, grid, visited)
+            if size:
+                islands.append(size)
     return islands
 
 
-def traverseNode(row, col, matrix, visited, islands):
-    islandSize = 0
-    stack = [[row, col]]
+def traverseNode(row, col, matrix, visited):
 
-    while stack:
-        rowIdx, colIdx = stack.pop()
+    if (row not in range(len(matrix)) or col not in range(len(matrix[0])) or visited[row][col]):
+        return 0
 
-        visited[rowIdx][colIdx] = True
+    visited[row][col] = True
 
-        if matrix[rowIdx][colIdx] == "0":
-            continue
-
-        islandSize += 1
-
-        for row, col in getNeighbors(rowIdx, colIdx, matrix, visited):
-            stack.append([row, col])
-    if islandSize:
-        islands.append(islandSize)
-
-
-def getNeighbors(rowIdx, colIdx, matrix, visited):
-    ROW, COL = len(matrix), len(matrix[0])
-    neighbors = []
-    directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-    for r, c in directions:
-        row, col = rowIdx + r, colIdx + c
-        if (row not in range(ROW) or col not in range(COL) or visited[row][col]):
-            continue
-
-        neighbors.append([row, col])
-    return neighbors
+    if matrix[row][col] == "0":
+        return 0
+    return 1 + traverseNode(row + 1, col, matrix, visited) \
+        + traverseNode(row - 1, col, matrix, visited) \
+        + traverseNode(row, col + 1, matrix, visited) \
+        + traverseNode(row, col - 1, matrix, visited)
 
 
 grid = [

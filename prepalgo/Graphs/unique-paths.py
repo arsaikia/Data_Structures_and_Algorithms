@@ -8,11 +8,12 @@ def getPaths(grid):
 
 def dfs(row, col, matrix, visited, ROW, COL):
 
-    if (row not in range(ROW) or
-            col not in range(COL) or
-            visited[row][col] or
-            matrix[row][col] == 1
-        ):
+    if (
+        row not in range(ROW) or
+        col not in range(COL) or
+        visited[row][col] or
+        matrix[row][col] == 1
+    ):
         return 0
 
     if row == (ROW - 1) and col == (COL - 1):
