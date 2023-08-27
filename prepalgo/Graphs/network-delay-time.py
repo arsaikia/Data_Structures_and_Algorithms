@@ -20,8 +20,8 @@ class Solution:
             if currNode in shortestPaths:
                 continue
             shortestPaths[currNode] = distanceToCurr
-            for distanceToneighbor, neighborNode in adjMap[currNode]:
+            for distanceToNeighbor, neighborNode in adjMap[currNode]:
                 heapq.heappush(
-                    minHeap, [distanceToCurr + distanceToneighbor, neighborNode])
+                    minHeap, [distanceToCurr + distanceToNeighbor, neighborNode])
 
         return max(shortestPaths.values()) if len(shortestPaths) == n else -1
