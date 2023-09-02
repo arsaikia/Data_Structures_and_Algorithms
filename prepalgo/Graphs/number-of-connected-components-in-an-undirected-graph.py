@@ -16,7 +16,7 @@ class Solution:
             if node in visited:
                 return 0
 
-            # For when we have a disjoing set/ node
+            # For when we have a disjoint set/ node
             if adjMap[node] == []:
                 return 1
 
