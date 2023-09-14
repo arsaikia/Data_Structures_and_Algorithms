@@ -3,4 +3,7 @@
     "python.pythonPath": "C:\\Users\\aruna\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
     "python.formatting.provider": "autopep8",
     "java.home": "C:\\jdk-11.0.8",
+    "cSpell.words": [
+        "inorder"
+    ],
 }
