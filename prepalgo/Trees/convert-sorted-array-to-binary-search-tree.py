@@ -12,7 +12,7 @@ class Solution:
             if l > r:
                 return None
 
-            m = (l + r) // 2
+            m = l + (r - l) // 2   # Overflow protection
 
             node = TreeNode(nums[m])
             node.left = buildBST(nums, l, m - 1)
