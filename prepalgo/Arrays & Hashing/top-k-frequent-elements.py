@@ -17,3 +17,25 @@ class Solution:
                     k -= 1
 
         return result
+
+################################################################
+import heapq
+# O(3 x N) + O(k x log N) = O(N + K log N)
+# O(N) Space
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+
+        charCounter = collections.Counter(nums) # O(N)
+        minHeap = [(-val, key) for key, val in charCounter.items()] # O(N)
+        heapq.heapify(minHeap)  # O(N)
+
+        res = []
+        # O(k x log N)
+        while k:
+            __, key = heapq.heappop(minHeap)
+            res.append(key)
+            k -= 1
+        
+        return res
+
+################################################################
